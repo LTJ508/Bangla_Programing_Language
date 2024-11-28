@@ -97,7 +97,9 @@
                 const result = await sendRequest('compile', {
                     source_code: sourceCode
                 });
-                document.getElementById('output').innerText = JSON.stringify(result, null, 2);
+                // Directly access the result field and set it as the inner text
+                const output = result.result.replace(/\\n/g, '\n');
+                document.getElementById('output').innerText = output;
             }
 
     </script>

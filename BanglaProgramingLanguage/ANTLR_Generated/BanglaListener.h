@@ -29,6 +29,9 @@ public:
   virtual void enterPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
   virtual void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
 
+  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
+  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
+
 
 };
 

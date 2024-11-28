@@ -11,7 +11,7 @@ def runCompiler(task_type, **kwargs):
         # Run the compiler executable with the temporary source file
         try:
             result = subprocess.run(
-                ["BanglaProgramingLanguage\\BanglaProgramingLanguage.exe", "temp_source.bangla"],
+                ["BanglaProgramingLanguage\\bin\\Debug\\BanglaProgramingLanguage.exe", "temp_source.bangla"],
                 capture_output=True,
                 text=True,
                 encoding='utf-8'  # Specify the encoding explicitly

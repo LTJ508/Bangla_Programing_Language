@@ -31,6 +31,9 @@ public:
   virtual void enterPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
   virtual void exitPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
 
+  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
+  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
+
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
   virtual void exitEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

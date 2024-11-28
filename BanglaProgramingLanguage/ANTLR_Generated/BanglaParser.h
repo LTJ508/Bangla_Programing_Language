@@ -12,13 +12,14 @@
 class  BanglaParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, SHURU = 7, 
-    SHESH = 8, DHORI = 9, DEKHAO = 10, ID = 11, NUMBER = 12, WS = 13
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
+    SHURU = 8, SHESH = 9, DHORI = 10, DEKHAO = 11, NATUN_LINE = 12, ID = 13, 
+    FLOAT = 14, INT = 15, STRING = 16, WS = 17
   };
 
   enum {
     RuleProgram = 0, RuleBlock = 1, RuleStatement = 2, RuleVariableDeclaration = 3, 
-    RulePrintStatement = 4
+    RulePrintStatement = 4, RulePrintArguments = 5
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -42,7 +43,8 @@ public:
   class BlockContext;
   class StatementContext;
   class VariableDeclarationContext;
-  class PrintStatementContext; 
+  class PrintStatementContext;
+  class PrintArgumentsContext; 
 
   class  ProgramContext : public antlr4::ParserRuleContext {
   public:
@@ -93,7 +95,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *DHORI();
     antlr4::tree::TerminalNode *ID();
-    antlr4::tree::TerminalNode *NUMBER();
+    antlr4::tree::TerminalNode *INT();
+    antlr4::tree::TerminalNode *FLOAT();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -107,7 +110,7 @@ public:
     PrintStatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *DEKHAO();
-    antlr4::tree::TerminalNode *ID();
+    PrintArgumentsContext *printArguments();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -115,6 +118,23 @@ public:
   };
 
   PrintStatementContext* printStatement();
+
+  class  PrintArgumentsContext : public antlr4::ParserRuleContext {
+  public:
+    PrintArgumentsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<antlr4::tree::TerminalNode *> ID();
+    antlr4::tree::TerminalNode* ID(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> STRING();
+    antlr4::tree::TerminalNode* STRING(size_t i);
+    antlr4::tree::TerminalNode *NATUN_LINE();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  PrintArgumentsContext* printArguments();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first
