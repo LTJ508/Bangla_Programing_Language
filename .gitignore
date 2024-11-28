@@ -1,2 +1,8 @@
 # Some journals paper related to this research
 Documents/
+
+# Pankti Project
+Pankti/
+
+# ANTLR Generated Files
+Grammar/.antlr/
