@@ -1,4 +1,0 @@
-sizeof => আয়তন
-default => সাধারণত
-while => যখন
-volatile => পরিবর্তনশীল
