@@ -3,7 +3,7 @@
 #include "antlr4-runtime.h"
 #include "ANTLR_Generated/BanglaLexer.h"
 #include "ANTLR_Generated/BanglaParser.h"
-#include "ANTLR_Generated/BanglaBaseListener.h"
+#include "BanglaCustomListener.h"
 
 using namespace std;
 using namespace antlr4;
@@ -22,7 +22,9 @@ int main(int argc, const char* argv[]) {
     BanglaParser parser(&tokens);
 
     tree::ParseTree* tree = parser.program();
-    std::cout << tree->toStringTree(&parser) << std::endl;
+
+    BanglaCustomListener listener;
+    tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
 
     return 0;
 }

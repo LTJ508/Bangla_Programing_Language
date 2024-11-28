@@ -1,4 +1,4 @@
-grammar Bangla;
+grammar Bangla_Copilot;
 
 // Parser Rules
 program

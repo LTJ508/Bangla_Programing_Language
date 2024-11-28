@@ -14,12 +14,11 @@ def runCompiler(task_type, **kwargs):
                 ["BanglaProgramingLanguage\\BanglaProgramingLanguage.exe", "temp_source.bangla"],
                 capture_output=True,
                 text=True,
-                check=True,
                 encoding='utf-8'  # Specify the encoding explicitly
             )
-            output = result.stdout
+            output = result.stdout + result.stderr  # Combine stdout and stderr
         except subprocess.CalledProcessError as e:
-            output = e.stderr
+            output = e.stdout + e.stderr  # Combine stdout and stderr in case of error
         
         return output
     else:

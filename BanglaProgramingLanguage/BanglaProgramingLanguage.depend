@@ -1,0 +1,856 @@
+# depslib dependency file v1.0
+1732821119 source:c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglabaselistener.cpp
+	"BanglaBaseListener.h"
+
+1732821119 c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglabaselistener.h
+	"antlr4-runtime.h"
+	"BanglaListener.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlr4-runtime.h
+	"antlr4-common.h"
+	"ANTLRErrorListener.h"
+	"ANTLRErrorStrategy.h"
+	"ANTLRFileStream.h"
+	"ANTLRInputStream.h"
+	"BailErrorStrategy.h"
+	"BaseErrorListener.h"
+	"BufferedTokenStream.h"
+	"CharStream.h"
+	"CommonToken.h"
+	"CommonTokenFactory.h"
+	"CommonTokenStream.h"
+	"ConsoleErrorListener.h"
+	"DefaultErrorStrategy.h"
+	"DiagnosticErrorListener.h"
+	"Exceptions.h"
+	"FailedPredicateException.h"
+	"InputMismatchException.h"
+	"IntStream.h"
+	"InterpreterRuleContext.h"
+	"Lexer.h"
+	"LexerInterpreter.h"
+	"LexerNoViableAltException.h"
+	"ListTokenSource.h"
+	"NoViableAltException.h"
+	"Parser.h"
+	"ParserInterpreter.h"
+	"ParserRuleContext.h"
+	"ProxyErrorListener.h"
+	"RecognitionException.h"
+	"Recognizer.h"
+	"RuleContext.h"
+	"RuleContextWithAltNum.h"
+	"RuntimeMetaData.h"
+	"Token.h"
+	"TokenFactory.h"
+	"TokenSource.h"
+	"TokenStream.h"
+	"TokenStreamRewriter.h"
+	"UnbufferedCharStream.h"
+	"UnbufferedTokenStream.h"
+	"Version.h"
+	"Vocabulary.h"
+	"Vocabulary.h"
+	"WritableToken.h"
+	"atn/ATN.h"
+	"atn/ATNConfig.h"
+	"atn/ATNConfigSet.h"
+	"atn/ATNDeserializationOptions.h"
+	"atn/ATNDeserializer.h"
+	"atn/ATNSimulator.h"
+	"atn/ATNState.h"
+	"atn/ATNType.h"
+	"atn/ActionTransition.h"
+	"atn/AmbiguityInfo.h"
+	"atn/ArrayPredictionContext.h"
+	"atn/AtomTransition.h"
+	"atn/BasicBlockStartState.h"
+	"atn/BasicState.h"
+	"atn/BlockEndState.h"
+	"atn/BlockStartState.h"
+	"atn/ContextSensitivityInfo.h"
+	"atn/DecisionEventInfo.h"
+	"atn/DecisionInfo.h"
+	"atn/DecisionState.h"
+	"atn/EpsilonTransition.h"
+	"atn/ErrorInfo.h"
+	"atn/LL1Analyzer.h"
+	"atn/LexerATNConfig.h"
+	"atn/LexerATNSimulator.h"
+	"atn/LexerAction.h"
+	"atn/LexerActionExecutor.h"
+	"atn/LexerActionType.h"
+	"atn/LexerChannelAction.h"
+	"atn/LexerCustomAction.h"
+	"atn/LexerIndexedCustomAction.h"
+	"atn/LexerModeAction.h"
+	"atn/LexerMoreAction.h"
+	"atn/LexerPopModeAction.h"
+	"atn/LexerPushModeAction.h"
+	"atn/LexerSkipAction.h"
+	"atn/LexerTypeAction.h"
+	"atn/LookaheadEventInfo.h"
+	"atn/LoopEndState.h"
+	"atn/NotSetTransition.h"
+	"atn/OrderedATNConfigSet.h"
+	"atn/ParseInfo.h"
+	"atn/ParserATNSimulator.h"
+	"atn/ParserATNSimulatorOptions.h"
+	"atn/PlusBlockStartState.h"
+	"atn/PlusLoopbackState.h"
+	"atn/PrecedencePredicateTransition.h"
+	"atn/PredicateEvalInfo.h"
+	"atn/PredicateTransition.h"
+	"atn/PredictionContext.h"
+	"atn/PredictionContextCache.h"
+	"atn/PredictionContextMergeCache.h"
+	"atn/PredictionContextMergeCacheOptions.h"
+	"atn/PredictionMode.h"
+	"atn/ProfilingATNSimulator.h"
+	"atn/RangeTransition.h"
+	"atn/RuleStartState.h"
+	"atn/RuleStopState.h"
+	"atn/RuleTransition.h"
+	"atn/SemanticContext.h"
+	"atn/SerializedATNView.h"
+	"atn/SetTransition.h"
+	"atn/SingletonPredictionContext.h"
+	"atn/StarBlockStartState.h"
+	"atn/StarLoopEntryState.h"
+	"atn/StarLoopbackState.h"
+	"atn/TokensStartState.h"
+	"atn/Transition.h"
+	"atn/WildcardTransition.h"
+	"dfa/DFA.h"
+	"dfa/DFASerializer.h"
+	"dfa/DFAState.h"
+	"dfa/LexerDFASerializer.h"
+	"misc/InterpreterDataReader.h"
+	"misc/Interval.h"
+	"misc/IntervalSet.h"
+	"misc/MurmurHash.h"
+	"misc/Predicate.h"
+	"support/Any.h"
+	"support/Arrays.h"
+	"support/BitSet.h"
+	"support/Casts.h"
+	"support/CPPUtils.h"
+	"tree/AbstractParseTreeVisitor.h"
+	"tree/ErrorNode.h"
+	"tree/ErrorNodeImpl.h"
+	"tree/ParseTree.h"
+	"tree/ParseTreeListener.h"
+	"tree/ParseTreeProperty.h"
+	"tree/ParseTreeVisitor.h"
+	"tree/ParseTreeWalker.h"
+	"tree/TerminalNode.h"
+	"tree/TerminalNodeImpl.h"
+	"tree/Trees.h"
+	"tree/pattern/Chunk.h"
+	"tree/pattern/ParseTreeMatch.h"
+	"tree/pattern/ParseTreePattern.h"
+	"tree/pattern/ParseTreePatternMatcher.h"
+	"tree/pattern/RuleTagToken.h"
+	"tree/pattern/TagChunk.h"
+	"tree/pattern/TextChunk.h"
+	"tree/pattern/TokenTagToken.h"
+	"tree/xpath/XPath.h"
+	"tree/xpath/XPathElement.h"
+	"tree/xpath/XPathLexer.h"
+	"tree/xpath/XPathLexerErrorListener.h"
+	"tree/xpath/XPathRuleAnywhereElement.h"
+	"tree/xpath/XPathRuleElement.h"
+	"tree/xpath/XPathTokenAnywhereElement.h"
+	"tree/xpath/XPathTokenElement.h"
+	"tree/xpath/XPathWildcardAnywhereElement.h"
+	"tree/xpath/XPathWildcardElement.h"
+	"internal/Synchronization.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlr4-common.h
+	<algorithm>
+	<any>
+	<atomic>
+	<bitset>
+	<cassert>
+	<climits>
+	<cstddef>
+	<cstdint>
+	<cstdlib>
+	<exception>
+	<fstream>
+	<iostream>
+	<iterator>
+	<limits>
+	<map>
+	<memory>
+	<set>
+	<sstream>
+	<stack>
+	<string>
+	<string_view>
+	<typeinfo>
+	<type_traits>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<vector>
+	"support/Declarations.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\declarations.h
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlrerrorlistener.h
+	"RecognitionException.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\recognitionexception.h
+	"Exceptions.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\exceptions.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlrerrorstrategy.h
+	"Token.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\token.h
+	"IntStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\intstream.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlrfilestream.h
+	"ANTLRInputStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\antlrinputstream.h
+	<string_view>
+	"CharStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\charstream.h
+	"IntStream.h"
+	"misc/Interval.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\misc\interval.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\bailerrorstrategy.h
+	"DefaultErrorStrategy.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\defaulterrorstrategy.h
+	"ANTLRErrorStrategy.h"
+	"misc/IntervalSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\misc\intervalset.h
+	"misc/Interval.h"
+	"Exceptions.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\baseerrorlistener.h
+	"ANTLRErrorListener.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\bufferedtokenstream.h
+	"TokenStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tokenstream.h
+	"IntStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\commontoken.h
+	"WritableToken.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\writabletoken.h
+	"Token.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\commontokenfactory.h
+	"TokenFactory.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tokenfactory.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\commontokenstream.h
+	"BufferedTokenStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\consoleerrorlistener.h
+	"BaseErrorListener.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\diagnosticerrorlistener.h
+	"BaseErrorListener.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\failedpredicateexception.h
+	"RecognitionException.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\inputmismatchexception.h
+	"RecognitionException.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\interpreterrulecontext.h
+	"ParserRuleContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\parserrulecontext.h
+	"RuleContext.h"
+	"support/CPPUtils.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\rulecontext.h
+	"tree/ParseTree.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetree.h
+	"support/Any.h"
+	"tree/ParseTreeType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\any.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetreetype.h
+	<cstddef>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\cpputils.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\lexer.h
+	"Recognizer.h"
+	"TokenSource.h"
+	"CharStream.h"
+	"Token.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\recognizer.h
+	"ProxyErrorListener.h"
+	"support/Casts.h"
+	"atn/SerializedATNView.h"
+	"internal/Synchronization.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\proxyerrorlistener.h
+	"ANTLRErrorListener.h"
+	"Exceptions.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\casts.h
+	<cassert>
+	<memory>
+	<type_traits>
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\serializedatnview.h
+	<cstddef>
+	<cstdint>
+	<cstring>
+	<iterator>
+	<vector>
+	"antlr4-common.h"
+	"misc/MurmurHash.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\misc\murmurhash.h
+	<cstdint>
+	<type_traits>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\internal\synchronization.h
+	"antlr4-common.h"
+	<mutex>
+	<shared_mutex>
+	<utility>
+	"absl/base/call_once.h"
+	"absl/base/thread_annotations.h"
+	"absl/synchronization/mutex.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tokensource.h
+	"TokenFactory.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\lexerinterpreter.h
+	"Lexer.h"
+	"atn/PredictionContext.h"
+	"atn/PredictionContextCache.h"
+	"Vocabulary.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictioncontext.h
+	<atomic>
+	"Recognizer.h"
+	"atn/ATN.h"
+	"atn/ATNState.h"
+	"atn/PredictionContextType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atn.h
+	"RuleContext.h"
+	"internal/Synchronization.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atnstate.h
+	"misc/IntervalSet.h"
+	"atn/Transition.h"
+	"atn/ATNStateType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\transition.h
+	"misc/IntervalSet.h"
+	"atn/TransitionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\transitiontype.h
+	<cstddef>
+	<string>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atnstatetype.h
+	<cstddef>
+	<string>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictioncontexttype.h
+	<cstddef>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictioncontextcache.h
+	"atn/PredictionContext.h"
+	"FlatHashSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\flathashset.h
+	"antlr4-common.h"
+	"absl/container/flat_hash_set.h"
+	<unordered_set>
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\vocabulary.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\lexernoviablealtexception.h
+	"RecognitionException.h"
+	"atn/ATNConfigSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atnconfigset.h
+	<cassert>
+	"support/BitSet.h"
+	"atn/PredictionContext.h"
+	"atn/ATNConfig.h"
+	"FlatHashSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\bitset.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atnconfig.h
+	<cassert>
+	"antlr4-common.h"
+	"atn/SemanticContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\semanticcontext.h
+	"Recognizer.h"
+	"support/CPPUtils.h"
+	"atn/SemanticContextType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\semanticcontexttype.h
+	<cstddef>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\listtokensource.h
+	"TokenSource.h"
+	"CommonTokenFactory.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\noviablealtexception.h
+	"RecognitionException.h"
+	"Token.h"
+	"atn/ATNConfigSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\parser.h
+	"Recognizer.h"
+	"tree/ParseTreeListener.h"
+	"tree/ParseTree.h"
+	"TokenStream.h"
+	"TokenSource.h"
+	"misc/Interval.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetreelistener.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\parserinterpreter.h
+	"Parser.h"
+	"atn/ATN.h"
+	"support/BitSet.h"
+	"atn/PredictionContext.h"
+	"atn/PredictionContextCache.h"
+	"Vocabulary.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\rulecontextwithaltnum.h
+	"ParserRuleContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\runtimemetadata.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tokenstreamrewriter.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\unbufferedcharstream.h
+	"CharStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\unbufferedtokenstream.h
+	"TokenStream.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\version.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atndeserializationoptions.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atndeserializer.h
+	"atn/ATNDeserializationOptions.h"
+	"atn/SerializedATNView.h"
+	"atn/LexerAction.h"
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexeraction.h
+	"atn/LexerActionType.h"
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexeractiontype.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atnsimulator.h
+	"atn/ATN.h"
+	"atn/PredictionContext.h"
+	"atn/PredictionContextCache.h"
+	"misc/IntervalSet.h"
+	"support/CPPUtils.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atntype.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\actiontransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\ambiguityinfo.h
+	"atn/DecisionEventInfo.h"
+	"support/BitSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\decisioneventinfo.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\arraypredictioncontext.h
+	"atn/PredictionContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\atomtransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\basicblockstartstate.h
+	"antlr4-common.h"
+	"atn/BlockStartState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\blockstartstate.h
+	"atn/DecisionState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\decisionstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\basicstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\blockendstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\contextsensitivityinfo.h
+	"atn/DecisionEventInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\decisioninfo.h
+	"atn/ContextSensitivityInfo.h"
+	"atn/AmbiguityInfo.h"
+	"atn/PredicateEvalInfo.h"
+	"atn/ErrorInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predicateevalinfo.h
+	"atn/DecisionEventInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\errorinfo.h
+	"atn/DecisionEventInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\epsilontransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\ll1analyzer.h
+	"Token.h"
+	"atn/ATNConfig.h"
+	"atn/PredictionContext.h"
+	"support/BitSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexeratnconfig.h
+	"atn/ATNConfig.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexeratnsimulator.h
+	<atomic>
+	"atn/ATNSimulator.h"
+	"atn/LexerATNConfig.h"
+	"atn/ATNConfigSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexeractionexecutor.h
+	"CharStream.h"
+	"atn/LexerAction.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexerchannelaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexercustomaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexerindexedcustomaction.h
+	"RuleContext.h"
+	"atn/LexerAction.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexermodeaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexermoreaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexerpopmodeaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexerpushmodeaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexerskipaction.h
+	"atn/LexerAction.h"
+	"atn/LexerActionType.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lexertypeaction.h
+	"atn/LexerActionType.h"
+	"atn/LexerAction.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\lookaheadeventinfo.h
+	"atn/DecisionEventInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\loopendstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\notsettransition.h
+	"atn/SetTransition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\settransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\orderedatnconfigset.h
+	"atn/ATNConfigSet.h"
+	"atn/ATNConfig.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\parseinfo.h
+	"atn/DecisionInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\parseratnsimulator.h
+	"PredictionMode.h"
+	"dfa/DFAState.h"
+	"atn/ATNSimulator.h"
+	"atn/PredictionContext.h"
+	"atn/PredictionContextMergeCache.h"
+	"atn/ParserATNSimulatorOptions.h"
+	"SemanticContext.h"
+	"atn/ATNConfig.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictionmode.h
+	"support/BitSet.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\dfa\dfastate.h
+	"antlr4-common.h"
+	"atn/ATNConfigSet.h"
+	"FlatHashMap.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\flathashmap.h
+	"antlr4-common.h"
+	"absl/container/flat_hash_map.h"
+	<unordered_map>
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictioncontextmergecache.h
+	<utility>
+	"atn/PredictionContext.h"
+	"atn/PredictionContextMergeCacheOptions.h"
+	"FlatHashMap.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predictioncontextmergecacheoptions.h
+	<cstddef>
+	<cstdint>
+	<limits>
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\parseratnsimulatoroptions.h
+	"atn/PredictionContextMergeCacheOptions.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\plusblockstartstate.h
+	"atn/BlockStartState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\plusloopbackstate.h
+	"atn/DecisionState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\precedencepredicatetransition.h
+	"atn/Transition.h"
+	"atn/SemanticContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\predicatetransition.h
+	"atn/Transition.h"
+	"atn/SemanticContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\profilingatnsimulator.h
+	"atn/ParserATNSimulator.h"
+	"atn/DecisionInfo.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\rangetransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\rulestartstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\rulestopstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\ruletransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\singletonpredictioncontext.h
+	"atn/PredictionContext.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\starblockstartstate.h
+	"atn/BlockStartState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\starloopentrystate.h
+	"atn/DecisionState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\starloopbackstate.h
+	"atn/ATNState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\tokensstartstate.h
+	"atn/DecisionState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\atn\wildcardtransition.h
+	"atn/Transition.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\dfa\dfa.h
+	"dfa/DFAState.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\dfa\dfaserializer.h
+	"Vocabulary.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\dfa\lexerdfaserializer.h
+	"dfa/DFASerializer.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\misc\interpreterdatareader.h
+	"antlr4-common.h"
+	"atn/ATN.h"
+	"Vocabulary.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\misc\predicate.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\support\arrays.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\abstractparsetreevisitor.h
+	"tree/ParseTree.h"
+	"tree/ParseTreeVisitor.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetreevisitor.h
+	"support/Any.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\errornode.h
+	"tree/TerminalNode.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\terminalnode.h
+	"tree/ParseTree.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\errornodeimpl.h
+	"tree/ErrorNode.h"
+	"tree/TerminalNodeImpl.h"
+	"misc/Interval.h"
+	"support/Any.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\terminalnodeimpl.h
+	"tree/TerminalNode.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetreeproperty.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\parsetreewalker.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\trees.h
+	"tree/TerminalNode.h"
+	"ParserRuleContext.h"
+	"Recognizer.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\chunk.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\parsetreematch.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\parsetreepattern.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\parsetreepatternmatcher.h
+	"Exceptions.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\ruletagtoken.h
+	"Token.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\tagchunk.h
+	"Chunk.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\textchunk.h
+	"Chunk.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\pattern\tokentagtoken.h
+	"CommonToken.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpath.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathelement.h
+	"antlr4-common.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathlexer.h
+	"antlr4-runtime.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathlexererrorlistener.h
+	"BaseErrorListener.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathruleanywhereelement.h
+	"XPathElement.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathruleelement.h
+	"XPathElement.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathtokenanywhereelement.h
+	"XPathElement.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathtokenelement.h
+	"XPathElement.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathwildcardanywhereelement.h
+	"XPathElement.h"
+
+1730834986 c:\antlr\antlr4\runtime\cpp\runtime\src\tree\xpath\xpathwildcardelement.h
+	"XPathElement.h"
+
+1732821119 c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglalistener.h
+	"antlr4-runtime.h"
+	"BanglaParser.h"
+
+1732821119 c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglaparser.h
+	"antlr4-runtime.h"
+
+1732821119 source:c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglalexer.cpp
+	"BanglaLexer.h"
+
+1732821119 c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglalexer.h
+	"antlr4-runtime.h"
+
+1732821119 source:c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglalistener.cpp
+	"BanglaListener.h"
+
+1732821119 source:c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\antlr_generated\banglaparser.cpp
+	"BanglaListener.h"
+	"BanglaParser.h"
+
+1732825146 source:c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\main.cpp
+	<iostream>
+	<fstream>
+	"antlr4-runtime.h"
+	"ANTLR_Generated/BanglaLexer.h"
+	"ANTLR_Generated/BanglaParser.h"
+	"BanglaCustomListener.h"
+
+1732825997 c:\users\joyde\documents\github\bangla_programing_language\banglaprograminglanguage\banglacustomlistener.h
+	"ANTLR_Generated/BanglaBaseListener.h"
+	<unordered_map>
+	<string>
+	<iostream>
+	<stdexcept>
+	<locale>
+	<codecvt>
+
