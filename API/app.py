@@ -7,15 +7,15 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 # Import necessary functions from the assembly_layer and quantum_service_deployment modules
-from task_agent import run_quantum_task
+from API.compiler import runCompiler
 
 # Initialize the Flask application
 app = Flask(__name__)
 # Enable CORS for all routes
 CORS(app)
 
-@app.route('/quantum_task', methods=['POST'])
-def quantum_task():
+@app.route('/compiler', methods=['POST'])
+def compiler_task():
     # Get the JSON data from the request
     data = request.json
     if not data:
@@ -32,7 +32,7 @@ def quantum_task():
 
     try:
         # Run the quantum task based on the task type and parameters
-        result = run_quantum_task(task_type, **params)
+        result = runCompiler(task_type, **params)
         # Return the result of the quantum task
         return jsonify({"status": "success", "result": result})
     except ValueError as e:

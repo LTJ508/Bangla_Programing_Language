@@ -3,418 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Circuit Interface</title>
+    <title>Bangla Compiler Interface</title>
     <style>
-        /* Overall Layout */
         body {
-            font-family: Verdana (sans-serif);
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
             margin-top: 20px;
         }
 
-        /* Main Container */
-        .container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            /* gap: 5px; */
-            width: 80%;
-            /* border: 1px solid red; */
-            margin-bottom: 10px;
-            padding: 1px;
-        }
-
-        /* Left and Right Sections */
-        .left-section, .right-section {
-            border: 2px solid black;
-            padding: 10px;
-        }
-
-        .left-section h2, .right-section h3 {
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        /* Each Row Style */
-        .row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
-        .task-section, .error-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            /* margin: 10px 0; */
-            margin-bottom: 5px;
-            border: 1px solid rgba(2, 61, 50, 0.434);
-            padding: 5px; */
-        }
-
-        /* Label and Input Styling */
-        label, input, select, button {
-            margin: 5px;
-        }
-
-        input[type="text"], input[type="number"], select {
-            width: 60px;
-            padding: 5px;
-            text-align: center;
-        }
-
-        /* Button Styling */
-        button {
-            background-color: rgba(255, 89, 0, 0.856);
-            color: white;
-            border:2px solid black;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .blue-button {
-            background-color: #17658b;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .blue-input {
-            background-color: #17658b;
-            color: white;
-            padding: 5px;
-            border: none;
-            text-align: center;
-        }
-
-        /* Bottom Buttons Styling */
-        .bottom-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
-        }
-
-        .result-section {
-            /* white-space: pre-wrap; */
-            background-color: #e0e0e0;
-            padding: 5px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        /* Right Section - Logs and Output */
-        .output, .logs {
+        .source-code, .output {
             border: 3px solid black;
             padding: 10px;
             margin-top: 10px;
-            width: 93%;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .output h3, .logs h3 {
+        .source-code h3, .output h3 {
             text-align: center;
             margin: 5px 0;
             font-size: 18px;
         }
 
-        .output pre, .logs pre {
+        .source-code textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .output pre {
             white-space: pre-wrap;
             font-family: monospace;
             text-align: left;
         }
+
+        .run-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    
-
-<div class="container">
-
-    <!-- Left Section: Quantum Circuit Design Interface -->
-    <div class="left-section">
-        
-        <!-- Header -->
-        <h2><u>User Interface</u></h2>
-        
-
-        <div class="task-section">
-            <h3>Quantum Circuit Design : </h3>
-            <label for="num_qubits">Number of Qubits:</label>
-            <input type="number" id="num_qubits" class="blue-input" value="2">
-            <button onclick="createCircuit()">Create Circuit</button>
-    
+    <div class="container">
+        <!-- Source Code Section -->
+        <div class="source-code">
+            <h3>Source Code</h3>
+            <textarea id="sourceCode" placeholder="Write your Bangla source code here..."></textarea>
         </div>
 
-        <div class="task-section">
-            <h3>Initialize State : </h3>
-            Enter State Probabilities : 
-            <label for="state_probabilities_0">For 0:</label>
-            <input type="text" id="state_probabilities_0" class="blue-input" value="0.5">
-            <label for="state_probabilities_1">For 1:</label>
-            <input type="text" id="state_probabilities_1" class="blue-input" value="0.5">
-            <label for="init_qubit">Select Qubit:</label>
-            <input type="number" id="init_qubit" class="blue-input" value="0">
-            <button onclick="initializeState()">Initialize</button>
-        </div>
-
-        <div class="task-section">
-            <h3>Gate Apply : </h3>
-            <label for="gate_type">Select Gate:</label>
-            <select id="gate_type" class="blue-input">
-                <option value="H">H</option>
-                <option value="X">X</option>
-                <option value="Y">Y</option>
-                <option value="Z">Z</option>
-            </select>
-            <label for="control_qubit_1">Control Qubit 1:</label>
-            <input type="number" id="control_qubit_1" class="blue-input" value="0">
-            <label for="control_qubit_2">Control Qubit 2:</label>
-            <input type="number" id="control_qubit_2" class="blue-input" value="0">
-            <label for="target_qubit">Target Qubit:</label>
-            <input type="number" id="target_qubit" class="blue-input" value="0">
-            <button onclick="applyGate()">Apply</button>
-        </div>
-
-        <div class="task-section">
-            <h3>Apply Encoding Algorithm : </h3>
-            <label for="encoding_algorithm">Select Algorithm:</label>
-            <select id="encoding_algorithm" class="blue-input" >
-                <option value="Repetition Code">Repetition Code</option>
-            </select>
-            <button onclick="applyEncoding()">Apply</button>
-        </div>
-
-       
-        <div class="task-section">
-            <h3>Apply Error : </h3>
-            <label for="error_type">Select Error Type:</label>
-            <select id="error_type" class="blue-input">
-                <option value="X">X</option>
-                <option value="Y">Y</option>
-                <option value="Z">Z</option>
-            </select>
-            <label for="error_probability">Probability:</label>
-            <input type="number" id="error_probability" class="blue-input" value="0.1">
-            <label for="start_index">Start Index:</label>
-            <select id="start_index" class="blue-input">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <!-- Add more options as needed -->
-            </select>
-            <label for="end_index">End Index:</label>
-            <select id="end_index" class="blue-input">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <!-- Add more options as needed -->
-            </select>
-            <button onclick="applyError()">Apply</button>
-        </div>
-
-
-        <div class="task-section">
-            <h3>Recovery Protocol : </h3>
-            <label for="decoding_algorithm">Select Algorithm:</label>
-            <select id="decoding_algorithm"class="blue-input" >
-                <option value="Repetition Code">Repetition Code</option>
-            </select>
-            <button onclick="applyDecoding()">Apply</button>
-        </div>
-
-            <div class="task-section">
-                <h3>Simulation : </h3>
-                <label for="measurement_qubit">Select Measurement Qubit:</label>
-                <select id="measurement_qubit" class="blue-input">
-                    <option value="0">Qubit 0</option>
-                    <option value="1">Qubit 1</option>
-                    <!-- Add more options as needed -->
-                </select>
-                <button onclick="applyMeasurement()">Apply</button>
-                <br><br>
-                <label for="num_iterations">Number of Iterations:</label>
-                <input type="number" id="num_iterations" class="blue-input" value="1000">
-                <br><br>
-                <label for="print_option">Print Option:</label>
-                <select id="print_option" class="blue-input">
-                    <option value="results">Results</option>
-                    <option value="counts">Counts</option>
-                </select>
-                <button onclick="applyPrintOption()">Apply</button>
-            </div>
-
-
-        <!-- Bottom Action Buttons -->
-        <div class="bottom-buttons">
-            <button>Draw Circuit</button>
-            <button>Compile</button>
-            <button>Run on Simulator</button>
-            <button>Run on Real Device</button>
-        </div>
-
-    </div>
-
-    <!-- Right Section: Logs and Output Display -->
-    <div class="right-section">
-        
-        <!-- Logs / Source Code Section -->
-        <div class="logs">
-            <h3>Logs / Source Code</h3>
-            <pre id="logs"></pre>
-        </div>
+        <!-- Run Compiler Button -->
+        <button class="run-button" onclick="runCompiler()">Run Compiler</button>
 
         <!-- Output Section -->
         <div class="output">
             <h3>Output</h3>
             <pre id="output"></pre>
         </div>
-
-        <script>
-            // Define the API URL for the quantum task endpoint
-            const apiUrl = '/quantum_task';
-    
-            async function sendRequest(taskType, params) {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        task_type: taskType,
-                        params: params
-                    }),
-                });
-                return await response.json();
-            }
-            // JavaScript functions for interacting with the API
-            function createCircuit() {
-                const numQubits = document.getElementById('num_qubits').value;
-                const command = "NumberOfQubit " + numQubits;
-                const logsElement = document.getElementById('logs');
-                logsElement.textContent += command + "\n";
-            }
-
-            function initializeState() {
-            const stateProbabilities0 = document.getElementById('state_probabilities_0').value;
-            const stateProbabilities1 = document.getElementById('state_probabilities_1').value;
-            const initQubit = document.getElementById('init_qubit').value;
-            let command;
-            if (initQubit.toLowerCase() === 'all') {
-                command = `Initialize ${stateProbabilities0} ${stateProbabilities1} All`;
-            } else {
-                command = `Initialize ${stateProbabilities0} ${stateProbabilities1} ${initQubit}`;
-            }
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-            
-        function applyGate() {
-            const gateType = document.getElementById('gate_type').value;
-            const controlQubit1 = document.getElementById('control_qubit_1').value;
-            const controlQubit2 = document.getElementById('control_qubit_2').value;
-            const targetQubit = document.getElementById('target_qubit').value;
-            let command;
-            if (gateType === 'CX') {
-                command = `ApplyGate ${gateType} ${controlQubit1} ${targetQubit}`;
-            } else {
-                command = `ApplyGate ${gateType} ${targetQubit}`;
-            }
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-        function applyEncoding() {
-            const encodingAlgorithm = document.getElementById('encoding_algorithm').value;
-            const command = `ApplyEncoding ${encodingAlgorithm}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function applyError() {
-            const errorType = document.getElementById('error_type').value;
-            const command = `ApplyError ${errorType}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function applyCorrection() {
-            const correctionAlgorithm = document.getElementById('correction_algorithm').value;
-            const command = `ApplyCorrection ${correctionAlgorithm}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function applyDecoding() {
-            const decodingAlgorithm = document.getElementById('decoding_algorithm').value;
-            const command = `ApplyDecoding ${decodingAlgorithm}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function applyMeasurement() {
-            const measurementQubit = document.getElementById('measurement_qubit').value;
-            const command = `ApplyMeasurement on Qubit ${measurementQubit}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function applyPrintOption() {
-            const printOptionResults = document.getElementById('print_option_results').value;
-            const printOptionCounts = document.getElementById('print_option_counts').value;
-            const command = `ApplyPrintOption Results: ${printOptionResults}, Counts: ${printOptionCounts}`;
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-        function drawCircuit() {
-            const command = 'DrawCircuit';
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-        function compileCircuit() {
-            const command = 'CompileCircuit';
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-        function runSimulator() {
-            const command = 'Run on Simulator';
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-        function runRealDevice() {
-            const command = 'Run on Real Device';
-            const logsElement = document.getElementById('logs');
-            logsElement.textContent += command + "\n";
-        }
-
-
-
-
-            async function runCircuitSimulation() {
-                const numQubits = document.getElementById('num_qubits').value;
-                const gateType = document.getElementById('gate_type').value;
-                const numIterations = document.getElementById('num_iterations').value;
-                const result = await sendRequest('circuit_simulation', {
-                    num_qubits: parseInt(numQubits),
-                    gate_type: gateType,
-                    num_iterations: parseInt(numIterations)
-                });
-                document.getElementById('circuit_simulation_result').textContent = JSON.stringify(result, null, 2);
-            }
-
-            async function runOptimization() {
-                const problemSize = document.getElementById('problem_size').value;
-                const optIterations = document.getElementById('opt_iterations').value;
-                const result = await sendRequest('optimization', {
-                    problem_size: parseInt(problemSize),
-                    num_iterations: parseInt(optIterations)
-                });
-                document.getElementById('optimization_result_text').textContent = JSON.stringify(result, null, 2);
-            }
-        </script>
     </div>
 
-</div>
+    <script>
 
+        // Define the API URL for the quantum task endpoint
+        const apiUrl = '/compiler';
+    
+        async function sendRequest(taskType, params) {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    task_type: taskType,
+                    params: params
+                }),
+            });
+            return await response.json();
+        }
+
+        async function runCompiler() {
+            const sourceCode = document.getElementById('sourceCode').value;
+                const result = await sendRequest('compile', {
+                    source_code: sourceCode
+                });
+                document.getElementById('output').innerText = JSON.stringify(result, null, 2);
+            }
+
+    </script>
 </body>
 </html>
