@@ -51,6 +51,7 @@
 		<Unit filename="ANTLR_Generated/BanglaListener.h" />
 		<Unit filename="ANTLR_Generated/BanglaParser.cpp" />
 		<Unit filename="ANTLR_Generated/BanglaParser.h" />
+		<Unit filename="BanglaCustomListener.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
