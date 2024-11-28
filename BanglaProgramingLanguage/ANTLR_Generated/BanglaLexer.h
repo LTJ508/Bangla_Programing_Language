@@ -12,11 +12,8 @@
 class  BanglaLexer : public antlr4::Lexer {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, SHURU = 14, 
-    SHESH = 15, DHORI = 16, JODI = 17, TANAHOLE = 18, JOTOKKHON = 19, DEKHAO = 20, 
-    FILE = 21, KHULO = 22, LEKHO = 23, BONDHO = 24, NATUN_LINE = 25, OKARJOKOR = 26, 
-    ID = 27, NUMBER = 28, STRING = 29, WS = 30
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, SHURU = 7, 
+    SHESH = 8, DHORI = 9, DEKHAO = 10, ID = 11, NUMBER = 12, WS = 13
   };
 
   explicit BanglaLexer(antlr4::CharStream *input);

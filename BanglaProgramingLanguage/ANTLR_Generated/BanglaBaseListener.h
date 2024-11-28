@@ -28,23 +28,8 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
 
-  virtual void enterAssignment(BanglaParser::AssignmentContext * /*ctx*/) override { }
-  virtual void exitAssignment(BanglaParser::AssignmentContext * /*ctx*/) override { }
-
-  virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
-  virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
-
-  virtual void enterForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
-  virtual void exitForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
-
-  virtual void enterIoStatement(BanglaParser::IoStatementContext * /*ctx*/) override { }
-  virtual void exitIoStatement(BanglaParser::IoStatementContext * /*ctx*/) override { }
-
-  virtual void enterFileOperation(BanglaParser::FileOperationContext * /*ctx*/) override { }
-  virtual void exitFileOperation(BanglaParser::FileOperationContext * /*ctx*/) override { }
-
-  virtual void enterExpression(BanglaParser::ExpressionContext * /*ctx*/) override { }
-  virtual void exitExpression(BanglaParser::ExpressionContext * /*ctx*/) override { }
+  virtual void enterPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
+  virtual void exitPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

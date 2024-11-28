@@ -30,8 +30,27 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++17" />
 			<Add option="-fexceptions" />
+			<Add option="-DANTLR4CPP_STATIC" />
+			<Add directory="C:/antlr/antlr4/runtime/Cpp/runtime/src" />
 		</Compiler>
+		<Linker>
+			<Add library="C:/antlr/antlr4/runtime/Cpp/build/runtime/libantlr4-runtime-static.a" />
+		</Linker>
+		<Unit filename="ANTLR_Generated/Bangla.g4" />
+		<Unit filename="ANTLR_Generated/Bangla.interp" />
+		<Unit filename="ANTLR_Generated/Bangla.tokens" />
+		<Unit filename="ANTLR_Generated/BanglaBaseListener.cpp" />
+		<Unit filename="ANTLR_Generated/BanglaBaseListener.h" />
+		<Unit filename="ANTLR_Generated/BanglaLexer.cpp" />
+		<Unit filename="ANTLR_Generated/BanglaLexer.h" />
+		<Unit filename="ANTLR_Generated/BanglaLexer.interp" />
+		<Unit filename="ANTLR_Generated/BanglaLexer.tokens" />
+		<Unit filename="ANTLR_Generated/BanglaListener.cpp" />
+		<Unit filename="ANTLR_Generated/BanglaListener.h" />
+		<Unit filename="ANTLR_Generated/BanglaParser.cpp" />
+		<Unit filename="ANTLR_Generated/BanglaParser.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

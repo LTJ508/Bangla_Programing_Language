@@ -6,3 +6,12 @@ Pankti/
 
 # ANTLR Generated Files
 Grammar/.antlr/
+BanglaProgramingLanguage/ANTLR_Generated/.antlr/
+BanglaProgramingLanguage/bin/
+BanglaProgramingLanguage/obj/
+
+# Python Cache
+API/__pycache__/
+
+# Virtual Environment
+.venv/

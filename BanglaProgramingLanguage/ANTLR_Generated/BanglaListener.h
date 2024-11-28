@@ -26,23 +26,8 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
 
-  virtual void enterAssignment(BanglaParser::AssignmentContext *ctx) = 0;
-  virtual void exitAssignment(BanglaParser::AssignmentContext *ctx) = 0;
-
-  virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
-  virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
-
-  virtual void enterForStatement(BanglaParser::ForStatementContext *ctx) = 0;
-  virtual void exitForStatement(BanglaParser::ForStatementContext *ctx) = 0;
-
-  virtual void enterIoStatement(BanglaParser::IoStatementContext *ctx) = 0;
-  virtual void exitIoStatement(BanglaParser::IoStatementContext *ctx) = 0;
-
-  virtual void enterFileOperation(BanglaParser::FileOperationContext *ctx) = 0;
-  virtual void exitFileOperation(BanglaParser::FileOperationContext *ctx) = 0;
-
-  virtual void enterExpression(BanglaParser::ExpressionContext *ctx) = 0;
-  virtual void exitExpression(BanglaParser::ExpressionContext *ctx) = 0;
+  virtual void enterPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
+  virtual void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
 
 
 };
