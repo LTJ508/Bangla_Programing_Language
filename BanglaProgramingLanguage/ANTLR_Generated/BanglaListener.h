@@ -32,6 +32,18 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
 
+  virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
+  virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
+
+  virtual void enterCondition(BanglaParser::ConditionContext *ctx) = 0;
+  virtual void exitCondition(BanglaParser::ConditionContext *ctx) = 0;
+
+  virtual void enterOperand(BanglaParser::OperandContext *ctx) = 0;
+  virtual void exitOperand(BanglaParser::OperandContext *ctx) = 0;
+
+  virtual void enterComparisonOperator(BanglaParser::ComparisonOperatorContext *ctx) = 0;
+  virtual void exitComparisonOperator(BanglaParser::ComparisonOperatorContext *ctx) = 0;
+
 
 };
 

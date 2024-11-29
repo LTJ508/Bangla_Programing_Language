@@ -12,6 +12,7 @@ block
 statement
     : variableDeclaration
     | printStatement
+    | ifStatement
     ;
 
 variableDeclaration
@@ -26,12 +27,38 @@ printArguments
     : (ID | STRING) (',' (ID | STRING))* (',' NATUN_LINE)?
     ;
 
+ifStatement
+    : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
+    ;
+
+condition
+    : operand comparisonOperator operand
+    ;
+
+operand
+    : ID
+    | INT
+    | FLOAT
+    ;
+
+comparisonOperator
+    : '>='
+    | '<='
+    | '>'
+    | '<'
+    | '=='
+    | '!='
+    ;
+
 // Lexer Rules
 SHURU: 'শুরু';
 SHESH: 'শেষ';
 DHORI: 'ধরি';
 DEKHAO: 'দেখাও';
 NATUN_LINE: 'নতুন_লাইন';
+IF: 'যদি';
+ELSE_IF: 'তানাহলে যদি';
+ELSE: 'তানাহলে';
 
 ID: ID_START ID_PART*; // Identifier
 

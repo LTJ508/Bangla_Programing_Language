@@ -34,6 +34,18 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
 
+  virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
+  virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
+
+  virtual void enterCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
+  virtual void exitCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
+
+  virtual void enterOperand(BanglaParser::OperandContext * /*ctx*/) override { }
+  virtual void exitOperand(BanglaParser::OperandContext * /*ctx*/) override { }
+
+  virtual void enterComparisonOperator(BanglaParser::ComparisonOperatorContext * /*ctx*/) override { }
+  virtual void exitComparisonOperator(BanglaParser::ComparisonOperatorContext * /*ctx*/) override { }
+
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
   virtual void exitEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
