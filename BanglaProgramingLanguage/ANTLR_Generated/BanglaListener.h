@@ -38,6 +38,9 @@ public:
   virtual void enterCondition(BanglaParser::ConditionContext *ctx) = 0;
   virtual void exitCondition(BanglaParser::ConditionContext *ctx) = 0;
 
+  virtual void enterExpression(BanglaParser::ExpressionContext *ctx) = 0;
+  virtual void exitExpression(BanglaParser::ExpressionContext *ctx) = 0;
+
   virtual void enterOperand(BanglaParser::OperandContext *ctx) = 0;
   virtual void exitOperand(BanglaParser::OperandContext *ctx) = 0;
 

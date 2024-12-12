@@ -16,7 +16,7 @@ statement
     ;
 
 variableDeclaration
-    : DHORI ID '=' (INT | FLOAT) ';'
+    : DHORI ID '=' expression ';'
     ;
 
 printStatement
@@ -35,10 +35,19 @@ condition
     : operand comparisonOperator operand
     ;
 
-operand
-    : ID
+expression
+    : expression ('*' | '/') expression
+    | expression ('+' | '-') expression
     | INT
     | FLOAT
+    | ID
+    | '(' expression ')'
+    ;
+
+operand
+    : INT
+    | FLOAT
+    | ID
     ;
 
 comparisonOperator

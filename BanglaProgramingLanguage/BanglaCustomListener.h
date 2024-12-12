@@ -47,6 +47,24 @@ std::string convertEnglishToBangla(const std::string& number) {
     return converter.to_bytes(wideBanglaNumber);
 }
 
+// Helper function to perform arithmetic operations on variants
+template <typename T>
+VariableValue performOperation(const VariableValue& left, const VariableValue& right, T op) {
+    return std::visit([&](auto&& a, auto&& b) -> VariableValue {
+        using A = std::decay_t<decltype(a)>;
+        using B = std::decay_t<decltype(b)>;
+        if constexpr (std::is_same_v<A, B>) {
+            return op(a, b);
+        } else if constexpr (std::is_same_v<A, int> && std::is_same_v<B, double>) {
+            return op(static_cast<double>(a), b);
+        } else if constexpr (std::is_same_v<A, double> && std::is_same_v<B, int>) {
+            return op(a, static_cast<double>(b));
+        } else {
+            throw std::runtime_error("Unsupported operand types");
+        }
+    }, left, right);
+}
+
 class BanglaCustomListener : public BanglaBaseListener {
 public:
     std::unordered_map<std::string, VariableValue> variables;
@@ -103,29 +121,41 @@ public:
         if (!executeCurrentBlock) return;
 
         std::string varName = ctx->ID()->getText();
-        std::string valueStr;
-        if (ctx->FLOAT()) {
-            valueStr = ctx->FLOAT()->getText();
-        } else if (ctx->INT()) {
-            valueStr = ctx->INT()->getText();
-        }
+        VariableValue value = evaluateExpression(ctx->expression());
+        variables[varName] = value;
 
-        try {
-            if (ctx->FLOAT()) {
-                std::string englishValueStr = convertBanglaToEnglish(valueStr);
-                double value = std::stod(englishValueStr);
-                variables[varName] = value;
-            } else if (ctx->INT()) {
-                std::string englishValueStr = convertBanglaToEnglish(valueStr);
-                int value = std::stoi(englishValueStr);
-                variables[varName] = value;
-            }
-        } catch (const std::invalid_argument& e) {
-            std::cerr << "Error: Invalid number format for variable " << varName << ": " << valueStr << std::endl;
-        } catch (const std::out_of_range& e) {
-            std::cerr << "Error: Number out of range for variable " << varName << ": " << valueStr << std::endl;
+        if (debug) {
+            std::cout << "Debug => Variable declared: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
         }
     }
+
+    // void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
+    //     if (!executeCurrentBlock) return;
+
+    //     std::string varName = ctx->ID()->getText();
+    //     std::string valueStr;
+    //     if (ctx->FLOAT()) {
+    //         valueStr = ctx->FLOAT()->getText();
+    //     } else if (ctx->INT()) {
+    //         valueStr = ctx->INT()->getText();
+    //     }
+
+    //     try {
+    //         if (ctx->FLOAT()) {
+    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //             double value = std::stod(englishValueStr);
+    //             variables[varName] = value;
+    //         } else if (ctx->INT()) {
+    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //             int value = std::stoi(englishValueStr);
+    //             variables[varName] = value;
+    //         }
+    //     } catch (const std::invalid_argument& e) {
+    //         std::cerr << "Error: Invalid number format for variable " << varName << ": " << valueStr << std::endl;
+    //     } catch (const std::out_of_range& e) {
+    //         std::cerr << "Error: Number out of range for variable " << varName << ": " << valueStr << std::endl;
+    //     }
+    // }
 
     void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
         if (!executeCurrentBlock) return;
@@ -236,6 +266,50 @@ private:
         executeCurrentBlock = previousExecuteCurrentBlock;
     }
 
+    VariableValue evaluateExpression(BanglaParser::ExpressionContext *ctx) {
+    try {
+        if (ctx->INT()) {
+            std::string valueStr = ctx->INT()->getText();
+            std::string englishValueStr = convertBanglaToEnglish(valueStr);
+            return std::stoi(englishValueStr);
+        } else if (ctx->FLOAT()) {
+            std::string valueStr = ctx->FLOAT()->getText();
+            std::string englishValueStr = convertBanglaToEnglish(valueStr);
+            return std::stod(englishValueStr);
+        } else if (ctx->ID()) {
+            std::string varName = ctx->ID()->getText();
+            if (variables.find(varName) != variables.end()) {
+                return variables[varName];
+            } else {
+                throw std::runtime_error("Undefined variable: " + varName);
+            }
+        } else if (ctx->expression().size() == 1) {
+            return evaluateExpression(ctx->expression(0));
+        } else if (ctx->expression().size() == 2) {
+            VariableValue left = evaluateExpression(ctx->expression(0));
+            VariableValue right = evaluateExpression(ctx->expression(1));
+            std::string op = ctx->children[1]->getText();
+
+            if (op == "+") {
+                return performOperation(left, right, std::plus<>());
+            } else if (op == "-") {
+                return performOperation(left, right, std::minus<>());
+            } else if (op == "*") {
+                return performOperation(left, right, std::multiplies<>());
+            } else if (op == "/") {
+                return performOperation(left, right, std::divides<>());
+            }
+        }
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
+        throw;
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Out of range: " << e.what() << std::endl;
+        throw;
+    }
+
+    throw std::runtime_error("Invalid expression");
+}
 };
 
 #endif // BANGLACUSTOMLISTENER_H

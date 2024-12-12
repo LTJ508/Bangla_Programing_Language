@@ -13,15 +13,16 @@ class  BanglaParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, SHURU = 14, 
-    SHESH = 15, DHORI = 16, DEKHAO = 17, NATUN_LINE = 18, IF = 19, ELSE_IF = 20, 
-    ELSE = 21, ID = 22, FLOAT = 23, INT = 24, STRING = 25, WS = 26
+    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
+    T__14 = 15, T__15 = 16, T__16 = 17, SHURU = 18, SHESH = 19, DHORI = 20, 
+    DEKHAO = 21, NATUN_LINE = 22, IF = 23, ELSE_IF = 24, ELSE = 25, ID = 26, 
+    FLOAT = 27, INT = 28, STRING = 29, WS = 30
   };
 
   enum {
     RuleProgram = 0, RuleBlock = 1, RuleStatement = 2, RuleVariableDeclaration = 3, 
     RulePrintStatement = 4, RulePrintArguments = 5, RuleIfStatement = 6, 
-    RuleCondition = 7, RuleOperand = 8, RuleComparisonOperator = 9
+    RuleCondition = 7, RuleExpression = 8, RuleOperand = 9, RuleComparisonOperator = 10
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -49,6 +50,7 @@ public:
   class PrintArgumentsContext;
   class IfStatementContext;
   class ConditionContext;
+  class ExpressionContext;
   class OperandContext;
   class ComparisonOperatorContext; 
 
@@ -102,8 +104,7 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *DHORI();
     antlr4::tree::TerminalNode *ID();
-    antlr4::tree::TerminalNode *INT();
-    antlr4::tree::TerminalNode *FLOAT();
+    ExpressionContext *expression();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -178,13 +179,30 @@ public:
 
   ConditionContext* condition();
 
+  class  ExpressionContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *INT();
+    antlr4::tree::TerminalNode *FLOAT();
+    antlr4::tree::TerminalNode *ID();
+    std::vector<ExpressionContext *> expression();
+    ExpressionContext* expression(size_t i);
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ExpressionContext* expression();
+  ExpressionContext* expression(int precedence);
   class  OperandContext : public antlr4::ParserRuleContext {
   public:
     OperandContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *ID();
     antlr4::tree::TerminalNode *INT();
     antlr4::tree::TerminalNode *FLOAT();
+    antlr4::tree::TerminalNode *ID();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -205,6 +223,10 @@ public:
 
   ComparisonOperatorContext* comparisonOperator();
 
+
+  bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;
+
+  bool expressionSempred(ExpressionContext *_localctx, size_t predicateIndex);
 
   // By default the static state used to implement the parser is lazily initialized during the first
   // call to the constructor. You can call this function if you wish to initialize the static state

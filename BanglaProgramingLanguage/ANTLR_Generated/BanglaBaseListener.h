@@ -40,6 +40,9 @@ public:
   virtual void enterCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
   virtual void exitCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
 
+  virtual void enterExpression(BanglaParser::ExpressionContext * /*ctx*/) override { }
+  virtual void exitExpression(BanglaParser::ExpressionContext * /*ctx*/) override { }
+
   virtual void enterOperand(BanglaParser::OperandContext * /*ctx*/) override { }
   virtual void exitOperand(BanglaParser::OperandContext * /*ctx*/) override { }
 
