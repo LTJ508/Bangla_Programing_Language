@@ -94,13 +94,28 @@
 
         async function runCompiler() {
             const sourceCode = document.getElementById('sourceCode').value;
-                const result = await sendRequest('compile', {
-                    source_code: sourceCode
-                });
-                // Directly access the result field and set it as the inner text
-                const output = result.result.replace(/\\n/g, '\n');
-                document.getElementById('output').innerText = output;
-            }
+            
+            // Start measuring time
+            const startTime = performance.now();
+            
+            const result = await sendRequest('compile', {
+                source_code: sourceCode
+            });
+            
+            // End measuring time
+            const endTime = performance.now();
+            
+            // Calculate execution time in seconds with 6 decimal places
+            const executionTime = ((endTime - startTime) / 1000).toFixed(6);
+            
+            // Directly access the result field and set it as the inner text
+            let output = result.result.replace(/\\n/g, '\n');
+
+            // Append the execution time to the output
+            output += `\nExecution Time: ${executionTime} seconds`;
+            
+            document.getElementById('output').innerText = output;
+        }
 
     </script>
 </body>

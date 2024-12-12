@@ -52,13 +52,24 @@ public:
     std::unordered_map<std::string, VariableValue> variables;
     bool executeCurrentBlock = true; // Flag to control block execution
     std::vector<bool> executionStack; // Stack to manage nested block execution states
+    int count = 0; // Variable to count nested if-else statements
+
 
     void enterIfStatement(BanglaParser::IfStatementContext *ctx) override {
         executionStack.push_back(executeCurrentBlock);
         executeCurrentBlock = false;
+        count++; // Increment count when entering an if statement
     }
 
     void exitIfStatement(BanglaParser::IfStatementContext *ctx) override {
+        count--; // Decrement count when exiting an if statement
+
+        if (count > 0) {
+            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+            executionStack.pop_back();
+            return; // Exit if nested
+        }
+
         bool conditionMet = false;
 
         // Check the main if condition
@@ -87,45 +98,6 @@ public:
         executeCurrentBlock = executionStack.back(); // Restore the previous execution state
         executionStack.pop_back();
     }
-
-// void exitIfStatement(BanglaParser::IfStatementContext *ctx) override {
-//     bool conditionMet = false;
-
-//     std::cout << "Debug => Entering if-statement" << std::endl;
-
-//     // Check the main if condition
-//     if (evaluateCondition(ctx->condition(0))) {
-//         std::cout << "Debug => Main if condition met" << std::endl;
-//         executeCurrentBlock = true;
-//         executeBlock(ctx->block(0));
-//         conditionMet = true;
-//     } else {
-//         // Check else-if conditions
-//         for (size_t i = 0; i < ctx->ELSE_IF().size(); ++i) {
-//             if (evaluateCondition(ctx->condition(i + 1))) {
-//                 std::cout << "Debug => Else-if condition " << i + 1 << " met" << std::endl;
-//                 executeCurrentBlock = true;
-//                 executeBlock(ctx->block(i + 1));
-//                 conditionMet = true;
-//                 break;
-//             }
-//         }
-//     }
-
-//     // Check else condition if no previous condition was met
-//     if (!conditionMet && ctx->ELSE()) {
-//         std::cout << "Debug => Else condition met" << std::endl;
-//         executeCurrentBlock = true;
-//         executeBlock(ctx->block(ctx->block().size() - 1));
-//     }
-
-//     // Restore the previous execution state
-//     executeCurrentBlock = executionStack.back();
-//     executionStack.pop_back();
-
-//     std::cout << "Debug => Exiting if-statement" << std::endl;
-// }
-
 
     void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
         if (!executeCurrentBlock) return;
