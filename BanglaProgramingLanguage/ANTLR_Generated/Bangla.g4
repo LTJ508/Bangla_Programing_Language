@@ -78,4 +78,8 @@ FLOAT: [০-৯]+'.'[০-৯]+; // Floating-point number
 INT: [০-৯]+; // Integer number
 STRING: '"' .*? '"'; // String literal
 
+// Comment rules
+LINE_COMMENT: '//' ~[\r\n]* -> skip; // Single-line comment
+BLOCK_COMMENT: '/*' .*? '*/' -> skip; // Multi-line comment
+
 WS: [ \t\r\n]+ -> skip; // Whitespace

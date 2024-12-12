@@ -16,7 +16,8 @@ public:
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
     T__14 = 15, T__15 = 16, T__16 = 17, SHURU = 18, SHESH = 19, DHORI = 20, 
     DEKHAO = 21, NATUN_LINE = 22, IF = 23, ELSE_IF = 24, ELSE = 25, ID = 26, 
-    FLOAT = 27, INT = 28, STRING = 29, WS = 30
+    FLOAT = 27, INT = 28, STRING = 29, LINE_COMMENT = 30, BLOCK_COMMENT = 31, 
+    WS = 32
   };
 
   explicit BanglaLexer(antlr4::CharStream *input);
