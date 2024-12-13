@@ -3,10 +3,10 @@ from flask_cors import CORS
 import os
 import sys
 
-# Adjust the path to point to the parent directory of 'assembly_layer'
+# Adjust the path to point to the parent directory of 'API'
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
-# Import necessary functions from the assembly_layer and quantum_service_deployment modules
+# Import necessary functions from the Compiler module
 from API.compiler import runCompiler
 
 # Initialize the Flask application

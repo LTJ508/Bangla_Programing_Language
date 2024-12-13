@@ -129,34 +129,6 @@ public:
         }
     }
 
-    // void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
-    //     if (!executeCurrentBlock) return;
-
-    //     std::string varName = ctx->ID()->getText();
-    //     std::string valueStr;
-    //     if (ctx->FLOAT()) {
-    //         valueStr = ctx->FLOAT()->getText();
-    //     } else if (ctx->INT()) {
-    //         valueStr = ctx->INT()->getText();
-    //     }
-
-    //     try {
-    //         if (ctx->FLOAT()) {
-    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
-    //             double value = std::stod(englishValueStr);
-    //             variables[varName] = value;
-    //         } else if (ctx->INT()) {
-    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
-    //             int value = std::stoi(englishValueStr);
-    //             variables[varName] = value;
-    //         }
-    //     } catch (const std::invalid_argument& e) {
-    //         std::cerr << "Error: Invalid number format for variable " << varName << ": " << valueStr << std::endl;
-    //     } catch (const std::out_of_range& e) {
-    //         std::cerr << "Error: Number out of range for variable " << varName << ": " << valueStr << std::endl;
-    //     }
-    // }
-
     void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
         if (!executeCurrentBlock) return;
 

@@ -13,6 +13,7 @@ statement
     : variableDeclaration
     | printStatement
     | ifStatement
+    | forStatement
     ;
 
 variableDeclaration
@@ -31,6 +32,10 @@ ifStatement
     : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
     ;
 
+forStatement
+    : FOR '(' variableDeclaration condition ';' expression ')' block
+    ;
+
 condition
     : operand comparisonOperator operand
     ;
@@ -42,6 +47,8 @@ expression
     | FLOAT
     | ID
     | '(' expression ')'
+    | ID '++'
+    | ID '--'
     ;
 
 operand
@@ -68,6 +75,7 @@ NATUN_LINE: 'নতুন_লাইন';
 IF: 'যদি';
 ELSE_IF: 'তানাহলে যদি';
 ELSE: 'তানাহলে';
+FOR: 'যতক্ষণ';
 
 ID: ID_START ID_PART*; // Identifier
 
