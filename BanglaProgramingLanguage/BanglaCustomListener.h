@@ -206,8 +206,9 @@ public:
         }
 
         if (countNestedIfElse > 0) {
-            if (executionStack.size() > 0){
-                executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+            // Restore the previous execution state
+            if (!executionStack.empty()) {
+                executeCurrentBlock = executionStack.back();
                 executionStack.pop_back();
             }
             return; // Exit if nested
@@ -238,8 +239,9 @@ public:
             executeBlock(ctx->block(ctx->block().size() - 1));
         }
 
-        if (executionStack.size() > 0){
-            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+        // Restore the previous execution state
+        if (!executionStack.empty()) {
+            executeCurrentBlock = executionStack.back();
             executionStack.pop_back();
         }
 
@@ -286,8 +288,9 @@ public:
             }
         }
 
-        if (executionStack.size() > 0){
-            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+        // Restore the previous execution state
+        if (!executionStack.empty()) {
+            executeCurrentBlock = executionStack.back();
             executionStack.pop_back();
         }
     }
