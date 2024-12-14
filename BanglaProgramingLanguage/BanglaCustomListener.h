@@ -236,6 +236,45 @@ public:
         }
     }
 
+void enterForStatement(BanglaParser::ForStatementContext *ctx) override {
+    // Preserve the current execution state
+    //executionStack.push_back(executeCurrentBlock);
+    //executeCurrentBlock = false;
+
+    // Initialize the loop variable
+    if (ctx->variableDeclaration()) {
+        exitVariableDeclaration(ctx->variableDeclaration());
+    } else if (ctx->initialization()) {
+        exitAssignmentStatement(ctx->initialization()->assignmentStatement());
+    }
+
+    // Check the loop condition
+    while (evaluateCondition(ctx->condition())) {
+        // Execute the loop body
+        executeBlock(ctx->block());
+
+        // Update the loop variable
+        if (ctx->incrementStatement()) {
+            exitIncrementStatement(ctx->incrementStatement());
+        } else if (ctx->decrementStatement()) {
+            exitDecrementStatement(ctx->decrementStatement());
+        } else if (ctx->assignmentStatement()) {
+            exitAssignmentStatement(ctx->assignmentStatement());
+        }
+    }
+}
+
+void exitForStatement(BanglaParser::ForStatementContext *ctx) override {
+    // if (executionStack.size() > 0){
+    //     executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+    //     executionStack.pop_back();
+    // }
+}
+
+void exitInitialization(BanglaParser::InitializationContext *ctx) {
+    exitAssignmentStatement(ctx->assignmentStatement());
+}
+
 private:
     bool evaluateCondition(BanglaParser::ConditionContext *ctx) {
         double leftValue = getOperandValue(ctx->operand(0));

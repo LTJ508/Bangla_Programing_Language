@@ -53,68 +53,78 @@ void banglaParserInitialize() {
   auto staticData = std::make_unique<BanglaParserStaticData>(
     std::vector<std::string>{
       "program", "block", "statement", "variableDeclaration", "printStatement", 
-      "printArguments", "ifStatement", "assignmentStatement", "incrementStatement", 
-      "decrementStatement", "condition", "expression", "operand", "comparisonOperator"
+      "printArguments", "ifStatement", "forStatement", "initialization", 
+      "assignmentStatement", "incrementStatement", "decrementStatement", 
+      "condition", "expression", "operand", "comparisonOperator"
     },
     std::vector<std::string>{
-      "", "'{'", "'}'", "'='", "';'", "'('", "')'", "','", "'++'", "'--'", 
+      "", "'{'", "'}'", "';'", "'='", "'('", "')'", "','", "'++'", "'--'", 
       "'*'", "'/'", "'+'", "'-'", "'>='", "'<='", "'>'", "'<'", "'=='", 
       "'!='", "'\\u09B6\\u09C1\\u09B0\\u09C1'", "'\\u09B6\\u09C7\\u09B7'", 
       "'\\u09A7\\u09B0\\u09BF'", "'\\u09A6\\u09C7\\u0996\\u09BE\\u0993'", 
       "'\\u09A8\\u09A4\\u09C1\\u09A8_\\u09B2\\u09BE\\u0987\\u09A8'", "'\\u09AF\\u09A6\\u09BF'", 
       "'\\u09A4\\u09BE\\u09A8\\u09BE\\u09B9\\u09B2\\u09C7 \\u09AF\\u09A6\\u09BF'", 
-      "'\\u09A4\\u09BE\\u09A8\\u09BE\\u09B9\\u09B2\\u09C7'"
+      "'\\u09A4\\u09BE\\u09A8\\u09BE\\u09B9\\u09B2\\u09C7'", "'\\u09AF\\u09A4\\u0995\\u09CD\\u09B7\\u09A3'"
     },
     std::vector<std::string>{
       "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
       "", "", "", "SHURU", "SHESH", "DHORI", "DEKHAO", "NATUN_LINE", "IF", 
-      "ELSE_IF", "ELSE", "ID", "FLOAT", "INT", "STRING", "LINE_COMMENT", 
+      "ELSE_IF", "ELSE", "FOR", "ID", "FLOAT", "INT", "STRING", "LINE_COMMENT", 
       "BLOCK_COMMENT", "WS"
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,34,138,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
-  	7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,1,0,1,0,
-  	1,0,1,0,1,1,1,1,5,1,35,8,1,10,1,12,1,38,9,1,1,1,1,1,1,2,1,2,1,2,1,2,1,
-  	2,1,2,3,2,48,8,2,1,3,1,3,1,3,1,3,3,3,54,8,3,1,3,1,3,1,4,1,4,1,4,1,4,1,
-  	4,1,4,1,5,1,5,1,5,5,5,67,8,5,10,5,12,5,70,9,5,1,5,1,5,3,5,74,8,5,1,6,
-  	1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,5,6,87,8,6,10,6,12,6,90,9,6,1,
-  	6,1,6,3,6,94,8,6,1,7,1,7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,
-  	1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,3,11,121,
-  	8,11,1,11,1,11,1,11,1,11,1,11,1,11,5,11,129,8,11,10,11,12,11,132,9,11,
-  	1,12,1,12,1,13,1,13,1,13,0,1,22,14,0,2,4,6,8,10,12,14,16,18,20,22,24,
-  	26,0,5,2,0,28,28,31,31,1,0,10,11,1,0,12,13,1,0,28,30,1,0,14,19,139,0,
-  	28,1,0,0,0,2,32,1,0,0,0,4,47,1,0,0,0,6,49,1,0,0,0,8,57,1,0,0,0,10,63,
-  	1,0,0,0,12,75,1,0,0,0,14,95,1,0,0,0,16,100,1,0,0,0,18,104,1,0,0,0,20,
-  	108,1,0,0,0,22,120,1,0,0,0,24,133,1,0,0,0,26,135,1,0,0,0,28,29,5,20,0,
-  	0,29,30,3,2,1,0,30,31,5,21,0,0,31,1,1,0,0,0,32,36,5,1,0,0,33,35,3,4,2,
-  	0,34,33,1,0,0,0,35,38,1,0,0,0,36,34,1,0,0,0,36,37,1,0,0,0,37,39,1,0,0,
-  	0,38,36,1,0,0,0,39,40,5,2,0,0,40,3,1,0,0,0,41,48,3,6,3,0,42,48,3,8,4,
-  	0,43,48,3,12,6,0,44,48,3,14,7,0,45,48,3,16,8,0,46,48,3,18,9,0,47,41,1,
-  	0,0,0,47,42,1,0,0,0,47,43,1,0,0,0,47,44,1,0,0,0,47,45,1,0,0,0,47,46,1,
-  	0,0,0,48,5,1,0,0,0,49,50,5,22,0,0,50,53,5,28,0,0,51,52,5,3,0,0,52,54,
-  	3,22,11,0,53,51,1,0,0,0,53,54,1,0,0,0,54,55,1,0,0,0,55,56,5,4,0,0,56,
-  	7,1,0,0,0,57,58,5,23,0,0,58,59,5,5,0,0,59,60,3,10,5,0,60,61,5,6,0,0,61,
-  	62,5,4,0,0,62,9,1,0,0,0,63,68,7,0,0,0,64,65,5,7,0,0,65,67,7,0,0,0,66,
-  	64,1,0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,73,1,0,0,0,70,
-  	68,1,0,0,0,71,72,5,7,0,0,72,74,5,24,0,0,73,71,1,0,0,0,73,74,1,0,0,0,74,
-  	11,1,0,0,0,75,76,5,25,0,0,76,77,5,5,0,0,77,78,3,20,10,0,78,79,5,6,0,0,
-  	79,88,3,2,1,0,80,81,5,26,0,0,81,82,5,5,0,0,82,83,3,20,10,0,83,84,5,6,
-  	0,0,84,85,3,2,1,0,85,87,1,0,0,0,86,80,1,0,0,0,87,90,1,0,0,0,88,86,1,0,
-  	0,0,88,89,1,0,0,0,89,93,1,0,0,0,90,88,1,0,0,0,91,92,5,27,0,0,92,94,3,
-  	2,1,0,93,91,1,0,0,0,93,94,1,0,0,0,94,13,1,0,0,0,95,96,5,28,0,0,96,97,
-  	5,3,0,0,97,98,3,22,11,0,98,99,5,4,0,0,99,15,1,0,0,0,100,101,5,28,0,0,
-  	101,102,5,8,0,0,102,103,5,4,0,0,103,17,1,0,0,0,104,105,5,28,0,0,105,106,
-  	5,9,0,0,106,107,5,4,0,0,107,19,1,0,0,0,108,109,3,24,12,0,109,110,3,26,
-  	13,0,110,111,3,24,12,0,111,21,1,0,0,0,112,113,6,11,-1,0,113,121,5,30,
-  	0,0,114,121,5,29,0,0,115,121,5,28,0,0,116,117,5,5,0,0,117,118,3,22,11,
-  	0,118,119,5,6,0,0,119,121,1,0,0,0,120,112,1,0,0,0,120,114,1,0,0,0,120,
-  	115,1,0,0,0,120,116,1,0,0,0,121,130,1,0,0,0,122,123,10,6,0,0,123,124,
-  	7,1,0,0,124,129,3,22,11,7,125,126,10,5,0,0,126,127,7,2,0,0,127,129,3,
-  	22,11,6,128,122,1,0,0,0,128,125,1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,
-  	0,130,131,1,0,0,0,131,23,1,0,0,0,132,130,1,0,0,0,133,134,7,3,0,0,134,
-  	25,1,0,0,0,135,136,7,4,0,0,136,27,1,0,0,0,10,36,47,53,68,73,88,93,120,
-  	128,130
+  	4,1,35,165,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,
+  	7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,
+  	14,2,15,7,15,1,0,1,0,1,0,1,0,1,1,1,1,5,1,39,8,1,10,1,12,1,42,9,1,1,1,
+  	1,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,59,8,2,1,
+  	3,1,3,1,3,1,3,3,3,65,8,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,4,1,5,1,5,1,5,
+  	5,5,78,8,5,10,5,12,5,81,9,5,1,5,1,5,3,5,85,8,5,1,6,1,6,1,6,1,6,1,6,1,
+  	6,1,6,1,6,1,6,1,6,1,6,5,6,98,8,6,10,6,12,6,101,9,6,1,6,1,6,3,6,105,8,
+  	6,1,7,1,7,1,7,1,7,3,7,111,8,7,1,7,1,7,1,7,1,7,1,7,3,7,118,8,7,1,7,1,7,
+  	1,7,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,11,1,12,1,
+  	12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,148,8,13,1,
+  	13,1,13,1,13,1,13,1,13,1,13,5,13,156,8,13,10,13,12,13,159,9,13,1,14,1,
+  	14,1,15,1,15,1,15,0,1,26,16,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
+  	0,5,2,0,29,29,32,32,1,0,10,11,1,0,12,13,1,0,29,31,1,0,14,19,170,0,32,
+  	1,0,0,0,2,36,1,0,0,0,4,58,1,0,0,0,6,60,1,0,0,0,8,68,1,0,0,0,10,74,1,0,
+  	0,0,12,86,1,0,0,0,14,106,1,0,0,0,16,122,1,0,0,0,18,125,1,0,0,0,20,129,
+  	1,0,0,0,22,132,1,0,0,0,24,135,1,0,0,0,26,147,1,0,0,0,28,160,1,0,0,0,30,
+  	162,1,0,0,0,32,33,5,20,0,0,33,34,3,2,1,0,34,35,5,21,0,0,35,1,1,0,0,0,
+  	36,40,5,1,0,0,37,39,3,4,2,0,38,37,1,0,0,0,39,42,1,0,0,0,40,38,1,0,0,0,
+  	40,41,1,0,0,0,41,43,1,0,0,0,42,40,1,0,0,0,43,44,5,2,0,0,44,3,1,0,0,0,
+  	45,59,3,6,3,0,46,59,3,8,4,0,47,59,3,12,6,0,48,49,3,18,9,0,49,50,5,3,0,
+  	0,50,59,1,0,0,0,51,52,3,20,10,0,52,53,5,3,0,0,53,59,1,0,0,0,54,55,3,22,
+  	11,0,55,56,5,3,0,0,56,59,1,0,0,0,57,59,3,14,7,0,58,45,1,0,0,0,58,46,1,
+  	0,0,0,58,47,1,0,0,0,58,48,1,0,0,0,58,51,1,0,0,0,58,54,1,0,0,0,58,57,1,
+  	0,0,0,59,5,1,0,0,0,60,61,5,22,0,0,61,64,5,29,0,0,62,63,5,4,0,0,63,65,
+  	3,26,13,0,64,62,1,0,0,0,64,65,1,0,0,0,65,66,1,0,0,0,66,67,5,3,0,0,67,
+  	7,1,0,0,0,68,69,5,23,0,0,69,70,5,5,0,0,70,71,3,10,5,0,71,72,5,6,0,0,72,
+  	73,5,3,0,0,73,9,1,0,0,0,74,79,7,0,0,0,75,76,5,7,0,0,76,78,7,0,0,0,77,
+  	75,1,0,0,0,78,81,1,0,0,0,79,77,1,0,0,0,79,80,1,0,0,0,80,84,1,0,0,0,81,
+  	79,1,0,0,0,82,83,5,7,0,0,83,85,5,24,0,0,84,82,1,0,0,0,84,85,1,0,0,0,85,
+  	11,1,0,0,0,86,87,5,25,0,0,87,88,5,5,0,0,88,89,3,24,12,0,89,90,5,6,0,0,
+  	90,99,3,2,1,0,91,92,5,26,0,0,92,93,5,5,0,0,93,94,3,24,12,0,94,95,5,6,
+  	0,0,95,96,3,2,1,0,96,98,1,0,0,0,97,91,1,0,0,0,98,101,1,0,0,0,99,97,1,
+  	0,0,0,99,100,1,0,0,0,100,104,1,0,0,0,101,99,1,0,0,0,102,103,5,27,0,0,
+  	103,105,3,2,1,0,104,102,1,0,0,0,104,105,1,0,0,0,105,13,1,0,0,0,106,107,
+  	5,28,0,0,107,110,5,5,0,0,108,111,3,6,3,0,109,111,3,16,8,0,110,108,1,0,
+  	0,0,110,109,1,0,0,0,110,111,1,0,0,0,111,112,1,0,0,0,112,113,3,24,12,0,
+  	113,117,5,3,0,0,114,118,3,18,9,0,115,118,3,20,10,0,116,118,3,22,11,0,
+  	117,114,1,0,0,0,117,115,1,0,0,0,117,116,1,0,0,0,117,118,1,0,0,0,118,119,
+  	1,0,0,0,119,120,5,6,0,0,120,121,3,2,1,0,121,15,1,0,0,0,122,123,3,18,9,
+  	0,123,124,5,3,0,0,124,17,1,0,0,0,125,126,5,29,0,0,126,127,5,4,0,0,127,
+  	128,3,26,13,0,128,19,1,0,0,0,129,130,5,29,0,0,130,131,5,8,0,0,131,21,
+  	1,0,0,0,132,133,5,29,0,0,133,134,5,9,0,0,134,23,1,0,0,0,135,136,3,28,
+  	14,0,136,137,3,30,15,0,137,138,3,28,14,0,138,25,1,0,0,0,139,140,6,13,
+  	-1,0,140,148,5,31,0,0,141,148,5,30,0,0,142,148,5,29,0,0,143,144,5,5,0,
+  	0,144,145,3,26,13,0,145,146,5,6,0,0,146,148,1,0,0,0,147,139,1,0,0,0,147,
+  	141,1,0,0,0,147,142,1,0,0,0,147,143,1,0,0,0,148,157,1,0,0,0,149,150,10,
+  	6,0,0,150,151,7,1,0,0,151,156,3,26,13,7,152,153,10,5,0,0,153,154,7,2,
+  	0,0,154,156,3,26,13,6,155,149,1,0,0,0,155,152,1,0,0,0,156,159,1,0,0,0,
+  	157,155,1,0,0,0,157,158,1,0,0,0,158,27,1,0,0,0,159,157,1,0,0,0,160,161,
+  	7,3,0,0,161,29,1,0,0,0,162,163,7,4,0,0,163,31,1,0,0,0,12,40,58,64,79,
+  	84,99,104,110,117,147,155,157
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -211,11 +221,11 @@ BanglaParser::ProgramContext* BanglaParser::program() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(28);
+    setState(32);
     match(BanglaParser::SHURU);
-    setState(29);
+    setState(33);
     block();
-    setState(30);
+    setState(34);
     match(BanglaParser::SHESH);
    
   }
@@ -273,20 +283,20 @@ BanglaParser::BlockContext* BanglaParser::block() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(32);
-    match(BanglaParser::T__0);
     setState(36);
+    match(BanglaParser::T__0);
+    setState(40);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while ((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & 314572800) != 0)) {
-      setState(33);
+      ((1ULL << _la) & 851443712) != 0)) {
+      setState(37);
       statement();
-      setState(38);
+      setState(42);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(39);
+    setState(43);
     match(BanglaParser::T__1);
    
   }
@@ -329,6 +339,10 @@ BanglaParser::DecrementStatementContext* BanglaParser::StatementContext::decreme
   return getRuleContext<BanglaParser::DecrementStatementContext>(0);
 }
 
+BanglaParser::ForStatementContext* BanglaParser::StatementContext::forStatement() {
+  return getRuleContext<BanglaParser::ForStatementContext>(0);
+}
+
 
 size_t BanglaParser::StatementContext::getRuleIndex() const {
   return BanglaParser::RuleStatement;
@@ -358,48 +372,61 @@ BanglaParser::StatementContext* BanglaParser::statement() {
     exitRule();
   });
   try {
-    setState(47);
+    setState(58);
     _errHandler->sync(this);
     switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx)) {
     case 1: {
       enterOuterAlt(_localctx, 1);
-      setState(41);
+      setState(45);
       variableDeclaration();
       break;
     }
 
     case 2: {
       enterOuterAlt(_localctx, 2);
-      setState(42);
+      setState(46);
       printStatement();
       break;
     }
 
     case 3: {
       enterOuterAlt(_localctx, 3);
-      setState(43);
+      setState(47);
       ifStatement();
       break;
     }
 
     case 4: {
       enterOuterAlt(_localctx, 4);
-      setState(44);
+      setState(48);
       assignmentStatement();
+      setState(49);
+      match(BanglaParser::T__2);
       break;
     }
 
     case 5: {
       enterOuterAlt(_localctx, 5);
-      setState(45);
+      setState(51);
       incrementStatement();
+      setState(52);
+      match(BanglaParser::T__2);
       break;
     }
 
     case 6: {
       enterOuterAlt(_localctx, 6);
-      setState(46);
+      setState(54);
       decrementStatement();
+      setState(55);
+      match(BanglaParser::T__2);
+      break;
+    }
+
+    case 7: {
+      enterOuterAlt(_localctx, 7);
+      setState(57);
+      forStatement();
       break;
     }
 
@@ -466,22 +493,22 @@ BanglaParser::VariableDeclarationContext* BanglaParser::variableDeclaration() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(49);
+    setState(60);
     match(BanglaParser::DHORI);
-    setState(50);
+    setState(61);
     match(BanglaParser::ID);
-    setState(53);
+    setState(64);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
-    if (_la == BanglaParser::T__2) {
-      setState(51);
-      match(BanglaParser::T__2);
-      setState(52);
+    if (_la == BanglaParser::T__3) {
+      setState(62);
+      match(BanglaParser::T__3);
+      setState(63);
       expression(0);
     }
-    setState(55);
-    match(BanglaParser::T__3);
+    setState(66);
+    match(BanglaParser::T__2);
    
   }
   catch (RecognitionException &e) {
@@ -537,16 +564,16 @@ BanglaParser::PrintStatementContext* BanglaParser::printStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(57);
+    setState(68);
     match(BanglaParser::DEKHAO);
-    setState(58);
+    setState(69);
     match(BanglaParser::T__4);
-    setState(59);
+    setState(70);
     printArguments();
-    setState(60);
+    setState(71);
     match(BanglaParser::T__5);
-    setState(61);
-    match(BanglaParser::T__3);
+    setState(72);
+    match(BanglaParser::T__2);
    
   }
   catch (RecognitionException &e) {
@@ -616,7 +643,7 @@ BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(63);
+    setState(74);
     _la = _input->LA(1);
     if (!(_la == BanglaParser::ID
 
@@ -627,14 +654,14 @@ BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
       _errHandler->reportMatch(this);
       consume();
     }
-    setState(68);
+    setState(79);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
-        setState(64);
+        setState(75);
         match(BanglaParser::T__6);
-        setState(65);
+        setState(76);
         _la = _input->LA(1);
         if (!(_la == BanglaParser::ID
 
@@ -646,18 +673,18 @@ BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
           consume();
         } 
       }
-      setState(70);
+      setState(81);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
     }
-    setState(73);
+    setState(84);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == BanglaParser::T__6) {
-      setState(71);
+      setState(82);
       match(BanglaParser::T__6);
-      setState(72);
+      setState(83);
       match(BanglaParser::NATUN_LINE);
     }
    
@@ -740,44 +767,234 @@ BanglaParser::IfStatementContext* BanglaParser::ifStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(75);
+    setState(86);
     match(BanglaParser::IF);
-    setState(76);
+    setState(87);
     match(BanglaParser::T__4);
-    setState(77);
-    condition();
-    setState(78);
-    match(BanglaParser::T__5);
-    setState(79);
-    block();
     setState(88);
+    condition();
+    setState(89);
+    match(BanglaParser::T__5);
+    setState(90);
+    block();
+    setState(99);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == BanglaParser::ELSE_IF) {
-      setState(80);
+      setState(91);
       match(BanglaParser::ELSE_IF);
-      setState(81);
+      setState(92);
       match(BanglaParser::T__4);
-      setState(82);
+      setState(93);
       condition();
-      setState(83);
+      setState(94);
       match(BanglaParser::T__5);
-      setState(84);
+      setState(95);
       block();
-      setState(90);
+      setState(101);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(93);
+    setState(104);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == BanglaParser::ELSE) {
-      setState(91);
+      setState(102);
       match(BanglaParser::ELSE);
-      setState(92);
+      setState(103);
       block();
     }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- ForStatementContext ------------------------------------------------------------------
+
+BanglaParser::ForStatementContext::ForStatementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* BanglaParser::ForStatementContext::FOR() {
+  return getToken(BanglaParser::FOR, 0);
+}
+
+BanglaParser::ConditionContext* BanglaParser::ForStatementContext::condition() {
+  return getRuleContext<BanglaParser::ConditionContext>(0);
+}
+
+BanglaParser::BlockContext* BanglaParser::ForStatementContext::block() {
+  return getRuleContext<BanglaParser::BlockContext>(0);
+}
+
+BanglaParser::VariableDeclarationContext* BanglaParser::ForStatementContext::variableDeclaration() {
+  return getRuleContext<BanglaParser::VariableDeclarationContext>(0);
+}
+
+BanglaParser::InitializationContext* BanglaParser::ForStatementContext::initialization() {
+  return getRuleContext<BanglaParser::InitializationContext>(0);
+}
+
+BanglaParser::AssignmentStatementContext* BanglaParser::ForStatementContext::assignmentStatement() {
+  return getRuleContext<BanglaParser::AssignmentStatementContext>(0);
+}
+
+BanglaParser::IncrementStatementContext* BanglaParser::ForStatementContext::incrementStatement() {
+  return getRuleContext<BanglaParser::IncrementStatementContext>(0);
+}
+
+BanglaParser::DecrementStatementContext* BanglaParser::ForStatementContext::decrementStatement() {
+  return getRuleContext<BanglaParser::DecrementStatementContext>(0);
+}
+
+
+size_t BanglaParser::ForStatementContext::getRuleIndex() const {
+  return BanglaParser::RuleForStatement;
+}
+
+void BanglaParser::ForStatementContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterForStatement(this);
+}
+
+void BanglaParser::ForStatementContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitForStatement(this);
+}
+
+BanglaParser::ForStatementContext* BanglaParser::forStatement() {
+  ForStatementContext *_localctx = _tracker.createInstance<ForStatementContext>(_ctx, getState());
+  enterRule(_localctx, 14, BanglaParser::RuleForStatement);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(106);
+    match(BanglaParser::FOR);
+    setState(107);
+    match(BanglaParser::T__4);
+    setState(110);
+    _errHandler->sync(this);
+
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx)) {
+    case 1: {
+      setState(108);
+      variableDeclaration();
+      break;
+    }
+
+    case 2: {
+      setState(109);
+      initialization();
+      break;
+    }
+
+    default:
+      break;
+    }
+    setState(112);
+    condition();
+    setState(113);
+    match(BanglaParser::T__2);
+    setState(117);
+    _errHandler->sync(this);
+
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
+    case 1: {
+      setState(114);
+      assignmentStatement();
+      break;
+    }
+
+    case 2: {
+      setState(115);
+      incrementStatement();
+      break;
+    }
+
+    case 3: {
+      setState(116);
+      decrementStatement();
+      break;
+    }
+
+    default:
+      break;
+    }
+    setState(119);
+    match(BanglaParser::T__5);
+    setState(120);
+    block();
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- InitializationContext ------------------------------------------------------------------
+
+BanglaParser::InitializationContext::InitializationContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+BanglaParser::AssignmentStatementContext* BanglaParser::InitializationContext::assignmentStatement() {
+  return getRuleContext<BanglaParser::AssignmentStatementContext>(0);
+}
+
+
+size_t BanglaParser::InitializationContext::getRuleIndex() const {
+  return BanglaParser::RuleInitialization;
+}
+
+void BanglaParser::InitializationContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterInitialization(this);
+}
+
+void BanglaParser::InitializationContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitInitialization(this);
+}
+
+BanglaParser::InitializationContext* BanglaParser::initialization() {
+  InitializationContext *_localctx = _tracker.createInstance<InitializationContext>(_ctx, getState());
+  enterRule(_localctx, 16, BanglaParser::RuleInitialization);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(122);
+    assignmentStatement();
+    setState(123);
+    match(BanglaParser::T__2);
    
   }
   catch (RecognitionException &e) {
@@ -822,7 +1039,7 @@ void BanglaParser::AssignmentStatementContext::exitRule(tree::ParseTreeListener 
 
 BanglaParser::AssignmentStatementContext* BanglaParser::assignmentStatement() {
   AssignmentStatementContext *_localctx = _tracker.createInstance<AssignmentStatementContext>(_ctx, getState());
-  enterRule(_localctx, 14, BanglaParser::RuleAssignmentStatement);
+  enterRule(_localctx, 18, BanglaParser::RuleAssignmentStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -833,14 +1050,12 @@ BanglaParser::AssignmentStatementContext* BanglaParser::assignmentStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(95);
+    setState(125);
     match(BanglaParser::ID);
-    setState(96);
-    match(BanglaParser::T__2);
-    setState(97);
-    expression(0);
-    setState(98);
+    setState(126);
     match(BanglaParser::T__3);
+    setState(127);
+    expression(0);
    
   }
   catch (RecognitionException &e) {
@@ -881,7 +1096,7 @@ void BanglaParser::IncrementStatementContext::exitRule(tree::ParseTreeListener *
 
 BanglaParser::IncrementStatementContext* BanglaParser::incrementStatement() {
   IncrementStatementContext *_localctx = _tracker.createInstance<IncrementStatementContext>(_ctx, getState());
-  enterRule(_localctx, 16, BanglaParser::RuleIncrementStatement);
+  enterRule(_localctx, 20, BanglaParser::RuleIncrementStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -892,12 +1107,10 @@ BanglaParser::IncrementStatementContext* BanglaParser::incrementStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(100);
+    setState(129);
     match(BanglaParser::ID);
-    setState(101);
+    setState(130);
     match(BanglaParser::T__7);
-    setState(102);
-    match(BanglaParser::T__3);
    
   }
   catch (RecognitionException &e) {
@@ -938,7 +1151,7 @@ void BanglaParser::DecrementStatementContext::exitRule(tree::ParseTreeListener *
 
 BanglaParser::DecrementStatementContext* BanglaParser::decrementStatement() {
   DecrementStatementContext *_localctx = _tracker.createInstance<DecrementStatementContext>(_ctx, getState());
-  enterRule(_localctx, 18, BanglaParser::RuleDecrementStatement);
+  enterRule(_localctx, 22, BanglaParser::RuleDecrementStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -949,12 +1162,10 @@ BanglaParser::DecrementStatementContext* BanglaParser::decrementStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(104);
+    setState(132);
     match(BanglaParser::ID);
-    setState(105);
+    setState(133);
     match(BanglaParser::T__8);
-    setState(106);
-    match(BanglaParser::T__3);
    
   }
   catch (RecognitionException &e) {
@@ -1003,7 +1214,7 @@ void BanglaParser::ConditionContext::exitRule(tree::ParseTreeListener *listener)
 
 BanglaParser::ConditionContext* BanglaParser::condition() {
   ConditionContext *_localctx = _tracker.createInstance<ConditionContext>(_ctx, getState());
-  enterRule(_localctx, 20, BanglaParser::RuleCondition);
+  enterRule(_localctx, 24, BanglaParser::RuleCondition);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -1014,11 +1225,11 @@ BanglaParser::ConditionContext* BanglaParser::condition() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(108);
+    setState(135);
     operand();
-    setState(109);
+    setState(136);
     comparisonOperator();
-    setState(110);
+    setState(137);
     operand();
    
   }
@@ -1085,8 +1296,8 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
   BanglaParser::ExpressionContext *_localctx = _tracker.createInstance<ExpressionContext>(_ctx, parentState);
   BanglaParser::ExpressionContext *previousContext = _localctx;
   (void)previousContext; // Silence compiler, in case the context is not used by generated code.
-  size_t startState = 22;
-  enterRecursionRule(_localctx, 22, BanglaParser::RuleExpression, precedence);
+  size_t startState = 26;
+  enterRecursionRule(_localctx, 26, BanglaParser::RuleExpression, precedence);
 
     size_t _la = 0;
 
@@ -1100,33 +1311,33 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(120);
+    setState(147);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case BanglaParser::INT: {
-        setState(113);
+        setState(140);
         match(BanglaParser::INT);
         break;
       }
 
       case BanglaParser::FLOAT: {
-        setState(114);
+        setState(141);
         match(BanglaParser::FLOAT);
         break;
       }
 
       case BanglaParser::ID: {
-        setState(115);
+        setState(142);
         match(BanglaParser::ID);
         break;
       }
 
       case BanglaParser::T__4: {
-        setState(116);
+        setState(143);
         match(BanglaParser::T__4);
-        setState(117);
+        setState(144);
         expression(0);
-        setState(118);
+        setState(145);
         match(BanglaParser::T__5);
         break;
       }
@@ -1135,24 +1346,24 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
       throw NoViableAltException(this);
     }
     _ctx->stop = _input->LT(-1);
-    setState(130);
+    setState(157);
     _errHandler->sync(this);
-    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 9, _ctx);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 11, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
         if (!_parseListeners.empty())
           triggerExitRuleEvent();
         previousContext = _localctx;
-        setState(128);
+        setState(155);
         _errHandler->sync(this);
-        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
+        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 10, _ctx)) {
         case 1: {
           _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
           pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(122);
+          setState(149);
 
           if (!(precpred(_ctx, 6))) throw FailedPredicateException(this, "precpred(_ctx, 6)");
-          setState(123);
+          setState(150);
           _la = _input->LA(1);
           if (!(_la == BanglaParser::T__9
 
@@ -1163,7 +1374,7 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
             _errHandler->reportMatch(this);
             consume();
           }
-          setState(124);
+          setState(151);
           expression(7);
           break;
         }
@@ -1171,10 +1382,10 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
         case 2: {
           _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
           pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(125);
+          setState(152);
 
           if (!(precpred(_ctx, 5))) throw FailedPredicateException(this, "precpred(_ctx, 5)");
-          setState(126);
+          setState(153);
           _la = _input->LA(1);
           if (!(_la == BanglaParser::T__11
 
@@ -1185,7 +1396,7 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
             _errHandler->reportMatch(this);
             consume();
           }
-          setState(127);
+          setState(154);
           expression(6);
           break;
         }
@@ -1194,9 +1405,9 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
           break;
         } 
       }
-      setState(132);
+      setState(159);
       _errHandler->sync(this);
-      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 9, _ctx);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 11, _ctx);
     }
   }
   catch (RecognitionException &e) {
@@ -1244,7 +1455,7 @@ void BanglaParser::OperandContext::exitRule(tree::ParseTreeListener *listener) {
 
 BanglaParser::OperandContext* BanglaParser::operand() {
   OperandContext *_localctx = _tracker.createInstance<OperandContext>(_ctx, getState());
-  enterRule(_localctx, 24, BanglaParser::RuleOperand);
+  enterRule(_localctx, 28, BanglaParser::RuleOperand);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -1256,10 +1467,10 @@ BanglaParser::OperandContext* BanglaParser::operand() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(133);
+    setState(160);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & 1879048192) != 0))) {
+      ((1ULL << _la) & 3758096384) != 0))) {
     _errHandler->recoverInline(this);
     }
     else {
@@ -1302,7 +1513,7 @@ void BanglaParser::ComparisonOperatorContext::exitRule(tree::ParseTreeListener *
 
 BanglaParser::ComparisonOperatorContext* BanglaParser::comparisonOperator() {
   ComparisonOperatorContext *_localctx = _tracker.createInstance<ComparisonOperatorContext>(_ctx, getState());
-  enterRule(_localctx, 26, BanglaParser::RuleComparisonOperator);
+  enterRule(_localctx, 30, BanglaParser::RuleComparisonOperator);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -1314,7 +1525,7 @@ BanglaParser::ComparisonOperatorContext* BanglaParser::comparisonOperator() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(135);
+    setState(162);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & 1032192) != 0))) {
@@ -1337,7 +1548,7 @@ BanglaParser::ComparisonOperatorContext* BanglaParser::comparisonOperator() {
 
 bool BanglaParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicateIndex) {
   switch (ruleIndex) {
-    case 11: return expressionSempred(antlrcpp::downCast<ExpressionContext *>(context), predicateIndex);
+    case 13: return expressionSempred(antlrcpp::downCast<ExpressionContext *>(context), predicateIndex);
 
   default:
     break;

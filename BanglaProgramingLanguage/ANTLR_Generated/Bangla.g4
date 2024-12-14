@@ -13,9 +13,10 @@ statement
     : variableDeclaration
     | printStatement
     | ifStatement
-    | assignmentStatement
-    | incrementStatement
-    | decrementStatement
+    | assignmentStatement ';'
+    | incrementStatement ';'
+    | decrementStatement ';'
+    | forStatement
     ;
 
 variableDeclaration
@@ -34,16 +35,24 @@ ifStatement
     : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
     ;
 
+forStatement
+    : FOR '(' (variableDeclaration | initialization)? condition ';' (assignmentStatement | incrementStatement | decrementStatement)? ')' block
+    ;
+
+initialization
+    : assignmentStatement ';'
+    ;
+ 
 assignmentStatement
-    : ID '=' expression ';'
+    : ID '=' expression
     ;
 
 incrementStatement
-    : ID '++' ';'
+    : ID '++'
     ;
 
 decrementStatement
-    : ID '--' ';'
+    : ID '--'
     ;
 
 condition
@@ -83,6 +92,7 @@ NATUN_LINE: 'নতুন_লাইন';
 IF: 'যদি';
 ELSE_IF: 'তানাহলে যদি';
 ELSE: 'তানাহলে';
+FOR: 'যতক্ষণ';
 
 ID: ID_START ID_PART*; // Identifier
 

@@ -16,15 +16,16 @@ public:
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
     T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, SHURU = 20, 
     SHESH = 21, DHORI = 22, DEKHAO = 23, NATUN_LINE = 24, IF = 25, ELSE_IF = 26, 
-    ELSE = 27, ID = 28, FLOAT = 29, INT = 30, STRING = 31, LINE_COMMENT = 32, 
-    BLOCK_COMMENT = 33, WS = 34
+    ELSE = 27, FOR = 28, ID = 29, FLOAT = 30, INT = 31, STRING = 32, LINE_COMMENT = 33, 
+    BLOCK_COMMENT = 34, WS = 35
   };
 
   enum {
     RuleProgram = 0, RuleBlock = 1, RuleStatement = 2, RuleVariableDeclaration = 3, 
     RulePrintStatement = 4, RulePrintArguments = 5, RuleIfStatement = 6, 
-    RuleAssignmentStatement = 7, RuleIncrementStatement = 8, RuleDecrementStatement = 9, 
-    RuleCondition = 10, RuleExpression = 11, RuleOperand = 12, RuleComparisonOperator = 13
+    RuleForStatement = 7, RuleInitialization = 8, RuleAssignmentStatement = 9, 
+    RuleIncrementStatement = 10, RuleDecrementStatement = 11, RuleCondition = 12, 
+    RuleExpression = 13, RuleOperand = 14, RuleComparisonOperator = 15
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -51,6 +52,8 @@ public:
   class PrintStatementContext;
   class PrintArgumentsContext;
   class IfStatementContext;
+  class ForStatementContext;
+  class InitializationContext;
   class AssignmentStatementContext;
   class IncrementStatementContext;
   class DecrementStatementContext;
@@ -98,6 +101,7 @@ public:
     AssignmentStatementContext *assignmentStatement();
     IncrementStatementContext *incrementStatement();
     DecrementStatementContext *decrementStatement();
+    ForStatementContext *forStatement();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -171,6 +175,39 @@ public:
   };
 
   IfStatementContext* ifStatement();
+
+  class  ForStatementContext : public antlr4::ParserRuleContext {
+  public:
+    ForStatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *FOR();
+    ConditionContext *condition();
+    BlockContext *block();
+    VariableDeclarationContext *variableDeclaration();
+    InitializationContext *initialization();
+    AssignmentStatementContext *assignmentStatement();
+    IncrementStatementContext *incrementStatement();
+    DecrementStatementContext *decrementStatement();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ForStatementContext* forStatement();
+
+  class  InitializationContext : public antlr4::ParserRuleContext {
+  public:
+    InitializationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AssignmentStatementContext *assignmentStatement();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  InitializationContext* initialization();
 
   class  AssignmentStatementContext : public antlr4::ParserRuleContext {
   public:

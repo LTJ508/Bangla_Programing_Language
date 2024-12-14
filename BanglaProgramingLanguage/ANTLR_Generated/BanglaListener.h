@@ -35,6 +35,12 @@ public:
   virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
   virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
 
+  virtual void enterForStatement(BanglaParser::ForStatementContext *ctx) = 0;
+  virtual void exitForStatement(BanglaParser::ForStatementContext *ctx) = 0;
+
+  virtual void enterInitialization(BanglaParser::InitializationContext *ctx) = 0;
+  virtual void exitInitialization(BanglaParser::InitializationContext *ctx) = 0;
+
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
 

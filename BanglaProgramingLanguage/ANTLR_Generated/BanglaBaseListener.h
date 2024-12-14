@@ -37,6 +37,12 @@ public:
   virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
   virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
 
+  virtual void enterForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
+  virtual void exitForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
+
+  virtual void enterInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
+  virtual void exitInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
+
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
 
