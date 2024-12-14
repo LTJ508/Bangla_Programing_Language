@@ -11,7 +11,7 @@
 #include <variant>
 
 using VariableValue = std::variant<int, double>;
-bool debug = false;
+bool debug = true;
 
 // Helper function to convert Bangla numerals to English numerals
 std::string convertBanglaToEnglish(const std::string& banglaNumber) {
@@ -72,15 +72,21 @@ public:
     std::vector<bool> executionStack; // Stack to manage nested block execution states
     int count = 0; // Variable to count nested if-else statements
 
-
     void enterIfStatement(BanglaParser::IfStatementContext *ctx) override {
         executionStack.push_back(executeCurrentBlock);
         executeCurrentBlock = false;
         count++; // Increment count when entering an if statement
+        if (debug) {
+            std::cout << "Debug => Entered If Statement-Count: " << count << std::endl;
+        }
     }
 
     void exitIfStatement(BanglaParser::IfStatementContext *ctx) override {
         count--; // Decrement count when exiting an if statement
+
+        if (debug) {
+            std::cout << "Debug => Exit If Statement-Count: " << count << std::endl;
+        }
 
         if (count > 0) {
             executeCurrentBlock = executionStack.back(); // Restore the previous execution state
@@ -121,11 +127,73 @@ public:
         if (!executeCurrentBlock) return;
 
         std::string varName = ctx->ID()->getText();
-        VariableValue value = evaluateExpression(ctx->expression());
+        VariableValue value = 0; // Default value
+
+        if (ctx->expression()) {
+            value = evaluateExpression(ctx->expression());
+        }
+
         variables[varName] = value;
 
         if (debug) {
             std::cout << "Debug => Variable declared: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
+        }
+    }
+
+    void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+        VariableValue value = evaluateExpression(ctx->expression());
+
+        if (variables.find(varName) != variables.end()) {
+            variables[varName] = value;
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
+        }
+
+        if (debug) {
+            std::cout << "Debug => Variable assigned: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
+        }
+    }
+
+    void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) + 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) + 1.0;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
+        }
+
+        if (debug) {
+            std::cout << "Debug => Variable incremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
+        }
+    }
+
+    void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) - 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) - 1.0;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
+        }
+
+        if (debug) {
+            std::cout << "Debug => Variable decremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
         }
     }
 
@@ -229,6 +297,12 @@ private:
                 exitPrintStatement(statement->printStatement());
             } else if (statement->ifStatement()) {
                 exitIfStatement(statement->ifStatement());
+            } else if (statement->assignmentStatement()) {
+                exitAssignmentStatement(statement->assignmentStatement());
+            } else if (statement->incrementStatement()) {
+                exitIncrementStatement(statement->incrementStatement());
+            } else if (statement->decrementStatement()) {
+                exitDecrementStatement(statement->decrementStatement());
             } else {
                 std::cerr << "Error: Unknown statement type. Text: " << statement->getText() << std::endl;
                 std::cerr << "Node class: " << typeid(*statement).name() << std::endl;

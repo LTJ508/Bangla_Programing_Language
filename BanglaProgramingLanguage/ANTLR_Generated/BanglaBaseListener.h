@@ -37,8 +37,14 @@ public:
   virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
   virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
 
-  virtual void enterForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
-  virtual void exitForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
+  virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
+  virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
+
+  virtual void enterIncrementStatement(BanglaParser::IncrementStatementContext * /*ctx*/) override { }
+  virtual void exitIncrementStatement(BanglaParser::IncrementStatementContext * /*ctx*/) override { }
+
+  virtual void enterDecrementStatement(BanglaParser::DecrementStatementContext * /*ctx*/) override { }
+  virtual void exitDecrementStatement(BanglaParser::DecrementStatementContext * /*ctx*/) override { }
 
   virtual void enterCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
   virtual void exitCondition(BanglaParser::ConditionContext * /*ctx*/) override { }

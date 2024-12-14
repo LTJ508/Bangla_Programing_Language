@@ -13,11 +13,13 @@ statement
     : variableDeclaration
     | printStatement
     | ifStatement
-    | forStatement
+    | assignmentStatement
+    | incrementStatement
+    | decrementStatement
     ;
 
 variableDeclaration
-    : DHORI ID '=' expression ';'
+    : DHORI ID ('=' expression)? ';'
     ;
 
 printStatement
@@ -32,8 +34,16 @@ ifStatement
     : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
     ;
 
-forStatement
-    : FOR '(' variableDeclaration condition ';' expression ')' block
+assignmentStatement
+    : ID '=' expression ';'
+    ;
+
+incrementStatement
+    : ID '++' ';'
+    ;
+
+decrementStatement
+    : ID '--' ';'
     ;
 
 condition
@@ -47,8 +57,6 @@ expression
     | FLOAT
     | ID
     | '(' expression ')'
-    | ID '++'
-    | ID '--'
     ;
 
 operand
@@ -75,7 +83,6 @@ NATUN_LINE: 'নতুন_লাইন';
 IF: 'যদি';
 ELSE_IF: 'তানাহলে যদি';
 ELSE: 'তানাহলে';
-FOR: 'যতক্ষণ';
 
 ID: ID_START ID_PART*; // Identifier
 
