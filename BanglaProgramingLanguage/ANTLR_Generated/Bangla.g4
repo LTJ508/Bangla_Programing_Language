@@ -52,7 +52,7 @@ ifStatement
     ;
 
 forStatement
-    : FOR '(' (variableDeclaration | initialization)? condition ';' (assignmentStatement | incrementStatement | decrementStatement)? ')' block
+    : FOR '(' (variableDeclaration | initialization | ';')? condition ';' (assignmentStatement | incrementStatement | decrementStatement)? ')' block
     ;
 
 condition

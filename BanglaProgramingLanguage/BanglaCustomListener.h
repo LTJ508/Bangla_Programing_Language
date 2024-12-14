@@ -264,6 +264,21 @@ public:
 
     // Exit For Statement
     void exitForStatement(BanglaParser::ForStatementContext *ctx) override {
+        countNestedForLoop--; // Decrement count when exiting a for loop
+
+        if (debug) {
+            std::cout << "Debug => Exit For Statement-Count: " << countNestedForLoop << std::endl;
+        }
+
+        if (countNestedForLoop > 0) {
+            // Restore the previous execution state
+            if (!executionStack.empty()) {
+                executeCurrentBlock = executionStack.back();
+                executionStack.pop_back();
+            }
+            return; // Exit if nested
+        }
+
         executeCurrentBlock = true; // Enable block execution for the loop body
 
         // Initialize the loop variable
@@ -293,7 +308,17 @@ public:
             executeCurrentBlock = executionStack.back();
             executionStack.pop_back();
         }
+
+        if (debug) {
+            std::cout << "Debug => For Statement exited-executionCurrentBlock: " << executeCurrentBlock << std::endl;
+            std::cout << "Debug => For Statement exited-executionCurrentBlock-Size: " << executionStack.size() << std::endl;
+        }
     }
+
+
+
+
+
 
 
 
