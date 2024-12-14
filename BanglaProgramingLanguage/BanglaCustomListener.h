@@ -11,7 +11,7 @@
 #include <variant>
 
 using VariableValue = std::variant<int, double>;
-bool debug = true;
+bool debug = false;
 
 // Helper function to convert Bangla numerals to English numerals
 std::string convertBanglaToEnglish(const std::string& banglaNumber) {
@@ -89,8 +89,10 @@ public:
         }
 
         if (count > 0) {
-            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
-            executionStack.pop_back();
+            if (executionStack.size() > 0){
+                executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+                executionStack.pop_back();
+            }
             return; // Exit if nested
         }
 
@@ -119,8 +121,15 @@ public:
             executeBlock(ctx->block(ctx->block().size() - 1));
         }
 
-        executeCurrentBlock = executionStack.back(); // Restore the previous execution state
-        executionStack.pop_back();
+        if (executionStack.size() > 0){
+            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+            executionStack.pop_back();
+        }
+
+        if (debug) {
+            std::cout << "Debug => If Statement exited-executionCurrentBlock: " << executeCurrentBlock << std::endl;
+            std::cout << "Debug => If Statement exited-executionCurrentBlock-Size: " << executionStack.size() << std::endl;
+        }
     }
 
     void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
@@ -296,6 +305,7 @@ private:
             } else if (statement->printStatement()) {
                 exitPrintStatement(statement->printStatement());
             } else if (statement->ifStatement()) {
+                count++;
                 exitIfStatement(statement->ifStatement());
             } else if (statement->assignmentStatement()) {
                 exitAssignmentStatement(statement->assignmentStatement());
