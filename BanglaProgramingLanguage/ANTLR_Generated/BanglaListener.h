@@ -26,18 +26,6 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
 
-  virtual void enterPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
-  virtual void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
-
-  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
-  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
-
-  virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
-  virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
-
-  virtual void enterForStatement(BanglaParser::ForStatementContext *ctx) = 0;
-  virtual void exitForStatement(BanglaParser::ForStatementContext *ctx) = 0;
-
   virtual void enterInitialization(BanglaParser::InitializationContext *ctx) = 0;
   virtual void exitInitialization(BanglaParser::InitializationContext *ctx) = 0;
 
@@ -49,6 +37,18 @@ public:
 
   virtual void enterDecrementStatement(BanglaParser::DecrementStatementContext *ctx) = 0;
   virtual void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) = 0;
+
+  virtual void enterPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
+  virtual void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) = 0;
+
+  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
+  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
+
+  virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
+  virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
+
+  virtual void enterForStatement(BanglaParser::ForStatementContext *ctx) = 0;
+  virtual void exitForStatement(BanglaParser::ForStatementContext *ctx) = 0;
 
   virtual void enterCondition(BanglaParser::ConditionContext *ctx) = 0;
   virtual void exitCondition(BanglaParser::ConditionContext *ctx) = 0;

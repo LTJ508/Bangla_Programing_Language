@@ -52,13 +52,13 @@ void banglaParserInitialize() {
 #endif
   auto staticData = std::make_unique<BanglaParserStaticData>(
     std::vector<std::string>{
-      "program", "block", "statement", "variableDeclaration", "printStatement", 
-      "printArguments", "ifStatement", "forStatement", "initialization", 
+      "program", "block", "statement", "variableDeclaration", "initialization", 
       "assignmentStatement", "incrementStatement", "decrementStatement", 
+      "printStatement", "printArguments", "ifStatement", "forStatement", 
       "condition", "expression", "operand", "comparisonOperator"
     },
     std::vector<std::string>{
-      "", "'{'", "'}'", "';'", "'='", "'('", "')'", "','", "'++'", "'--'", 
+      "", "'{'", "'}'", "';'", "'='", "'++'", "'--'", "'('", "')'", "','", 
       "'*'", "'/'", "'+'", "'-'", "'>='", "'<='", "'>'", "'<'", "'=='", 
       "'!='", "'\\u09B6\\u09C1\\u09B0\\u09C1'", "'\\u09B6\\u09C7\\u09B7'", 
       "'\\u09A7\\u09B0\\u09BF'", "'\\u09A6\\u09C7\\u0996\\u09BE\\u0993'", 
@@ -78,53 +78,53 @@ void banglaParserInitialize() {
   	7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,
   	14,2,15,7,15,1,0,1,0,1,0,1,0,1,1,1,1,5,1,39,8,1,10,1,12,1,42,9,1,1,1,
   	1,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,59,8,2,1,
-  	3,1,3,1,3,1,3,3,3,65,8,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,4,1,5,1,5,1,5,
-  	5,5,78,8,5,10,5,12,5,81,9,5,1,5,1,5,3,5,85,8,5,1,6,1,6,1,6,1,6,1,6,1,
-  	6,1,6,1,6,1,6,1,6,1,6,5,6,98,8,6,10,6,12,6,101,9,6,1,6,1,6,3,6,105,8,
-  	6,1,7,1,7,1,7,1,7,3,7,111,8,7,1,7,1,7,1,7,1,7,1,7,3,7,118,8,7,1,7,1,7,
-  	1,7,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,11,1,12,1,
-  	12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,148,8,13,1,
-  	13,1,13,1,13,1,13,1,13,1,13,5,13,156,8,13,10,13,12,13,159,9,13,1,14,1,
-  	14,1,15,1,15,1,15,0,1,26,16,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
-  	0,5,2,0,29,29,32,32,1,0,10,11,1,0,12,13,1,0,29,31,1,0,14,19,170,0,32,
-  	1,0,0,0,2,36,1,0,0,0,4,58,1,0,0,0,6,60,1,0,0,0,8,68,1,0,0,0,10,74,1,0,
-  	0,0,12,86,1,0,0,0,14,106,1,0,0,0,16,122,1,0,0,0,18,125,1,0,0,0,20,129,
-  	1,0,0,0,22,132,1,0,0,0,24,135,1,0,0,0,26,147,1,0,0,0,28,160,1,0,0,0,30,
-  	162,1,0,0,0,32,33,5,20,0,0,33,34,3,2,1,0,34,35,5,21,0,0,35,1,1,0,0,0,
-  	36,40,5,1,0,0,37,39,3,4,2,0,38,37,1,0,0,0,39,42,1,0,0,0,40,38,1,0,0,0,
-  	40,41,1,0,0,0,41,43,1,0,0,0,42,40,1,0,0,0,43,44,5,2,0,0,44,3,1,0,0,0,
-  	45,59,3,6,3,0,46,59,3,8,4,0,47,59,3,12,6,0,48,49,3,18,9,0,49,50,5,3,0,
-  	0,50,59,1,0,0,0,51,52,3,20,10,0,52,53,5,3,0,0,53,59,1,0,0,0,54,55,3,22,
-  	11,0,55,56,5,3,0,0,56,59,1,0,0,0,57,59,3,14,7,0,58,45,1,0,0,0,58,46,1,
-  	0,0,0,58,47,1,0,0,0,58,48,1,0,0,0,58,51,1,0,0,0,58,54,1,0,0,0,58,57,1,
-  	0,0,0,59,5,1,0,0,0,60,61,5,22,0,0,61,64,5,29,0,0,62,63,5,4,0,0,63,65,
-  	3,26,13,0,64,62,1,0,0,0,64,65,1,0,0,0,65,66,1,0,0,0,66,67,5,3,0,0,67,
-  	7,1,0,0,0,68,69,5,23,0,0,69,70,5,5,0,0,70,71,3,10,5,0,71,72,5,6,0,0,72,
-  	73,5,3,0,0,73,9,1,0,0,0,74,79,7,0,0,0,75,76,5,7,0,0,76,78,7,0,0,0,77,
-  	75,1,0,0,0,78,81,1,0,0,0,79,77,1,0,0,0,79,80,1,0,0,0,80,84,1,0,0,0,81,
-  	79,1,0,0,0,82,83,5,7,0,0,83,85,5,24,0,0,84,82,1,0,0,0,84,85,1,0,0,0,85,
-  	11,1,0,0,0,86,87,5,25,0,0,87,88,5,5,0,0,88,89,3,24,12,0,89,90,5,6,0,0,
-  	90,99,3,2,1,0,91,92,5,26,0,0,92,93,5,5,0,0,93,94,3,24,12,0,94,95,5,6,
-  	0,0,95,96,3,2,1,0,96,98,1,0,0,0,97,91,1,0,0,0,98,101,1,0,0,0,99,97,1,
-  	0,0,0,99,100,1,0,0,0,100,104,1,0,0,0,101,99,1,0,0,0,102,103,5,27,0,0,
-  	103,105,3,2,1,0,104,102,1,0,0,0,104,105,1,0,0,0,105,13,1,0,0,0,106,107,
-  	5,28,0,0,107,110,5,5,0,0,108,111,3,6,3,0,109,111,3,16,8,0,110,108,1,0,
-  	0,0,110,109,1,0,0,0,110,111,1,0,0,0,111,112,1,0,0,0,112,113,3,24,12,0,
-  	113,117,5,3,0,0,114,118,3,18,9,0,115,118,3,20,10,0,116,118,3,22,11,0,
-  	117,114,1,0,0,0,117,115,1,0,0,0,117,116,1,0,0,0,117,118,1,0,0,0,118,119,
-  	1,0,0,0,119,120,5,6,0,0,120,121,3,2,1,0,121,15,1,0,0,0,122,123,3,18,9,
-  	0,123,124,5,3,0,0,124,17,1,0,0,0,125,126,5,29,0,0,126,127,5,4,0,0,127,
-  	128,3,26,13,0,128,19,1,0,0,0,129,130,5,29,0,0,130,131,5,8,0,0,131,21,
-  	1,0,0,0,132,133,5,29,0,0,133,134,5,9,0,0,134,23,1,0,0,0,135,136,3,28,
-  	14,0,136,137,3,30,15,0,137,138,3,28,14,0,138,25,1,0,0,0,139,140,6,13,
-  	-1,0,140,148,5,31,0,0,141,148,5,30,0,0,142,148,5,29,0,0,143,144,5,5,0,
-  	0,144,145,3,26,13,0,145,146,5,6,0,0,146,148,1,0,0,0,147,139,1,0,0,0,147,
-  	141,1,0,0,0,147,142,1,0,0,0,147,143,1,0,0,0,148,157,1,0,0,0,149,150,10,
-  	6,0,0,150,151,7,1,0,0,151,156,3,26,13,7,152,153,10,5,0,0,153,154,7,2,
-  	0,0,154,156,3,26,13,6,155,149,1,0,0,0,155,152,1,0,0,0,156,159,1,0,0,0,
-  	157,155,1,0,0,0,157,158,1,0,0,0,158,27,1,0,0,0,159,157,1,0,0,0,160,161,
-  	7,3,0,0,161,29,1,0,0,0,162,163,7,4,0,0,163,31,1,0,0,0,12,40,58,64,79,
-  	84,99,104,110,117,147,155,157
+  	3,1,3,1,3,1,3,3,3,65,8,3,1,3,1,3,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,6,1,6,
+  	1,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,5,9,91,8,9,10,9,12,
+  	9,94,9,9,1,9,1,9,3,9,98,8,9,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,
+  	10,1,10,1,10,5,10,111,8,10,10,10,12,10,114,9,10,1,10,1,10,3,10,118,8,
+  	10,1,11,1,11,1,11,1,11,3,11,124,8,11,1,11,1,11,1,11,1,11,1,11,3,11,131,
+  	8,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,13,
+  	1,13,1,13,3,13,148,8,13,1,13,1,13,1,13,1,13,1,13,1,13,5,13,156,8,13,10,
+  	13,12,13,159,9,13,1,14,1,14,1,15,1,15,1,15,0,1,26,16,0,2,4,6,8,10,12,
+  	14,16,18,20,22,24,26,28,30,0,5,3,0,24,24,29,29,32,32,1,0,10,11,1,0,12,
+  	13,1,0,29,31,1,0,14,19,170,0,32,1,0,0,0,2,36,1,0,0,0,4,58,1,0,0,0,6,60,
+  	1,0,0,0,8,68,1,0,0,0,10,71,1,0,0,0,12,75,1,0,0,0,14,78,1,0,0,0,16,81,
+  	1,0,0,0,18,87,1,0,0,0,20,99,1,0,0,0,22,119,1,0,0,0,24,135,1,0,0,0,26,
+  	147,1,0,0,0,28,160,1,0,0,0,30,162,1,0,0,0,32,33,5,20,0,0,33,34,3,2,1,
+  	0,34,35,5,21,0,0,35,1,1,0,0,0,36,40,5,1,0,0,37,39,3,4,2,0,38,37,1,0,0,
+  	0,39,42,1,0,0,0,40,38,1,0,0,0,40,41,1,0,0,0,41,43,1,0,0,0,42,40,1,0,0,
+  	0,43,44,5,2,0,0,44,3,1,0,0,0,45,59,3,6,3,0,46,47,3,10,5,0,47,48,5,3,0,
+  	0,48,59,1,0,0,0,49,50,3,12,6,0,50,51,5,3,0,0,51,59,1,0,0,0,52,53,3,14,
+  	7,0,53,54,5,3,0,0,54,59,1,0,0,0,55,59,3,16,8,0,56,59,3,20,10,0,57,59,
+  	3,22,11,0,58,45,1,0,0,0,58,46,1,0,0,0,58,49,1,0,0,0,58,52,1,0,0,0,58,
+  	55,1,0,0,0,58,56,1,0,0,0,58,57,1,0,0,0,59,5,1,0,0,0,60,61,5,22,0,0,61,
+  	64,5,29,0,0,62,63,5,4,0,0,63,65,3,26,13,0,64,62,1,0,0,0,64,65,1,0,0,0,
+  	65,66,1,0,0,0,66,67,5,3,0,0,67,7,1,0,0,0,68,69,3,10,5,0,69,70,5,3,0,0,
+  	70,9,1,0,0,0,71,72,5,29,0,0,72,73,5,4,0,0,73,74,3,26,13,0,74,11,1,0,0,
+  	0,75,76,5,29,0,0,76,77,5,5,0,0,77,13,1,0,0,0,78,79,5,29,0,0,79,80,5,6,
+  	0,0,80,15,1,0,0,0,81,82,5,23,0,0,82,83,5,7,0,0,83,84,3,18,9,0,84,85,5,
+  	8,0,0,85,86,5,3,0,0,86,17,1,0,0,0,87,92,7,0,0,0,88,89,5,9,0,0,89,91,7,
+  	0,0,0,90,88,1,0,0,0,91,94,1,0,0,0,92,90,1,0,0,0,92,93,1,0,0,0,93,97,1,
+  	0,0,0,94,92,1,0,0,0,95,96,5,9,0,0,96,98,5,24,0,0,97,95,1,0,0,0,97,98,
+  	1,0,0,0,98,19,1,0,0,0,99,100,5,25,0,0,100,101,5,7,0,0,101,102,3,24,12,
+  	0,102,103,5,8,0,0,103,112,3,2,1,0,104,105,5,26,0,0,105,106,5,7,0,0,106,
+  	107,3,24,12,0,107,108,5,8,0,0,108,109,3,2,1,0,109,111,1,0,0,0,110,104,
+  	1,0,0,0,111,114,1,0,0,0,112,110,1,0,0,0,112,113,1,0,0,0,113,117,1,0,0,
+  	0,114,112,1,0,0,0,115,116,5,27,0,0,116,118,3,2,1,0,117,115,1,0,0,0,117,
+  	118,1,0,0,0,118,21,1,0,0,0,119,120,5,28,0,0,120,123,5,7,0,0,121,124,3,
+  	6,3,0,122,124,3,8,4,0,123,121,1,0,0,0,123,122,1,0,0,0,123,124,1,0,0,0,
+  	124,125,1,0,0,0,125,126,3,24,12,0,126,130,5,3,0,0,127,131,3,10,5,0,128,
+  	131,3,12,6,0,129,131,3,14,7,0,130,127,1,0,0,0,130,128,1,0,0,0,130,129,
+  	1,0,0,0,130,131,1,0,0,0,131,132,1,0,0,0,132,133,5,8,0,0,133,134,3,2,1,
+  	0,134,23,1,0,0,0,135,136,3,28,14,0,136,137,3,30,15,0,137,138,3,28,14,
+  	0,138,25,1,0,0,0,139,140,6,13,-1,0,140,148,5,31,0,0,141,148,5,30,0,0,
+  	142,148,5,29,0,0,143,144,5,7,0,0,144,145,3,26,13,0,145,146,5,8,0,0,146,
+  	148,1,0,0,0,147,139,1,0,0,0,147,141,1,0,0,0,147,142,1,0,0,0,147,143,1,
+  	0,0,0,148,157,1,0,0,0,149,150,10,6,0,0,150,151,7,1,0,0,151,156,3,26,13,
+  	7,152,153,10,5,0,0,153,154,7,2,0,0,154,156,3,26,13,6,155,149,1,0,0,0,
+  	155,152,1,0,0,0,156,159,1,0,0,0,157,155,1,0,0,0,157,158,1,0,0,0,158,27,
+  	1,0,0,0,159,157,1,0,0,0,160,161,7,3,0,0,161,29,1,0,0,0,162,163,7,4,0,
+  	0,163,31,1,0,0,0,12,40,58,64,92,97,112,117,123,130,147,155,157
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -319,14 +319,6 @@ BanglaParser::VariableDeclarationContext* BanglaParser::StatementContext::variab
   return getRuleContext<BanglaParser::VariableDeclarationContext>(0);
 }
 
-BanglaParser::PrintStatementContext* BanglaParser::StatementContext::printStatement() {
-  return getRuleContext<BanglaParser::PrintStatementContext>(0);
-}
-
-BanglaParser::IfStatementContext* BanglaParser::StatementContext::ifStatement() {
-  return getRuleContext<BanglaParser::IfStatementContext>(0);
-}
-
 BanglaParser::AssignmentStatementContext* BanglaParser::StatementContext::assignmentStatement() {
   return getRuleContext<BanglaParser::AssignmentStatementContext>(0);
 }
@@ -337,6 +329,14 @@ BanglaParser::IncrementStatementContext* BanglaParser::StatementContext::increme
 
 BanglaParser::DecrementStatementContext* BanglaParser::StatementContext::decrementStatement() {
   return getRuleContext<BanglaParser::DecrementStatementContext>(0);
+}
+
+BanglaParser::PrintStatementContext* BanglaParser::StatementContext::printStatement() {
+  return getRuleContext<BanglaParser::PrintStatementContext>(0);
+}
+
+BanglaParser::IfStatementContext* BanglaParser::StatementContext::ifStatement() {
+  return getRuleContext<BanglaParser::IfStatementContext>(0);
 }
 
 BanglaParser::ForStatementContext* BanglaParser::StatementContext::forStatement() {
@@ -385,41 +385,41 @@ BanglaParser::StatementContext* BanglaParser::statement() {
     case 2: {
       enterOuterAlt(_localctx, 2);
       setState(46);
-      printStatement();
+      assignmentStatement();
+      setState(47);
+      match(BanglaParser::T__2);
       break;
     }
 
     case 3: {
       enterOuterAlt(_localctx, 3);
-      setState(47);
-      ifStatement();
+      setState(49);
+      incrementStatement();
+      setState(50);
+      match(BanglaParser::T__2);
       break;
     }
 
     case 4: {
       enterOuterAlt(_localctx, 4);
-      setState(48);
-      assignmentStatement();
-      setState(49);
+      setState(52);
+      decrementStatement();
+      setState(53);
       match(BanglaParser::T__2);
       break;
     }
 
     case 5: {
       enterOuterAlt(_localctx, 5);
-      setState(51);
-      incrementStatement();
-      setState(52);
-      match(BanglaParser::T__2);
+      setState(55);
+      printStatement();
       break;
     }
 
     case 6: {
       enterOuterAlt(_localctx, 6);
-      setState(54);
-      decrementStatement();
-      setState(55);
-      match(BanglaParser::T__2);
+      setState(56);
+      ifStatement();
       break;
     }
 
@@ -520,6 +520,232 @@ BanglaParser::VariableDeclarationContext* BanglaParser::variableDeclaration() {
   return _localctx;
 }
 
+//----------------- InitializationContext ------------------------------------------------------------------
+
+BanglaParser::InitializationContext::InitializationContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+BanglaParser::AssignmentStatementContext* BanglaParser::InitializationContext::assignmentStatement() {
+  return getRuleContext<BanglaParser::AssignmentStatementContext>(0);
+}
+
+
+size_t BanglaParser::InitializationContext::getRuleIndex() const {
+  return BanglaParser::RuleInitialization;
+}
+
+void BanglaParser::InitializationContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterInitialization(this);
+}
+
+void BanglaParser::InitializationContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitInitialization(this);
+}
+
+BanglaParser::InitializationContext* BanglaParser::initialization() {
+  InitializationContext *_localctx = _tracker.createInstance<InitializationContext>(_ctx, getState());
+  enterRule(_localctx, 8, BanglaParser::RuleInitialization);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(68);
+    assignmentStatement();
+    setState(69);
+    match(BanglaParser::T__2);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- AssignmentStatementContext ------------------------------------------------------------------
+
+BanglaParser::AssignmentStatementContext::AssignmentStatementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* BanglaParser::AssignmentStatementContext::ID() {
+  return getToken(BanglaParser::ID, 0);
+}
+
+BanglaParser::ExpressionContext* BanglaParser::AssignmentStatementContext::expression() {
+  return getRuleContext<BanglaParser::ExpressionContext>(0);
+}
+
+
+size_t BanglaParser::AssignmentStatementContext::getRuleIndex() const {
+  return BanglaParser::RuleAssignmentStatement;
+}
+
+void BanglaParser::AssignmentStatementContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterAssignmentStatement(this);
+}
+
+void BanglaParser::AssignmentStatementContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitAssignmentStatement(this);
+}
+
+BanglaParser::AssignmentStatementContext* BanglaParser::assignmentStatement() {
+  AssignmentStatementContext *_localctx = _tracker.createInstance<AssignmentStatementContext>(_ctx, getState());
+  enterRule(_localctx, 10, BanglaParser::RuleAssignmentStatement);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(71);
+    match(BanglaParser::ID);
+    setState(72);
+    match(BanglaParser::T__3);
+    setState(73);
+    expression(0);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- IncrementStatementContext ------------------------------------------------------------------
+
+BanglaParser::IncrementStatementContext::IncrementStatementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* BanglaParser::IncrementStatementContext::ID() {
+  return getToken(BanglaParser::ID, 0);
+}
+
+
+size_t BanglaParser::IncrementStatementContext::getRuleIndex() const {
+  return BanglaParser::RuleIncrementStatement;
+}
+
+void BanglaParser::IncrementStatementContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterIncrementStatement(this);
+}
+
+void BanglaParser::IncrementStatementContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitIncrementStatement(this);
+}
+
+BanglaParser::IncrementStatementContext* BanglaParser::incrementStatement() {
+  IncrementStatementContext *_localctx = _tracker.createInstance<IncrementStatementContext>(_ctx, getState());
+  enterRule(_localctx, 12, BanglaParser::RuleIncrementStatement);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(75);
+    match(BanglaParser::ID);
+    setState(76);
+    match(BanglaParser::T__4);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- DecrementStatementContext ------------------------------------------------------------------
+
+BanglaParser::DecrementStatementContext::DecrementStatementContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* BanglaParser::DecrementStatementContext::ID() {
+  return getToken(BanglaParser::ID, 0);
+}
+
+
+size_t BanglaParser::DecrementStatementContext::getRuleIndex() const {
+  return BanglaParser::RuleDecrementStatement;
+}
+
+void BanglaParser::DecrementStatementContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterDecrementStatement(this);
+}
+
+void BanglaParser::DecrementStatementContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<BanglaListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitDecrementStatement(this);
+}
+
+BanglaParser::DecrementStatementContext* BanglaParser::decrementStatement() {
+  DecrementStatementContext *_localctx = _tracker.createInstance<DecrementStatementContext>(_ctx, getState());
+  enterRule(_localctx, 14, BanglaParser::RuleDecrementStatement);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(78);
+    match(BanglaParser::ID);
+    setState(79);
+    match(BanglaParser::T__5);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
 //----------------- PrintStatementContext ------------------------------------------------------------------
 
 BanglaParser::PrintStatementContext::PrintStatementContext(ParserRuleContext *parent, size_t invokingState)
@@ -553,7 +779,7 @@ void BanglaParser::PrintStatementContext::exitRule(tree::ParseTreeListener *list
 
 BanglaParser::PrintStatementContext* BanglaParser::printStatement() {
   PrintStatementContext *_localctx = _tracker.createInstance<PrintStatementContext>(_ctx, getState());
-  enterRule(_localctx, 8, BanglaParser::RulePrintStatement);
+  enterRule(_localctx, 16, BanglaParser::RulePrintStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -564,15 +790,15 @@ BanglaParser::PrintStatementContext* BanglaParser::printStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(68);
+    setState(81);
     match(BanglaParser::DEKHAO);
-    setState(69);
-    match(BanglaParser::T__4);
-    setState(70);
+    setState(82);
+    match(BanglaParser::T__6);
+    setState(83);
     printArguments();
-    setState(71);
-    match(BanglaParser::T__5);
-    setState(72);
+    setState(84);
+    match(BanglaParser::T__7);
+    setState(85);
     match(BanglaParser::T__2);
    
   }
@@ -607,8 +833,12 @@ tree::TerminalNode* BanglaParser::PrintArgumentsContext::STRING(size_t i) {
   return getToken(BanglaParser::STRING, i);
 }
 
-tree::TerminalNode* BanglaParser::PrintArgumentsContext::NATUN_LINE() {
-  return getToken(BanglaParser::NATUN_LINE, 0);
+std::vector<tree::TerminalNode *> BanglaParser::PrintArgumentsContext::NATUN_LINE() {
+  return getTokens(BanglaParser::NATUN_LINE);
+}
+
+tree::TerminalNode* BanglaParser::PrintArgumentsContext::NATUN_LINE(size_t i) {
+  return getToken(BanglaParser::NATUN_LINE, i);
 }
 
 
@@ -630,7 +860,7 @@ void BanglaParser::PrintArgumentsContext::exitRule(tree::ParseTreeListener *list
 
 BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
   PrintArgumentsContext *_localctx = _tracker.createInstance<PrintArgumentsContext>(_ctx, getState());
-  enterRule(_localctx, 10, BanglaParser::RulePrintArguments);
+  enterRule(_localctx, 18, BanglaParser::RulePrintArguments);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -643,29 +873,27 @@ BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(74);
+    setState(87);
     _la = _input->LA(1);
-    if (!(_la == BanglaParser::ID
-
-    || _la == BanglaParser::STRING)) {
+    if (!((((_la & ~ 0x3fULL) == 0) &&
+      ((1ULL << _la) & 4848615424) != 0))) {
     _errHandler->recoverInline(this);
     }
     else {
       _errHandler->reportMatch(this);
       consume();
     }
-    setState(79);
+    setState(92);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
-        setState(75);
-        match(BanglaParser::T__6);
-        setState(76);
+        setState(88);
+        match(BanglaParser::T__8);
+        setState(89);
         _la = _input->LA(1);
-        if (!(_la == BanglaParser::ID
-
-        || _la == BanglaParser::STRING)) {
+        if (!((((_la & ~ 0x3fULL) == 0) &&
+          ((1ULL << _la) & 4848615424) != 0))) {
         _errHandler->recoverInline(this);
         }
         else {
@@ -673,18 +901,18 @@ BanglaParser::PrintArgumentsContext* BanglaParser::printArguments() {
           consume();
         } 
       }
-      setState(81);
+      setState(94);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
     }
-    setState(84);
+    setState(97);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
-    if (_la == BanglaParser::T__6) {
-      setState(82);
-      match(BanglaParser::T__6);
-      setState(83);
+    if (_la == BanglaParser::T__8) {
+      setState(95);
+      match(BanglaParser::T__8);
+      setState(96);
       match(BanglaParser::NATUN_LINE);
     }
    
@@ -755,7 +983,7 @@ void BanglaParser::IfStatementContext::exitRule(tree::ParseTreeListener *listene
 
 BanglaParser::IfStatementContext* BanglaParser::ifStatement() {
   IfStatementContext *_localctx = _tracker.createInstance<IfStatementContext>(_ctx, getState());
-  enterRule(_localctx, 12, BanglaParser::RuleIfStatement);
+  enterRule(_localctx, 20, BanglaParser::RuleIfStatement);
   size_t _la = 0;
 
 #if __cplusplus > 201703L
@@ -767,42 +995,42 @@ BanglaParser::IfStatementContext* BanglaParser::ifStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(86);
-    match(BanglaParser::IF);
-    setState(87);
-    match(BanglaParser::T__4);
-    setState(88);
-    condition();
-    setState(89);
-    match(BanglaParser::T__5);
-    setState(90);
-    block();
     setState(99);
+    match(BanglaParser::IF);
+    setState(100);
+    match(BanglaParser::T__6);
+    setState(101);
+    condition();
+    setState(102);
+    match(BanglaParser::T__7);
+    setState(103);
+    block();
+    setState(112);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == BanglaParser::ELSE_IF) {
-      setState(91);
+      setState(104);
       match(BanglaParser::ELSE_IF);
-      setState(92);
-      match(BanglaParser::T__4);
-      setState(93);
+      setState(105);
+      match(BanglaParser::T__6);
+      setState(106);
       condition();
-      setState(94);
-      match(BanglaParser::T__5);
-      setState(95);
+      setState(107);
+      match(BanglaParser::T__7);
+      setState(108);
       block();
-      setState(101);
+      setState(114);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(104);
+    setState(117);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == BanglaParser::ELSE) {
-      setState(102);
+      setState(115);
       match(BanglaParser::ELSE);
-      setState(103);
+      setState(116);
       block();
     }
    
@@ -873,7 +1101,7 @@ void BanglaParser::ForStatementContext::exitRule(tree::ParseTreeListener *listen
 
 BanglaParser::ForStatementContext* BanglaParser::forStatement() {
   ForStatementContext *_localctx = _tracker.createInstance<ForStatementContext>(_ctx, getState());
-  enterRule(_localctx, 14, BanglaParser::RuleForStatement);
+  enterRule(_localctx, 22, BanglaParser::RuleForStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -884,22 +1112,22 @@ BanglaParser::ForStatementContext* BanglaParser::forStatement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(106);
+    setState(119);
     match(BanglaParser::FOR);
-    setState(107);
-    match(BanglaParser::T__4);
-    setState(110);
+    setState(120);
+    match(BanglaParser::T__6);
+    setState(123);
     _errHandler->sync(this);
 
     switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx)) {
     case 1: {
-      setState(108);
+      setState(121);
       variableDeclaration();
       break;
     }
 
     case 2: {
-      setState(109);
+      setState(122);
       initialization();
       break;
     }
@@ -907,28 +1135,28 @@ BanglaParser::ForStatementContext* BanglaParser::forStatement() {
     default:
       break;
     }
-    setState(112);
+    setState(125);
     condition();
-    setState(113);
+    setState(126);
     match(BanglaParser::T__2);
-    setState(117);
+    setState(130);
     _errHandler->sync(this);
 
     switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx)) {
     case 1: {
-      setState(114);
+      setState(127);
       assignmentStatement();
       break;
     }
 
     case 2: {
-      setState(115);
+      setState(128);
       incrementStatement();
       break;
     }
 
     case 3: {
-      setState(116);
+      setState(129);
       decrementStatement();
       break;
     }
@@ -936,236 +1164,10 @@ BanglaParser::ForStatementContext* BanglaParser::forStatement() {
     default:
       break;
     }
-    setState(119);
-    match(BanglaParser::T__5);
-    setState(120);
-    block();
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- InitializationContext ------------------------------------------------------------------
-
-BanglaParser::InitializationContext::InitializationContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-BanglaParser::AssignmentStatementContext* BanglaParser::InitializationContext::assignmentStatement() {
-  return getRuleContext<BanglaParser::AssignmentStatementContext>(0);
-}
-
-
-size_t BanglaParser::InitializationContext::getRuleIndex() const {
-  return BanglaParser::RuleInitialization;
-}
-
-void BanglaParser::InitializationContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterInitialization(this);
-}
-
-void BanglaParser::InitializationContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitInitialization(this);
-}
-
-BanglaParser::InitializationContext* BanglaParser::initialization() {
-  InitializationContext *_localctx = _tracker.createInstance<InitializationContext>(_ctx, getState());
-  enterRule(_localctx, 16, BanglaParser::RuleInitialization);
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(122);
-    assignmentStatement();
-    setState(123);
-    match(BanglaParser::T__2);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- AssignmentStatementContext ------------------------------------------------------------------
-
-BanglaParser::AssignmentStatementContext::AssignmentStatementContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* BanglaParser::AssignmentStatementContext::ID() {
-  return getToken(BanglaParser::ID, 0);
-}
-
-BanglaParser::ExpressionContext* BanglaParser::AssignmentStatementContext::expression() {
-  return getRuleContext<BanglaParser::ExpressionContext>(0);
-}
-
-
-size_t BanglaParser::AssignmentStatementContext::getRuleIndex() const {
-  return BanglaParser::RuleAssignmentStatement;
-}
-
-void BanglaParser::AssignmentStatementContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAssignmentStatement(this);
-}
-
-void BanglaParser::AssignmentStatementContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAssignmentStatement(this);
-}
-
-BanglaParser::AssignmentStatementContext* BanglaParser::assignmentStatement() {
-  AssignmentStatementContext *_localctx = _tracker.createInstance<AssignmentStatementContext>(_ctx, getState());
-  enterRule(_localctx, 18, BanglaParser::RuleAssignmentStatement);
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(125);
-    match(BanglaParser::ID);
-    setState(126);
-    match(BanglaParser::T__3);
-    setState(127);
-    expression(0);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- IncrementStatementContext ------------------------------------------------------------------
-
-BanglaParser::IncrementStatementContext::IncrementStatementContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* BanglaParser::IncrementStatementContext::ID() {
-  return getToken(BanglaParser::ID, 0);
-}
-
-
-size_t BanglaParser::IncrementStatementContext::getRuleIndex() const {
-  return BanglaParser::RuleIncrementStatement;
-}
-
-void BanglaParser::IncrementStatementContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIncrementStatement(this);
-}
-
-void BanglaParser::IncrementStatementContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIncrementStatement(this);
-}
-
-BanglaParser::IncrementStatementContext* BanglaParser::incrementStatement() {
-  IncrementStatementContext *_localctx = _tracker.createInstance<IncrementStatementContext>(_ctx, getState());
-  enterRule(_localctx, 20, BanglaParser::RuleIncrementStatement);
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(129);
-    match(BanglaParser::ID);
-    setState(130);
-    match(BanglaParser::T__7);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- DecrementStatementContext ------------------------------------------------------------------
-
-BanglaParser::DecrementStatementContext::DecrementStatementContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* BanglaParser::DecrementStatementContext::ID() {
-  return getToken(BanglaParser::ID, 0);
-}
-
-
-size_t BanglaParser::DecrementStatementContext::getRuleIndex() const {
-  return BanglaParser::RuleDecrementStatement;
-}
-
-void BanglaParser::DecrementStatementContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterDecrementStatement(this);
-}
-
-void BanglaParser::DecrementStatementContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<BanglaListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitDecrementStatement(this);
-}
-
-BanglaParser::DecrementStatementContext* BanglaParser::decrementStatement() {
-  DecrementStatementContext *_localctx = _tracker.createInstance<DecrementStatementContext>(_ctx, getState());
-  enterRule(_localctx, 22, BanglaParser::RuleDecrementStatement);
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
     setState(132);
-    match(BanglaParser::ID);
+    match(BanglaParser::T__7);
     setState(133);
-    match(BanglaParser::T__8);
+    block();
    
   }
   catch (RecognitionException &e) {
@@ -1332,13 +1334,13 @@ BanglaParser::ExpressionContext* BanglaParser::expression(int precedence) {
         break;
       }
 
-      case BanglaParser::T__4: {
+      case BanglaParser::T__6: {
         setState(143);
-        match(BanglaParser::T__4);
+        match(BanglaParser::T__6);
         setState(144);
         expression(0);
         setState(145);
-        match(BanglaParser::T__5);
+        match(BanglaParser::T__7);
         break;
       }
 

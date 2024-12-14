@@ -70,25 +70,142 @@ public:
     std::unordered_map<std::string, VariableValue> variables;
     bool executeCurrentBlock = true; // Flag to control block execution
     std::vector<bool> executionStack; // Stack to manage nested block execution states
-    int count = 0; // Variable to count nested if-else statements
+    int countNestedIfElse = 0; // Variable to count nested if-else statements
+    int countNestedForLoop = 0; // Variable to count nested for loops
 
-    void enterIfStatement(BanglaParser::IfStatementContext *ctx) override {
-        executionStack.push_back(executeCurrentBlock);
-        executeCurrentBlock = false;
-        count++; // Increment count when entering an if statement
+    // Variable Declaration
+    void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+        VariableValue value = 0; // Default value
+
+        if (ctx->expression()) {
+            value = evaluateExpression(ctx->expression());
+        }
+
+        variables[varName] = value;
+
         if (debug) {
-            std::cout << "Debug => Entered If Statement-Count: " << count << std::endl;
+            std::cout << "Debug => Variable declared: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
         }
     }
 
-    void exitIfStatement(BanglaParser::IfStatementContext *ctx) override {
-        count--; // Decrement count when exiting an if statement
+    // Initialization
+    void exitInitialization(BanglaParser::InitializationContext *ctx) {
+        exitAssignmentStatement(ctx->assignmentStatement());
+    }
+    
+    // Assignment Statement
+    void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
 
-        if (debug) {
-            std::cout << "Debug => Exit If Statement-Count: " << count << std::endl;
+        std::string varName = ctx->ID()->getText();
+        VariableValue value = evaluateExpression(ctx->expression());
+
+        if (variables.find(varName) != variables.end()) {
+            variables[varName] = value;
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
         }
 
-        if (count > 0) {
+        if (debug) {
+            std::cout << "Debug => Variable assigned: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
+        }
+    }
+
+    // Increment Statements
+    void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) + 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) + 1.0;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
+        }
+
+        if (debug) {
+            std::cout << "Debug => Variable incremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
+        }
+    }
+
+    // Decrement Statements
+    void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        std::string varName = ctx->ID()->getText();
+
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) - 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) - 1.0;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
+        }
+
+        if (debug) {
+            std::cout << "Debug => Variable decremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
+        }
+    }
+
+    // Print Statement
+    void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
+
+        for (auto arg : ctx->printArguments()->children) {
+            if (auto terminalNode = dynamic_cast<antlr4::tree::TerminalNode*>(arg)) {
+                if (terminalNode->getSymbol()->getType() == BanglaParser::ID) {
+                    std::string varName = terminalNode->getText();
+                    if (variables.find(varName) != variables.end()) {
+                        std::string banglaValueStr;
+                        if (std::holds_alternative<int>(variables[varName])) {
+                            banglaValueStr = convertEnglishToBangla(std::to_string(std::get<int>(variables[varName])));
+                        } else if (std::holds_alternative<double>(variables[varName])) {
+                            banglaValueStr = convertEnglishToBangla(std::to_string(std::get<double>(variables[varName])));
+                        }
+                        std::cout << banglaValueStr;
+                    } else {
+                        std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
+                    }
+                } else if (terminalNode->getSymbol()->getType() == BanglaParser::STRING) {
+                    std::string text = terminalNode->getText();
+                    // Remove the surrounding quotes from the string literal
+                    text = text.substr(1, text.length() - 2);
+                    std::cout << text;
+                } else if (terminalNode->getSymbol()->getType() == BanglaParser::NATUN_LINE) {
+                    std::cout << std::endl;
+                }
+            }
+        }
+    }
+
+    // Enter If Statement
+    void enterIfStatement(BanglaParser::IfStatementContext *ctx) override {
+        executionStack.push_back(executeCurrentBlock);
+        executeCurrentBlock = false;
+        countNestedIfElse++; // Increment count when entering an if statement
+        if (debug) {
+            std::cout << "Debug => Entered If Statement-Count: " << countNestedIfElse << std::endl;
+        }
+    }
+
+    // Exit If Statement
+    void exitIfStatement(BanglaParser::IfStatementContext *ctx) override {
+        countNestedIfElse--; // Decrement count when exiting an if statement
+
+        if (debug) {
+            std::cout << "Debug => Exit If Statement-Count: " << countNestedIfElse << std::endl;
+        }
+
+        if (countNestedIfElse > 0) {
             if (executionStack.size() > 0){
                 executeCurrentBlock = executionStack.back(); // Restore the previous execution state
                 executionStack.pop_back();
@@ -132,150 +249,84 @@ public:
         }
     }
 
-    void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) override {
-        if (!executeCurrentBlock) return;
-
-        std::string varName = ctx->ID()->getText();
-        VariableValue value = 0; // Default value
-
-        if (ctx->expression()) {
-            value = evaluateExpression(ctx->expression());
-        }
-
-        variables[varName] = value;
-
+    // Enter For Statement
+    void enterForStatement(BanglaParser::ForStatementContext *ctx) override {
+        // Preserve the current execution state
+        executionStack.push_back(executeCurrentBlock);
+        executeCurrentBlock = false;
+        countNestedForLoop++; // Increment count when entering a for loop
         if (debug) {
-            std::cout << "Debug => Variable declared: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
+            std::cout << "Debug => Entered For Statement-Count: " << countNestedForLoop << std::endl;
         }
     }
 
-    void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) override {
-        if (!executeCurrentBlock) return;
+    // Exit For Statement
+    void exitForStatement(BanglaParser::ForStatementContext *ctx) override {
+        executeCurrentBlock = true; // Enable block execution for the loop body
 
-        std::string varName = ctx->ID()->getText();
-        VariableValue value = evaluateExpression(ctx->expression());
-
-        if (variables.find(varName) != variables.end()) {
-            variables[varName] = value;
-        } else {
-            throw std::runtime_error("Undefined variable: " + varName);
+        // Initialize the loop variable
+        if (ctx->variableDeclaration()) {
+            exitVariableDeclaration(ctx->variableDeclaration());
+        } else if (ctx->initialization()) {
+            exitAssignmentStatement(ctx->initialization()->assignmentStatement());
         }
 
-        if (debug) {
-            std::cout << "Debug => Variable assigned: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, value) << std::endl;
-        }
-    }
+        // Check the loop condition
+        while (evaluateCondition(ctx->condition())) {
+            // Execute the loop body
+            executeBlock(ctx->block());
 
-    void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) override {
-        if (!executeCurrentBlock) return;
-
-        std::string varName = ctx->ID()->getText();
-
-        if (variables.find(varName) != variables.end()) {
-            if (std::holds_alternative<int>(variables[varName])) {
-                variables[varName] = std::get<int>(variables[varName]) + 1;
-            } else if (std::holds_alternative<double>(variables[varName])) {
-                variables[varName] = std::get<double>(variables[varName]) + 1.0;
-            }
-        } else {
-            throw std::runtime_error("Undefined variable: " + varName);
-        }
-
-        if (debug) {
-            std::cout << "Debug => Variable incremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
-        }
-    }
-
-    void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) override {
-        if (!executeCurrentBlock) return;
-
-        std::string varName = ctx->ID()->getText();
-
-        if (variables.find(varName) != variables.end()) {
-            if (std::holds_alternative<int>(variables[varName])) {
-                variables[varName] = std::get<int>(variables[varName]) - 1;
-            } else if (std::holds_alternative<double>(variables[varName])) {
-                variables[varName] = std::get<double>(variables[varName]) - 1.0;
-            }
-        } else {
-            throw std::runtime_error("Undefined variable: " + varName);
-        }
-
-        if (debug) {
-            std::cout << "Debug => Variable decremented: " << varName << " = " << std::visit([](auto&& arg) { return std::to_string(arg); }, variables[varName]) << std::endl;
-        }
-    }
-
-    void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
-        if (!executeCurrentBlock) return;
-
-        for (auto arg : ctx->printArguments()->children) {
-            if (auto terminalNode = dynamic_cast<antlr4::tree::TerminalNode*>(arg)) {
-                if (terminalNode->getSymbol()->getType() == BanglaParser::ID) {
-                    std::string varName = terminalNode->getText();
-                    if (variables.find(varName) != variables.end()) {
-                        std::string banglaValueStr;
-                        if (std::holds_alternative<int>(variables[varName])) {
-                            banglaValueStr = convertEnglishToBangla(std::to_string(std::get<int>(variables[varName])));
-                        } else if (std::holds_alternative<double>(variables[varName])) {
-                            banglaValueStr = convertEnglishToBangla(std::to_string(std::get<double>(variables[varName])));
-                        }
-                        std::cout << banglaValueStr;
-                    } else {
-                        std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
-                    }
-                } else if (terminalNode->getSymbol()->getType() == BanglaParser::STRING) {
-                    std::string text = terminalNode->getText();
-                    // Remove the surrounding quotes from the string literal
-                    text = text.substr(1, text.length() - 2);
-                    std::cout << text;
-                } else if (terminalNode->getSymbol()->getType() == BanglaParser::NATUN_LINE) {
-                    std::cout << std::endl;
-                }
+            // Update the loop variable
+            if (ctx->incrementStatement()) {
+                exitIncrementStatement(ctx->incrementStatement());
+            } else if (ctx->decrementStatement()) {
+                exitDecrementStatement(ctx->decrementStatement());
+            } else if (ctx->assignmentStatement()) {
+                exitAssignmentStatement(ctx->assignmentStatement());
             }
         }
-    }
 
-void enterForStatement(BanglaParser::ForStatementContext *ctx) override {
-    // Preserve the current execution state
-    //executionStack.push_back(executeCurrentBlock);
-    //executeCurrentBlock = false;
-
-    // Initialize the loop variable
-    if (ctx->variableDeclaration()) {
-        exitVariableDeclaration(ctx->variableDeclaration());
-    } else if (ctx->initialization()) {
-        exitAssignmentStatement(ctx->initialization()->assignmentStatement());
-    }
-
-    // Check the loop condition
-    while (evaluateCondition(ctx->condition())) {
-        // Execute the loop body
-        executeBlock(ctx->block());
-
-        // Update the loop variable
-        if (ctx->incrementStatement()) {
-            exitIncrementStatement(ctx->incrementStatement());
-        } else if (ctx->decrementStatement()) {
-            exitDecrementStatement(ctx->decrementStatement());
-        } else if (ctx->assignmentStatement()) {
-            exitAssignmentStatement(ctx->assignmentStatement());
+        if (executionStack.size() > 0){
+            executeCurrentBlock = executionStack.back(); // Restore the previous execution state
+            executionStack.pop_back();
         }
     }
-}
 
-void exitForStatement(BanglaParser::ForStatementContext *ctx) override {
-    // if (executionStack.size() > 0){
-    //     executeCurrentBlock = executionStack.back(); // Restore the previous execution state
-    //     executionStack.pop_back();
-    // }
-}
 
-void exitInitialization(BanglaParser::InitializationContext *ctx) {
-    exitAssignmentStatement(ctx->assignmentStatement());
-}
+
+
+
+
+
 
 private:
+
+    // Helper functions for evaluating expressions and conditions
+    double getOperandValue(BanglaParser::OperandContext *ctx) {
+        if (ctx->ID()) {
+            std::string varName = ctx->ID()->getText();
+            if (variables.find(varName) == variables.end()) {
+                std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
+                throw std::runtime_error("Undefined variable");
+            }
+            if (std::holds_alternative<int>(variables[varName])) {
+                return std::get<int>(variables[varName]);
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                return std::get<double>(variables[varName]);
+            }
+        } else if (ctx->INT()) {
+            std::string valueStr = ctx->INT()->getText();
+            std::string englishValueStr = convertBanglaToEnglish(valueStr);
+            return std::stoi(englishValueStr);
+        } else if (ctx->FLOAT()) {
+            std::string valueStr = ctx->FLOAT()->getText();
+            std::string englishValueStr = convertBanglaToEnglish(valueStr);
+            return std::stod(englishValueStr);
+        }
+        return 0;
+    }
+
+    // Evaluate the condition
     bool evaluateCondition(BanglaParser::ConditionContext *ctx) {
         double leftValue = getOperandValue(ctx->operand(0));
         double rightValue = getOperandValue(ctx->operand(1));
@@ -305,30 +356,53 @@ private:
         return result;
     }
 
-    double getOperandValue(BanglaParser::OperandContext *ctx) {
-        if (ctx->ID()) {
-            std::string varName = ctx->ID()->getText();
-            if (variables.find(varName) == variables.end()) {
-                std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
-                throw std::runtime_error("Undefined variable");
+    // Evaluate the expression
+    VariableValue evaluateExpression(BanglaParser::ExpressionContext *ctx) {
+        try {
+            if (ctx->INT()) {
+                std::string valueStr = ctx->INT()->getText();
+                std::string englishValueStr = convertBanglaToEnglish(valueStr);
+                return std::stoi(englishValueStr);
+            } else if (ctx->FLOAT()) {
+                std::string valueStr = ctx->FLOAT()->getText();
+                std::string englishValueStr = convertBanglaToEnglish(valueStr);
+                return std::stod(englishValueStr);
+            } else if (ctx->ID()) {
+                std::string varName = ctx->ID()->getText();
+                if (variables.find(varName) != variables.end()) {
+                    return variables[varName];
+                } else {
+                    throw std::runtime_error("Undefined variable: " + varName);
+                }
+            } else if (ctx->expression().size() == 1) {
+                return evaluateExpression(ctx->expression(0));
+            } else if (ctx->expression().size() == 2) {
+                VariableValue left = evaluateExpression(ctx->expression(0));
+                VariableValue right = evaluateExpression(ctx->expression(1));
+                std::string op = ctx->children[1]->getText();
+
+                if (op == "+") {
+                    return performOperation(left, right, std::plus<>());
+                } else if (op == "-") {
+                    return performOperation(left, right, std::minus<>());
+                } else if (op == "*") {
+                    return performOperation(left, right, std::multiplies<>());
+                } else if (op == "/") {
+                    return performOperation(left, right, std::divides<>());
+                }
             }
-            if (std::holds_alternative<int>(variables[varName])) {
-                return std::get<int>(variables[varName]);
-            } else if (std::holds_alternative<double>(variables[varName])) {
-                return std::get<double>(variables[varName]);
-            }
-        } else if (ctx->INT()) {
-            std::string valueStr = ctx->INT()->getText();
-            std::string englishValueStr = convertBanglaToEnglish(valueStr);
-            return std::stoi(englishValueStr);
-        } else if (ctx->FLOAT()) {
-            std::string valueStr = ctx->FLOAT()->getText();
-            std::string englishValueStr = convertBanglaToEnglish(valueStr);
-            return std::stod(englishValueStr);
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Invalid argument: " << e.what() << std::endl;
+            throw;
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Out of range: " << e.what() << std::endl;
+            throw;
         }
-        return 0;
+
+        throw std::runtime_error("Invalid expression");
     }
 
+    // Execute the block
     void executeBlock(BanglaParser::BlockContext *ctx) {
         bool previousExecuteCurrentBlock = executeCurrentBlock;
         executeCurrentBlock = true;
@@ -341,17 +415,20 @@ private:
             // Process specific child types of the statement
             if (statement->variableDeclaration()) {
                 exitVariableDeclaration(statement->variableDeclaration());
-            } else if (statement->printStatement()) {
-                exitPrintStatement(statement->printStatement());
-            } else if (statement->ifStatement()) {
-                count++;
-                exitIfStatement(statement->ifStatement());
             } else if (statement->assignmentStatement()) {
                 exitAssignmentStatement(statement->assignmentStatement());
             } else if (statement->incrementStatement()) {
                 exitIncrementStatement(statement->incrementStatement());
             } else if (statement->decrementStatement()) {
                 exitDecrementStatement(statement->decrementStatement());
+            } else if (statement->printStatement()) {
+                exitPrintStatement(statement->printStatement());
+            } else if (statement->ifStatement()) {
+                countNestedIfElse++;
+                exitIfStatement(statement->ifStatement());
+            } else if (statement->forStatement()) {
+                countNestedForLoop++;
+                exitForStatement(statement->forStatement());
             } else {
                 std::cerr << "Error: Unknown statement type. Text: " << statement->getText() << std::endl;
                 std::cerr << "Node class: " << typeid(*statement).name() << std::endl;
@@ -360,51 +437,6 @@ private:
 
         executeCurrentBlock = previousExecuteCurrentBlock;
     }
-
-    VariableValue evaluateExpression(BanglaParser::ExpressionContext *ctx) {
-    try {
-        if (ctx->INT()) {
-            std::string valueStr = ctx->INT()->getText();
-            std::string englishValueStr = convertBanglaToEnglish(valueStr);
-            return std::stoi(englishValueStr);
-        } else if (ctx->FLOAT()) {
-            std::string valueStr = ctx->FLOAT()->getText();
-            std::string englishValueStr = convertBanglaToEnglish(valueStr);
-            return std::stod(englishValueStr);
-        } else if (ctx->ID()) {
-            std::string varName = ctx->ID()->getText();
-            if (variables.find(varName) != variables.end()) {
-                return variables[varName];
-            } else {
-                throw std::runtime_error("Undefined variable: " + varName);
-            }
-        } else if (ctx->expression().size() == 1) {
-            return evaluateExpression(ctx->expression(0));
-        } else if (ctx->expression().size() == 2) {
-            VariableValue left = evaluateExpression(ctx->expression(0));
-            VariableValue right = evaluateExpression(ctx->expression(1));
-            std::string op = ctx->children[1]->getText();
-
-            if (op == "+") {
-                return performOperation(left, right, std::plus<>());
-            } else if (op == "-") {
-                return performOperation(left, right, std::minus<>());
-            } else if (op == "*") {
-                return performOperation(left, right, std::multiplies<>());
-            } else if (op == "/") {
-                return performOperation(left, right, std::divides<>());
-            }
-        }
-    } catch (const std::invalid_argument& e) {
-        std::cerr << "Invalid argument: " << e.what() << std::endl;
-        throw;
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Out of range: " << e.what() << std::endl;
-        throw;
-    }
-
-    throw std::runtime_error("Invalid expression");
-}
 };
 
 #endif // BANGLACUSTOMLISTENER_H

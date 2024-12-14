@@ -28,18 +28,6 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
 
-  virtual void enterPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
-  virtual void exitPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
-
-  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
-  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
-
-  virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
-  virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
-
-  virtual void enterForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
-  virtual void exitForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
-
   virtual void enterInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
   virtual void exitInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
 
@@ -51,6 +39,18 @@ public:
 
   virtual void enterDecrementStatement(BanglaParser::DecrementStatementContext * /*ctx*/) override { }
   virtual void exitDecrementStatement(BanglaParser::DecrementStatementContext * /*ctx*/) override { }
+
+  virtual void enterPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
+  virtual void exitPrintStatement(BanglaParser::PrintStatementContext * /*ctx*/) override { }
+
+  virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
+  virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
+
+  virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
+  virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
+
+  virtual void enterForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
+  virtual void exitForStatement(BanglaParser::ForStatementContext * /*ctx*/) override { }
 
   virtual void enterCondition(BanglaParser::ConditionContext * /*ctx*/) override { }
   virtual void exitCondition(BanglaParser::ConditionContext * /*ctx*/) override { }

@@ -11,32 +11,16 @@ block
 
 statement
     : variableDeclaration
-    | printStatement
-    | ifStatement
     | assignmentStatement ';'
     | incrementStatement ';'
     | decrementStatement ';'
+    | printStatement
+    | ifStatement
     | forStatement
     ;
 
 variableDeclaration
     : DHORI ID ('=' expression)? ';'
-    ;
-
-printStatement
-    : DEKHAO '(' printArguments ')' ';'
-    ;
-
-printArguments
-    : (ID | STRING) (',' (ID | STRING))* (',' NATUN_LINE)?
-    ;
-
-ifStatement
-    : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
-    ;
-
-forStatement
-    : FOR '(' (variableDeclaration | initialization)? condition ';' (assignmentStatement | incrementStatement | decrementStatement)? ')' block
     ;
 
 initialization
@@ -53,6 +37,22 @@ incrementStatement
 
 decrementStatement
     : ID '--'
+    ;
+
+printStatement
+    : DEKHAO '(' printArguments ')' ';'
+    ;
+
+printArguments
+    : (ID | STRING | NATUN_LINE) (',' (ID | STRING | NATUN_LINE))* (',' NATUN_LINE)?
+    ;
+
+ifStatement
+    : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
+    ;
+
+forStatement
+    : FOR '(' (variableDeclaration | initialization)? condition ';' (assignmentStatement | incrementStatement | decrementStatement)? ')' block
     ;
 
 condition
