@@ -1,5 +1,9 @@
-01. Compiler Based
-02. Conditional Statement => If else => Completed
-03. Iterative => For loop
-04. Basic File Handling
-05. Array
+01. Compiler Based => Currenlty Working as a C++ Interpreter
+02. Variable Declaration => Completed
+03. Variable Assignment => Completed
+04. Arithmetic Operations => Completed
+05. Take Input from Terminal
+06. Conditional Statement => If else, nested if else => Completed
+07. Iterative => For loop, nested for loop => Completed
+08. Array => declaration, assignment, access
+09. Basic File Handling
