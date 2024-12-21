@@ -14,10 +14,10 @@ public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
-    T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, SHURU = 20, 
-    SHESH = 21, DHORI = 22, DEKHAO = 23, NATUN_LINE = 24, IF = 25, ELSE_IF = 26, 
-    ELSE = 27, FOR = 28, ID = 29, FLOAT = 30, INT = 31, STRING = 32, LINE_COMMENT = 33, 
-    BLOCK_COMMENT = 34, WS = 35
+    T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, T__19 = 20, 
+    T__20 = 21, SHURU = 22, SHESH = 23, DHORI = 24, DEKHAO = 25, NATUN_LINE = 26, 
+    IF = 27, ELSE_IF = 28, ELSE = 29, FOR = 30, ID = 31, FLOAT = 32, INT = 33, 
+    STRING = 34, LINE_COMMENT = 35, BLOCK_COMMENT = 36, WS = 37
   };
 
   explicit BanglaLexer(antlr4::CharStream *input);

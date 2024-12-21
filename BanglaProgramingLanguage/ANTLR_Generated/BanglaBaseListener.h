@@ -28,11 +28,26 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext * /*ctx*/) override { }
 
-  virtual void enterInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
-  virtual void exitInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
+  virtual void enterArrayDeclaration(BanglaParser::ArrayDeclarationContext * /*ctx*/) override { }
+  virtual void exitArrayDeclaration(BanglaParser::ArrayDeclarationContext * /*ctx*/) override { }
+
+  virtual void enterArrayElementAssignment(BanglaParser::ArrayElementAssignmentContext * /*ctx*/) override { }
+  virtual void exitArrayElementAssignment(BanglaParser::ArrayElementAssignmentContext * /*ctx*/) override { }
+
+  virtual void enterArrayIndex(BanglaParser::ArrayIndexContext * /*ctx*/) override { }
+  virtual void exitArrayIndex(BanglaParser::ArrayIndexContext * /*ctx*/) override { }
+
+  virtual void enterArrayElement(BanglaParser::ArrayElementContext * /*ctx*/) override { }
+  virtual void exitArrayElement(BanglaParser::ArrayElementContext * /*ctx*/) override { }
+
+  virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
+  virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
 
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
+
+  virtual void enterInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
+  virtual void exitInitialization(BanglaParser::InitializationContext * /*ctx*/) override { }
 
   virtual void enterIncrementStatement(BanglaParser::IncrementStatementContext * /*ctx*/) override { }
   virtual void exitIncrementStatement(BanglaParser::IncrementStatementContext * /*ctx*/) override { }

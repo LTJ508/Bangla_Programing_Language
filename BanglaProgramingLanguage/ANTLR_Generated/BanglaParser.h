@@ -14,18 +14,20 @@ public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
-    T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, SHURU = 20, 
-    SHESH = 21, DHORI = 22, DEKHAO = 23, NATUN_LINE = 24, IF = 25, ELSE_IF = 26, 
-    ELSE = 27, FOR = 28, ID = 29, FLOAT = 30, INT = 31, STRING = 32, LINE_COMMENT = 33, 
-    BLOCK_COMMENT = 34, WS = 35
+    T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, T__19 = 20, 
+    T__20 = 21, SHURU = 22, SHESH = 23, DHORI = 24, DEKHAO = 25, NATUN_LINE = 26, 
+    IF = 27, ELSE_IF = 28, ELSE = 29, FOR = 30, ID = 31, FLOAT = 32, INT = 33, 
+    STRING = 34, LINE_COMMENT = 35, BLOCK_COMMENT = 36, WS = 37
   };
 
   enum {
     RuleProgram = 0, RuleBlock = 1, RuleStatement = 2, RuleVariableDeclaration = 3, 
-    RuleInitialization = 4, RuleAssignmentStatement = 5, RuleIncrementStatement = 6, 
-    RuleDecrementStatement = 7, RulePrintStatement = 8, RulePrintArguments = 9, 
-    RuleIfStatement = 10, RuleForStatement = 11, RuleCondition = 12, RuleExpression = 13, 
-    RuleOperand = 14, RuleComparisonOperator = 15
+    RuleArrayDeclaration = 4, RuleArrayElementAssignment = 5, RuleArrayIndex = 6, 
+    RuleArrayElement = 7, RuleArrayElementAccess = 8, RuleAssignmentStatement = 9, 
+    RuleInitialization = 10, RuleIncrementStatement = 11, RuleDecrementStatement = 12, 
+    RulePrintStatement = 13, RulePrintArguments = 14, RuleIfStatement = 15, 
+    RuleForStatement = 16, RuleCondition = 17, RuleExpression = 18, RuleOperand = 19, 
+    RuleComparisonOperator = 20
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -49,8 +51,13 @@ public:
   class BlockContext;
   class StatementContext;
   class VariableDeclarationContext;
-  class InitializationContext;
+  class ArrayDeclarationContext;
+  class ArrayElementAssignmentContext;
+  class ArrayIndexContext;
+  class ArrayElementContext;
+  class ArrayElementAccessContext;
   class AssignmentStatementContext;
+  class InitializationContext;
   class IncrementStatementContext;
   class DecrementStatementContext;
   class PrintStatementContext;
@@ -96,6 +103,8 @@ public:
     StatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     VariableDeclarationContext *variableDeclaration();
+    ArrayDeclarationContext *arrayDeclaration();
+    ArrayElementAssignmentContext *arrayElementAssignment();
     AssignmentStatementContext *assignmentStatement();
     IncrementStatementContext *incrementStatement();
     DecrementStatementContext *decrementStatement();
@@ -125,18 +134,79 @@ public:
 
   VariableDeclarationContext* variableDeclaration();
 
-  class  InitializationContext : public antlr4::ParserRuleContext {
+  class  ArrayDeclarationContext : public antlr4::ParserRuleContext {
   public:
-    InitializationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    ArrayDeclarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    AssignmentStatementContext *assignmentStatement();
+    antlr4::tree::TerminalNode *DHORI();
+    antlr4::tree::TerminalNode *ID();
+    ArrayIndexContext *arrayIndex();
+    std::vector<ArrayElementContext *> arrayElement();
+    ArrayElementContext* arrayElement(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
    
   };
 
-  InitializationContext* initialization();
+  ArrayDeclarationContext* arrayDeclaration();
+
+  class  ArrayElementAssignmentContext : public antlr4::ParserRuleContext {
+  public:
+    ArrayElementAssignmentContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *ID();
+    ArrayIndexContext *arrayIndex();
+    ArrayElementContext *arrayElement();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ArrayElementAssignmentContext* arrayElementAssignment();
+
+  class  ArrayIndexContext : public antlr4::ParserRuleContext {
+  public:
+    ArrayIndexContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *INT();
+    antlr4::tree::TerminalNode *ID();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ArrayIndexContext* arrayIndex();
+
+  class  ArrayElementContext : public antlr4::ParserRuleContext {
+  public:
+    ArrayElementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *STRING();
+    ExpressionContext *expression();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ArrayElementContext* arrayElement();
+
+  class  ArrayElementAccessContext : public antlr4::ParserRuleContext {
+  public:
+    ArrayElementAccessContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *ID();
+    ArrayIndexContext *arrayIndex();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ArrayElementAccessContext* arrayElementAccess();
 
   class  AssignmentStatementContext : public antlr4::ParserRuleContext {
   public:
@@ -151,6 +221,19 @@ public:
   };
 
   AssignmentStatementContext* assignmentStatement();
+
+  class  InitializationContext : public antlr4::ParserRuleContext {
+  public:
+    InitializationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AssignmentStatementContext *assignmentStatement();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  InitializationContext* initialization();
 
   class  IncrementStatementContext : public antlr4::ParserRuleContext {
   public:
@@ -202,6 +285,8 @@ public:
     antlr4::tree::TerminalNode* STRING(size_t i);
     std::vector<antlr4::tree::TerminalNode *> NATUN_LINE();
     antlr4::tree::TerminalNode* NATUN_LINE(size_t i);
+    std::vector<ArrayElementAccessContext *> arrayElementAccess();
+    ArrayElementAccessContext* arrayElementAccess(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -272,6 +357,7 @@ public:
     antlr4::tree::TerminalNode *INT();
     antlr4::tree::TerminalNode *FLOAT();
     antlr4::tree::TerminalNode *ID();
+    ArrayElementAccessContext *arrayElementAccess();
     std::vector<ExpressionContext *> expression();
     ExpressionContext* expression(size_t i);
 
@@ -289,6 +375,7 @@ public:
     antlr4::tree::TerminalNode *INT();
     antlr4::tree::TerminalNode *FLOAT();
     antlr4::tree::TerminalNode *ID();
+    ArrayElementAccessContext *arrayElementAccess();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

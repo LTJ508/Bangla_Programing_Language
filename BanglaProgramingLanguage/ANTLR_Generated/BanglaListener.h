@@ -26,11 +26,26 @@ public:
   virtual void enterVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
   virtual void exitVariableDeclaration(BanglaParser::VariableDeclarationContext *ctx) = 0;
 
-  virtual void enterInitialization(BanglaParser::InitializationContext *ctx) = 0;
-  virtual void exitInitialization(BanglaParser::InitializationContext *ctx) = 0;
+  virtual void enterArrayDeclaration(BanglaParser::ArrayDeclarationContext *ctx) = 0;
+  virtual void exitArrayDeclaration(BanglaParser::ArrayDeclarationContext *ctx) = 0;
+
+  virtual void enterArrayElementAssignment(BanglaParser::ArrayElementAssignmentContext *ctx) = 0;
+  virtual void exitArrayElementAssignment(BanglaParser::ArrayElementAssignmentContext *ctx) = 0;
+
+  virtual void enterArrayIndex(BanglaParser::ArrayIndexContext *ctx) = 0;
+  virtual void exitArrayIndex(BanglaParser::ArrayIndexContext *ctx) = 0;
+
+  virtual void enterArrayElement(BanglaParser::ArrayElementContext *ctx) = 0;
+  virtual void exitArrayElement(BanglaParser::ArrayElementContext *ctx) = 0;
+
+  virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
+  virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
 
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
+
+  virtual void enterInitialization(BanglaParser::InitializationContext *ctx) = 0;
+  virtual void exitInitialization(BanglaParser::InitializationContext *ctx) = 0;
 
   virtual void enterIncrementStatement(BanglaParser::IncrementStatementContext *ctx) = 0;
   virtual void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) = 0;

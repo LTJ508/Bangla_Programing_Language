@@ -443,6 +443,10 @@ private:
             // Process specific child types of the statement
             if (statement->variableDeclaration()) {
                 exitVariableDeclaration(statement->variableDeclaration());
+            } else if (statement->arrayDeclaration()) {
+                exitArrayDeclaration(statement->arrayDeclaration());
+            } else if (statement->arrayElementAssignment()) {
+                exitArrayElementAssignment(statement->arrayElementAssignment());
             } else if (statement->assignmentStatement()) {
                 exitAssignmentStatement(statement->assignmentStatement());
             } else if (statement->incrementStatement()) {

@@ -11,6 +11,8 @@ block
 
 statement
     : variableDeclaration
+    | arrayDeclaration
+    | arrayElementAssignment
     | assignmentStatement ';'
     | incrementStatement ';'
     | decrementStatement ';'
@@ -23,12 +25,36 @@ variableDeclaration
     : DHORI ID ('=' expression)? ';'
     ;
 
-initialization
-    : assignmentStatement ';'
+arrayDeclaration
+    : DHORI ID '[' arrayIndex ']' ';'
+    | DHORI ID '[' arrayIndex ']' '=' '[' (arrayElement (',' arrayElement)*)? ']' ';'
+    | DHORI ID '=' '[' (arrayElement (',' arrayElement)*)? ']' ';'
     ;
- 
+
+arrayElementAssignment
+    : ID '[' arrayIndex ']' '=' arrayElement ';'
+    ;
+
+arrayIndex
+    : INT
+    | ID
+    ;
+
+arrayElement
+    : STRING
+    | expression
+    ;
+
+arrayElementAccess
+    : ID '[' arrayIndex ']'
+    ;
+
 assignmentStatement
     : ID '=' expression
+    ;
+
+initialization
+    : assignmentStatement ';'
     ;
 
 incrementStatement
@@ -44,7 +70,7 @@ printStatement
     ;
 
 printArguments
-    : (ID | STRING | NATUN_LINE) (',' (ID | STRING | NATUN_LINE))* (',' NATUN_LINE)?
+    : (ID | STRING | NATUN_LINE | arrayElementAccess) (',' (ID | STRING | NATUN_LINE | arrayElementAccess))* (',' NATUN_LINE)?
     ;
 
 ifStatement
@@ -65,6 +91,7 @@ expression
     | INT
     | FLOAT
     | ID
+    | arrayElementAccess
     | '(' expression ')'
     ;
 
@@ -72,6 +99,7 @@ operand
     : INT
     | FLOAT
     | ID
+    | arrayElementAccess
     ;
 
 comparisonOperator
