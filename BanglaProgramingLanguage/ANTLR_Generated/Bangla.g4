@@ -27,22 +27,17 @@ variableDeclaration
 
 arrayDeclaration
     : DHORI ID '[' arrayIndex ']' ';'
-    | DHORI ID '[' arrayIndex ']' '=' '[' (arrayElement (',' arrayElement)*)? ']' ';'
-    | DHORI ID '=' '[' (arrayElement (',' arrayElement)*)? ']' ';'
+    | DHORI ID '[' arrayIndex ']' '=' '[' (expression (',' expression)*)? ']' ';'
+    | DHORI ID '=' '[' (expression (',' expression)*)? ']' ';'
     ;
 
 arrayElementAssignment
-    : ID '[' arrayIndex ']' '=' arrayElement ';'
+    : ID '[' arrayIndex ']' '=' expression ';'
     ;
 
 arrayIndex
     : INT
     | ID
-    ;
-
-arrayElement
-    : STRING
-    | expression
     ;
 
 arrayElementAccess
@@ -90,6 +85,7 @@ expression
     | expression ('+' | '-') expression
     | INT
     | FLOAT
+    | STRING
     | ID
     | arrayElementAccess
     | '(' expression ')'

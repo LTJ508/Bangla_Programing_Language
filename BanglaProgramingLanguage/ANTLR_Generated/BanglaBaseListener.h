@@ -37,9 +37,6 @@ public:
   virtual void enterArrayIndex(BanglaParser::ArrayIndexContext * /*ctx*/) override { }
   virtual void exitArrayIndex(BanglaParser::ArrayIndexContext * /*ctx*/) override { }
 
-  virtual void enterArrayElement(BanglaParser::ArrayElementContext * /*ctx*/) override { }
-  virtual void exitArrayElement(BanglaParser::ArrayElementContext * /*ctx*/) override { }
-
   virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
   virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
 

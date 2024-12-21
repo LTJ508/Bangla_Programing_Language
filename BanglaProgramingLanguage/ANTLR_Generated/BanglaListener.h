@@ -35,9 +35,6 @@ public:
   virtual void enterArrayIndex(BanglaParser::ArrayIndexContext *ctx) = 0;
   virtual void exitArrayIndex(BanglaParser::ArrayIndexContext *ctx) = 0;
 
-  virtual void enterArrayElement(BanglaParser::ArrayElementContext *ctx) = 0;
-  virtual void exitArrayElement(BanglaParser::ArrayElementContext *ctx) = 0;
-
   virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
   virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
 
