@@ -102,7 +102,7 @@
 
     // Array Declaration, assignment and access elements
     ধরি লিস্ট১[৪]; // Declaration only with size
-    ধরি লিস্ট২ = ["ক", "খ", "গ", "ঘ"]; // Declaration with elemetns, size depends on the elemetns
+    ধরি লিস্ট২ = ["ক", "খ", ৪, "ঘ"]; // Declaration with elemetns, size depends on the elemetns
 
     যতক্ষণ (ক = ০; ক < ৪; ক++) {
         লিস্ট১[ক] = ক + ১;
