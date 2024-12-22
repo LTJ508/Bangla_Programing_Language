@@ -143,72 +143,72 @@ public:
     }
 
     // Increment Statements
-void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) override {
-    if (!executeCurrentBlock) return;
+    void exitIncrementStatement(BanglaParser::IncrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
 
-    std::string varName = ctx->ID()->getText();
+        std::string varName = ctx->ID()->getText();
 
-    if (variables.find(varName) != variables.end()) {
-        if (std::holds_alternative<int>(variables[varName])) {
-            variables[varName] = std::get<int>(variables[varName]) + 1;
-        } else if (std::holds_alternative<double>(variables[varName])) {
-            variables[varName] = std::get<double>(variables[varName]) + 1.0;
-        } else if (std::holds_alternative<std::string>(variables[varName])) {
-            std::cerr << "Warning: Cannot increment a string variable: " << varName << std::endl;
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) + 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) + 1.0;
+            } else if (std::holds_alternative<std::string>(variables[varName])) {
+                std::cerr << "Warning: Cannot increment a string variable: " << varName << std::endl;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
         }
-    } else {
-        throw std::runtime_error("Undefined variable: " + varName);
-    }
 
-    if (debug) {
-        std::cout << "Debug => Variable incremented: " << varName << " = " 
-                  << std::visit([](auto&& arg) -> std::string {
-                        using T = std::decay_t<decltype(arg)>;
-                        if constexpr (std::is_same_v<T, int> || std::is_same_v<T, double>) {
-                            return std::to_string(arg);
-                        } else if constexpr (std::is_same_v<T, std::string>) {
-                            return arg;
-                        } else {
-                            return "Unsupported type";
-                        }
-                    }, variables[varName]) 
-                  << std::endl;
+        if (debug) {
+            std::cout << "Debug => Variable incremented: " << varName << " = " 
+                    << std::visit([](auto&& arg) -> std::string {
+                            using T = std::decay_t<decltype(arg)>;
+                            if constexpr (std::is_same_v<T, int> || std::is_same_v<T, double>) {
+                                return std::to_string(arg);
+                            } else if constexpr (std::is_same_v<T, std::string>) {
+                                return arg;
+                            } else {
+                                return "Unsupported type";
+                            }
+                        }, variables[varName]) 
+                    << std::endl;
+        }
     }
-}
 
     // Decrement Statements
-void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) override {
-    if (!executeCurrentBlock) return;
+    void exitDecrementStatement(BanglaParser::DecrementStatementContext *ctx) override {
+        if (!executeCurrentBlock) return;
 
-    std::string varName = ctx->ID()->getText();
+        std::string varName = ctx->ID()->getText();
 
-    if (variables.find(varName) != variables.end()) {
-        if (std::holds_alternative<int>(variables[varName])) {
-            variables[varName] = std::get<int>(variables[varName]) - 1;
-        } else if (std::holds_alternative<double>(variables[varName])) {
-            variables[varName] = std::get<double>(variables[varName]) - 1.0;
-        } else if (std::holds_alternative<std::string>(variables[varName])) {
-            std::cerr << "Warning: Cannot decrement a string variable: " << varName << std::endl;
+        if (variables.find(varName) != variables.end()) {
+            if (std::holds_alternative<int>(variables[varName])) {
+                variables[varName] = std::get<int>(variables[varName]) - 1;
+            } else if (std::holds_alternative<double>(variables[varName])) {
+                variables[varName] = std::get<double>(variables[varName]) - 1.0;
+            } else if (std::holds_alternative<std::string>(variables[varName])) {
+                std::cerr << "Warning: Cannot decrement a string variable: " << varName << std::endl;
+            }
+        } else {
+            throw std::runtime_error("Undefined variable: " + varName);
         }
-    } else {
-        throw std::runtime_error("Undefined variable: " + varName);
-    }
 
-    if (debug) {
-        std::cout << "Debug => Variable decremented: " << varName << " = " 
-                  << std::visit([](auto&& arg) -> std::string {
-                        using T = std::decay_t<decltype(arg)>;
-                        if constexpr (std::is_same_v<T, int> || std::is_same_v<T, double>) {
-                            return std::to_string(arg);
-                        } else if constexpr (std::is_same_v<T, std::string>) {
-                            return arg;
-                        } else {
-                            return "Unsupported type";
-                        }
-                    }, variables[varName]) 
-                  << std::endl;
+        if (debug) {
+            std::cout << "Debug => Variable decremented: " << varName << " = " 
+                    << std::visit([](auto&& arg) -> std::string {
+                            using T = std::decay_t<decltype(arg)>;
+                            if constexpr (std::is_same_v<T, int> || std::is_same_v<T, double>) {
+                                return std::to_string(arg);
+                            } else if constexpr (std::is_same_v<T, std::string>) {
+                                return arg;
+                            } else {
+                                return "Unsupported type";
+                            }
+                        }, variables[varName]) 
+                    << std::endl;
+        }
     }
-}
 
     // Print Statement
     void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
