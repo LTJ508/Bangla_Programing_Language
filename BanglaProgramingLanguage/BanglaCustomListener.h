@@ -72,6 +72,7 @@ VariableValue performOperation(const VariableValue& left, const VariableValue& r
 class BanglaCustomListener : public BanglaBaseListener {
 public:
     std::unordered_map<std::string, VariableValue> variables;
+    std::unordered_map<std::string, std::vector<VariableValue>> arrays;
     bool executeCurrentBlock = true; // Flag to control block execution
     std::vector<bool> executionStack; // Stack to manage nested block execution states
     int countNestedIfElse = 0; // Variable to count nested if-else statements
@@ -239,6 +240,17 @@ public:
                 } else if (terminalNode->getSymbol()->getType() == BanglaParser::NATUN_LINE) {
                     std::cout << std::endl;
                 }
+            } else if (auto arrayElementAccess = dynamic_cast<BanglaParser::ArrayElementAccessContext*>(arg)) {
+                VariableValue value = getArrayElementValue(arrayElementAccess);
+                std::string banglaValueStr;
+                if (std::holds_alternative<int>(value)) {
+                    banglaValueStr = convertEnglishToBangla(std::to_string(std::get<int>(value)));
+                } else if (std::holds_alternative<double>(value)) {
+                    banglaValueStr = convertEnglishToBangla(std::to_string(std::get<double>(value)));
+                } else if (std::holds_alternative<std::string>(value)) {
+                    banglaValueStr = std::get<std::string>(value);
+                }
+                std::cout << banglaValueStr;
             }
         }
     }
@@ -371,22 +383,114 @@ public:
         }
     }
 
+    // Array Declaration
+    void exitArrayDeclaration(BanglaParser::ArrayDeclarationContext *ctx) override {
+        if (!executeCurrentBlock) return;
 
+        std::string arrayName = ctx->ID()->getText();
+        std::vector<VariableValue> elements;
+        int size = 0;
 
+        if (ctx->arrayIndex()) {
+            if (ctx->arrayIndex()->INT()) {
+                // Convert the text of arrayIndex if it is INT
+                std::string banglaIndex = ctx->arrayIndex()->INT()->getText();
+                std::string englishIndex = convertBanglaToEnglish(banglaIndex);
+                size = std::stoi(englishIndex);
+            } else if (ctx->arrayIndex()->ID()) {
+                // Get the value of ID if it is ID
+                std::string varName = ctx->arrayIndex()->ID()->getText();
+                if (variables.find(varName) != variables.end()) {
+                    VariableValue value = variables[varName];
+                    if (std::holds_alternative<int>(value)) {
+                        size = std::get<int>(value);
+                    } else {
+                        throw std::runtime_error("Array size must be an integer");
+                    }
+                } else {
+                    throw std::runtime_error("Undefined variable: " + varName);
+                }
+            }
+        }
 
+        if (ctx->arrayIndex() && ctx->expression().empty()) {
+            // Case 1: Declaration with size only
+            elements.resize(size);
+        } else if (ctx->arrayIndex() && !ctx->expression().empty()) {
+            // Case 2: Declaration with size and elements
+            for (auto exprCtx : ctx->expression()) {
+                elements.push_back(evaluateExpression(exprCtx));
+            }
+            if (elements.size() != size) {
+                throw std::runtime_error("Array size does not match the number of elements provided");
+            }
+        } else if (!ctx->arrayIndex() && !ctx->expression().empty()) {
+            // Case 3: Declaration without size but with elements
+            for (auto exprCtx : ctx->expression()) {
+                elements.push_back(evaluateExpression(exprCtx));
+            }
+        }
 
+        arrays[arrayName] = elements;
 
+        if (debug) {
+            std::cout << "Debug => Array declared: " << arrayName << " with size " << elements.size() << std::endl;
+        }
+    }
 
+    // Array Element Assignment
+    void exitArrayElementAssignment(BanglaParser::ArrayElementAssignmentContext *ctx) override {
+        if (!executeCurrentBlock) return;
 
+        std::string arrayName = ctx->ID()->getText();
+        int index = 0;
 
-// New Code
+        if (ctx->arrayIndex()->INT()) {
+            // Convert the text of arrayIndex if it is INT
+            std::string banglaIndex = ctx->arrayIndex()->INT()->getText();
+            std::string englishIndex = convertBanglaToEnglish(banglaIndex);
+            index = std::stoi(englishIndex);
+        } else if (ctx->arrayIndex()->ID()) {
+            // Get the value of ID if it is ID
+            std::string varName = ctx->arrayIndex()->ID()->getText();
+            if (variables.find(varName) != variables.end()) {
+                VariableValue value = variables[varName];
+                if (std::holds_alternative<int>(value)) {
+                    index = std::get<int>(value);
+                } else {
+                    throw std::runtime_error("Array index must be an integer");
+                }
+            } else {
+                throw std::runtime_error("Undefined variable: " + varName);
+            }
+        }
 
+        if (arrays.find(arrayName) != arrays.end()) {
+            auto &array = arrays[arrayName];
+            if (index >= 0 && index < array.size()) {
+                array[index] = evaluateExpression(ctx->expression());
+            } else {
+                throw std::runtime_error("Array index out of bounds: " + std::to_string(index));
+            }
+        } else {
+            throw std::runtime_error("Undefined array: " + arrayName);
+        }
 
-
-
-
-
-
+        if (debug) {
+            std::cout << "Debug => Array element assigned: " << arrayName << "[" << index << "] = " 
+                    << std::visit([](auto&& arg) -> std::string {
+                            using T = std::decay_t<decltype(arg)>;
+                            if constexpr (std::is_same_v<T, int> || std::is_same_v<T, double>) {
+                                return std::to_string(arg);
+                            } else if constexpr (std::is_same_v<T, std::string>) {
+                                return arg;
+                            } else {
+                                return "Unsupported type";
+                            }
+                        }, arrays[arrayName][index]) 
+                    << std::endl;
+        }
+    }
 
 
 
@@ -422,18 +526,7 @@ private:
 
     // Helper functions for evaluating expressions and conditions
     double getOperandValue(BanglaParser::OperandContext *ctx) {
-        if (ctx->ID()) {
-            std::string varName = ctx->ID()->getText();
-            if (variables.find(varName) == variables.end()) {
-                std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
-                throw std::runtime_error("Undefined variable");
-            }
-            if (std::holds_alternative<int>(variables[varName])) {
-                return std::get<int>(variables[varName]);
-            } else if (std::holds_alternative<double>(variables[varName])) {
-                return std::get<double>(variables[varName]);
-            }
-        } else if (ctx->INT()) {
+        if (ctx->INT()) {
             std::string valueStr = ctx->INT()->getText();
             std::string englishValueStr = convertBanglaToEnglish(valueStr);
             return std::stoi(englishValueStr);
@@ -441,8 +534,31 @@ private:
             std::string valueStr = ctx->FLOAT()->getText();
             std::string englishValueStr = convertBanglaToEnglish(valueStr);
             return std::stod(englishValueStr);
+        } else if (ctx->ID()) {
+            std::string varName = ctx->ID()->getText();
+            if (variables.find(varName) != variables.end()) {
+                VariableValue value = variables[varName];
+                if (std::holds_alternative<int>(value)) {
+                    return std::get<int>(value);
+                } else if (std::holds_alternative<double>(value)) {
+                    return std::get<double>(value);
+                } else {
+                    throw std::runtime_error("Operand must be a number");
+                }
+            } else {
+                throw std::runtime_error("Undefined variable: " + varName);
+            }
+        } else if (ctx->arrayElementAccess()) {
+            VariableValue value = getArrayElementValue(ctx->arrayElementAccess());
+            if (std::holds_alternative<int>(value)) {
+                return std::get<int>(value);
+            } else if (std::holds_alternative<double>(value)) {
+                return std::get<double>(value);
+            } else {
+                throw std::runtime_error("Operand must be a number");
+            }
         }
-        return 0;
+        throw std::runtime_error("Invalid operand");
     }
 
     // Evaluate the condition
@@ -497,6 +613,8 @@ private:
                 std::string text = ctx->STRING()->getText();
                 text = text.substr(1, text.length() - 2); // Remove quotes
                 return text;
+            } else if (ctx->arrayElementAccess()) {
+                return getArrayElementValue(ctx->arrayElementAccess());
             } else if (ctx->expression().size() == 1) {
                 return evaluateExpression(ctx->expression(0));
             } else if (ctx->expression().size() == 2) {
@@ -523,6 +641,43 @@ private:
         }
 
         throw std::runtime_error("Invalid expression");
+    }
+
+    // Get the value of an array element
+    VariableValue getArrayElementValue(BanglaParser::ArrayElementAccessContext *ctx) {
+        std::string arrayName = ctx->ID()->getText();
+        int index = 0;
+
+        if (ctx->arrayIndex()->INT()) {
+            // Convert the text of arrayIndex if it is INT
+            std::string banglaIndex = ctx->arrayIndex()->INT()->getText();
+            std::string englishIndex = convertBanglaToEnglish(banglaIndex);
+            index = std::stoi(englishIndex);
+        } else if (ctx->arrayIndex()->ID()) {
+            // Get the value of ID if it is ID
+            std::string varName = ctx->arrayIndex()->ID()->getText();
+            if (variables.find(varName) != variables.end()) {
+                VariableValue value = variables[varName];
+                if (std::holds_alternative<int>(value)) {
+                    index = std::get<int>(value);
+                } else {
+                    throw std::runtime_error("Array index must be an integer");
+                }
+            } else {
+                throw std::runtime_error("Undefined variable: " + varName);
+            }
+        }
+
+        if (arrays.find(arrayName) != arrays.end()) {
+            auto &array = arrays[arrayName];
+            if (index >= 0 && index < array.size()) {
+                return array[index];
+            } else {
+                throw std::runtime_error("Array index out of bounds: " + std::to_string(index));
+            }
+        } else {
+            throw std::runtime_error("Undefined array: " + arrayName);
+        }
     }
 
     // Execute the block
@@ -564,6 +719,27 @@ private:
 
         executeCurrentBlock = previousExecuteCurrentBlock;
     }
+
+
+
+    
+
+
+
+    // New Code
+    
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 #endif // BANGLACUSTOMLISTENER_H

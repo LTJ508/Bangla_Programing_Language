@@ -121,11 +121,11 @@
             // Calculate execution time in seconds with 6 decimal places
             const executionTime = ((endTime - startTime) / 1000).toFixed(6);
             
-            // Directly access the result field and set it as the inner text
-            let output = result.result.replace(/\\n/g, '\n');
-
             // Append the execution time to the output
-            output += `\nExecution Time: ${executionTime} seconds`;
+            let output = `Execution Time: ${executionTime} seconds\n\n`;
+
+            // Directly access the result field and set it as the inner text
+            output += result.result.replace(/\\n/g, '\n');
             
             document.getElementById('output').innerText = output;
         }
