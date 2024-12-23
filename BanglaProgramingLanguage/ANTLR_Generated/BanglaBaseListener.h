@@ -61,6 +61,24 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
 
+  virtual void enterFileOperations(BanglaParser::FileOperationsContext * /*ctx*/) override { }
+  virtual void exitFileOperations(BanglaParser::FileOperationsContext * /*ctx*/) override { }
+
+  virtual void enterFileDeclaration(BanglaParser::FileDeclarationContext * /*ctx*/) override { }
+  virtual void exitFileDeclaration(BanglaParser::FileDeclarationContext * /*ctx*/) override { }
+
+  virtual void enterFileAssignment(BanglaParser::FileAssignmentContext * /*ctx*/) override { }
+  virtual void exitFileAssignment(BanglaParser::FileAssignmentContext * /*ctx*/) override { }
+
+  virtual void enterFileRead(BanglaParser::FileReadContext * /*ctx*/) override { }
+  virtual void exitFileRead(BanglaParser::FileReadContext * /*ctx*/) override { }
+
+  virtual void enterFileWrite(BanglaParser::FileWriteContext * /*ctx*/) override { }
+  virtual void exitFileWrite(BanglaParser::FileWriteContext * /*ctx*/) override { }
+
+  virtual void enterFileClose(BanglaParser::FileCloseContext * /*ctx*/) override { }
+  virtual void exitFileClose(BanglaParser::FileCloseContext * /*ctx*/) override { }
+
   virtual void enterIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
   virtual void exitIfStatement(BanglaParser::IfStatementContext * /*ctx*/) override { }
 

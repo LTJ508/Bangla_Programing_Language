@@ -15,7 +15,7 @@ def runCompiler(task_type, **kwargs):
                 capture_output=True,
                 text=True,
                 encoding='utf-8',  # Specify the encoding explicitly
-                timeout=5  # Set the timeout to 5 seconds
+                timeout=10  # Set the timeout to 5 seconds
             )
             output = result.stdout + result.stderr  # Combine stdout and stderr
         except subprocess.TimeoutExpired:

@@ -17,6 +17,7 @@ statement
     | incrementStatement ';'
     | decrementStatement ';'
     | printStatement
+    | fileOperations
     | ifStatement
     | forStatement
     ;
@@ -72,6 +73,34 @@ printArguments
     : (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess) (',' (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess))* (',' NATUN_LINE)?
     ;
 
+fileOperations
+    : fileDeclaration
+    | fileAssignment
+    | fileRead
+    | fileWrite
+    | fileClose
+    ;
+
+fileDeclaration
+    : FILE ID ('=' FILE_OPEN '(' STRING ',' (FILE_READ | FILE_WRITE) ')')? ';'
+    ;
+
+fileAssignment
+    : ID '=' FILE_OPEN '(' STRING ',' (FILE_READ | FILE_WRITE) ')' ';'
+    ;
+
+fileRead
+    : (ID | DHORI ID) '=' FILE_READ '(' ID ')' ';'
+    ;
+
+fileWrite
+    : FILE_WRITE '(' ID ',' printArguments ')' ';'
+    ;
+
+fileClose
+    : FILE_CLOSE '(' ID (',' ID)* ')' ';'
+    ;
+
 ifStatement
     : IF '(' condition ')' block (ELSE_IF '(' condition ')' block)* (ELSE block)?
     ;
@@ -123,6 +152,11 @@ IF: 'যদি';
 ELSE_IF: 'তানাহলে যদি';
 ELSE: 'তানাহলে';
 FOR: 'যতক্ষণ';
+FILE: 'ফাইল';
+FILE_OPEN: 'খুলো';
+FILE_CLOSE: 'বন্ধ';
+FILE_READ: 'পড়ো';
+FILE_WRITE: 'লেখো';
 
 ID: ID_START ID_PART*; // Identifier
 
