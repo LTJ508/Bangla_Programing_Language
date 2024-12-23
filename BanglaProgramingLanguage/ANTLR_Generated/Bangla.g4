@@ -17,7 +17,11 @@ statement
     | incrementStatement ';'
     | decrementStatement ';'
     | printStatement
-    | fileOperations
+    | fileDeclaration
+    | fileAssignment
+    | fileRead
+    | fileWrite
+    | fileClose
     | ifStatement
     | forStatement
     ;
@@ -71,14 +75,6 @@ printStatement
 
 printArguments
     : (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess) (',' (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess))* (',' NATUN_LINE)?
-    ;
-
-fileOperations
-    : fileDeclaration
-    | fileAssignment
-    | fileRead
-    | fileWrite
-    | fileClose
     ;
 
 fileDeclaration

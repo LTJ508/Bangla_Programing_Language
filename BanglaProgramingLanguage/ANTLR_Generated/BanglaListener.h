@@ -59,9 +59,6 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
 
-  virtual void enterFileOperations(BanglaParser::FileOperationsContext *ctx) = 0;
-  virtual void exitFileOperations(BanglaParser::FileOperationsContext *ctx) = 0;
-
   virtual void enterFileDeclaration(BanglaParser::FileDeclarationContext *ctx) = 0;
   virtual void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) = 0;
 

@@ -27,10 +27,10 @@ public:
     RuleArrayDeclaration = 4, RuleArrayElementAssignment = 5, RuleArrayIndex = 6, 
     RuleArrayElementAccess = 7, RuleArraySizeAccess = 8, RuleAssignmentStatement = 9, 
     RuleInitialization = 10, RuleIncrementStatement = 11, RuleDecrementStatement = 12, 
-    RulePrintStatement = 13, RulePrintArguments = 14, RuleFileOperations = 15, 
-    RuleFileDeclaration = 16, RuleFileAssignment = 17, RuleFileRead = 18, 
-    RuleFileWrite = 19, RuleFileClose = 20, RuleIfStatement = 21, RuleForStatement = 22, 
-    RuleCondition = 23, RuleExpression = 24, RuleOperand = 25, RuleComparisonOperator = 26
+    RulePrintStatement = 13, RulePrintArguments = 14, RuleFileDeclaration = 15, 
+    RuleFileAssignment = 16, RuleFileRead = 17, RuleFileWrite = 18, RuleFileClose = 19, 
+    RuleIfStatement = 20, RuleForStatement = 21, RuleCondition = 22, RuleExpression = 23, 
+    RuleOperand = 24, RuleComparisonOperator = 25
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -65,7 +65,6 @@ public:
   class DecrementStatementContext;
   class PrintStatementContext;
   class PrintArgumentsContext;
-  class FileOperationsContext;
   class FileDeclarationContext;
   class FileAssignmentContext;
   class FileReadContext;
@@ -118,7 +117,11 @@ public:
     IncrementStatementContext *incrementStatement();
     DecrementStatementContext *decrementStatement();
     PrintStatementContext *printStatement();
-    FileOperationsContext *fileOperations();
+    FileDeclarationContext *fileDeclaration();
+    FileAssignmentContext *fileAssignment();
+    FileReadContext *fileRead();
+    FileWriteContext *fileWrite();
+    FileCloseContext *fileClose();
     IfStatementContext *ifStatement();
     ForStatementContext *forStatement();
 
@@ -305,23 +308,6 @@ public:
   };
 
   PrintArgumentsContext* printArguments();
-
-  class  FileOperationsContext : public antlr4::ParserRuleContext {
-  public:
-    FileOperationsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    FileDeclarationContext *fileDeclaration();
-    FileAssignmentContext *fileAssignment();
-    FileReadContext *fileRead();
-    FileWriteContext *fileWrite();
-    FileCloseContext *fileClose();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileOperationsContext* fileOperations();
 
   class  FileDeclarationContext : public antlr4::ParserRuleContext {
   public:

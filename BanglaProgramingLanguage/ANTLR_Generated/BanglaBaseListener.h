@@ -61,9 +61,6 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext * /*ctx*/) override { }
 
-  virtual void enterFileOperations(BanglaParser::FileOperationsContext * /*ctx*/) override { }
-  virtual void exitFileOperations(BanglaParser::FileOperationsContext * /*ctx*/) override { }
-
   virtual void enterFileDeclaration(BanglaParser::FileDeclarationContext * /*ctx*/) override { }
   virtual void exitFileDeclaration(BanglaParser::FileDeclarationContext * /*ctx*/) override { }
 
