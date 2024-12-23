@@ -90,7 +90,7 @@ fileAssignment
     ;
 
 fileRead
-    : (ID | DHORI ID) '=' FILE_READ '(' ID ')' ';'
+    : ID '=' FILE_READ '(' ID ')' ';'
     ;
 
 fileWrite
