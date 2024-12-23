@@ -15,18 +15,20 @@ public:
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
     T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, T__19 = 20, 
-    T__20 = 21, SHURU = 22, SHESH = 23, DHORI = 24, DEKHAO = 25, NATUN_LINE = 26, 
-    IF = 27, ELSE_IF = 28, ELSE = 29, FOR = 30, ID = 31, FLOAT = 32, INT = 33, 
-    STRING = 34, LINE_COMMENT = 35, BLOCK_COMMENT = 36, WS = 37
+    T__20 = 21, T__21 = 22, SHURU = 23, SHESH = 24, DHORI = 25, DEKHAO = 26, 
+    NATUN_LINE = 27, IF = 28, ELSE_IF = 29, ELSE = 30, FOR = 31, ID = 32, 
+    FLOAT = 33, INT = 34, STRING = 35, LINE_COMMENT = 36, BLOCK_COMMENT = 37, 
+    WS = 38
   };
 
   enum {
     RuleProgram = 0, RuleBlock = 1, RuleStatement = 2, RuleVariableDeclaration = 3, 
     RuleArrayDeclaration = 4, RuleArrayElementAssignment = 5, RuleArrayIndex = 6, 
-    RuleArrayElementAccess = 7, RuleAssignmentStatement = 8, RuleInitialization = 9, 
-    RuleIncrementStatement = 10, RuleDecrementStatement = 11, RulePrintStatement = 12, 
-    RulePrintArguments = 13, RuleIfStatement = 14, RuleForStatement = 15, 
-    RuleCondition = 16, RuleExpression = 17, RuleOperand = 18, RuleComparisonOperator = 19
+    RuleArrayElementAccess = 7, RuleArraySizeAccess = 8, RuleAssignmentStatement = 9, 
+    RuleInitialization = 10, RuleIncrementStatement = 11, RuleDecrementStatement = 12, 
+    RulePrintStatement = 13, RulePrintArguments = 14, RuleIfStatement = 15, 
+    RuleForStatement = 16, RuleCondition = 17, RuleExpression = 18, RuleOperand = 19, 
+    RuleComparisonOperator = 20
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -54,6 +56,7 @@ public:
   class ArrayElementAssignmentContext;
   class ArrayIndexContext;
   class ArrayElementAccessContext;
+  class ArraySizeAccessContext;
   class AssignmentStatementContext;
   class InitializationContext;
   class IncrementStatementContext;
@@ -192,6 +195,19 @@ public:
 
   ArrayElementAccessContext* arrayElementAccess();
 
+  class  ArraySizeAccessContext : public antlr4::ParserRuleContext {
+  public:
+    ArraySizeAccessContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *ID();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+   
+  };
+
+  ArraySizeAccessContext* arraySizeAccess();
+
   class  AssignmentStatementContext : public antlr4::ParserRuleContext {
   public:
     AssignmentStatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -271,6 +287,8 @@ public:
     antlr4::tree::TerminalNode* NATUN_LINE(size_t i);
     std::vector<ArrayElementAccessContext *> arrayElementAccess();
     ArrayElementAccessContext* arrayElementAccess(size_t i);
+    std::vector<ArraySizeAccessContext *> arraySizeAccess();
+    ArraySizeAccessContext* arraySizeAccess(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -343,6 +361,7 @@ public:
     antlr4::tree::TerminalNode *STRING();
     antlr4::tree::TerminalNode *ID();
     ArrayElementAccessContext *arrayElementAccess();
+    ArraySizeAccessContext *arraySizeAccess();
     std::vector<ExpressionContext *> expression();
     ExpressionContext* expression(size_t i);
 
@@ -361,6 +380,7 @@ public:
     antlr4::tree::TerminalNode *FLOAT();
     antlr4::tree::TerminalNode *ID();
     ArrayElementAccessContext *arrayElementAccess();
+    ArraySizeAccessContext *arraySizeAccess();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

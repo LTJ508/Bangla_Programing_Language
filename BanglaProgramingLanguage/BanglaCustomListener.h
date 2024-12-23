@@ -212,6 +212,49 @@ public:
     }
 
     // Print Statement
+    // void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
+    //     if (!executeCurrentBlock) return;
+
+    //     for (auto arg : ctx->printArguments()->children) {
+    //         if (auto terminalNode = dynamic_cast<antlr4::tree::TerminalNode*>(arg)) {
+    //             if (terminalNode->getSymbol()->getType() == BanglaParser::ID) {
+    //                 std::string varName = terminalNode->getText();
+    //                 if (variables.find(varName) != variables.end()) {
+    //                     std::string banglaValueStr;
+    //                     if (std::holds_alternative<int>(variables[varName])) {
+    //                         banglaValueStr = convertEnglishToBangla(std::to_string(std::get<int>(variables[varName])));
+    //                     } else if (std::holds_alternative<double>(variables[varName])) {
+    //                         banglaValueStr = convertEnglishToBangla(std::to_string(std::get<double>(variables[varName])));
+    //                     } else if (std::holds_alternative<std::string>(variables[varName])) {
+    //                         banglaValueStr = std::get<std::string>(variables[varName]);
+    //                     }
+    //                     std::cout << banglaValueStr;
+    //                 } else {
+    //                     std::cerr << "Error: Variable " << varName << " not defined." << std::endl;
+    //                 }
+    //             } else if (terminalNode->getSymbol()->getType() == BanglaParser::STRING) {
+    //                 std::string text = terminalNode->getText();
+    //                 // Remove the surrounding quotes from the string literal
+    //                 text = text.substr(1, text.length() - 2);
+    //                 std::cout << text;
+    //             } else if (terminalNode->getSymbol()->getType() == BanglaParser::NATUN_LINE) {
+    //                 std::cout << std::endl;
+    //             }
+    //         } else if (auto arrayElementAccess = dynamic_cast<BanglaParser::ArrayElementAccessContext*>(arg)) {
+    //             VariableValue value = getArrayElementValue(arrayElementAccess);
+    //             std::string banglaValueStr;
+    //             if (std::holds_alternative<int>(value)) {
+    //                 banglaValueStr = convertEnglishToBangla(std::to_string(std::get<int>(value)));
+    //             } else if (std::holds_alternative<double>(value)) {
+    //                 banglaValueStr = convertEnglishToBangla(std::to_string(std::get<double>(value)));
+    //             } else if (std::holds_alternative<std::string>(value)) {
+    //                 banglaValueStr = std::get<std::string>(value);
+    //             }
+    //             std::cout << banglaValueStr;
+    //         }
+    //     }
+    // }
+
     void exitPrintStatement(BanglaParser::PrintStatementContext *ctx) override {
         if (!executeCurrentBlock) return;
 
@@ -250,6 +293,10 @@ public:
                 } else if (std::holds_alternative<std::string>(value)) {
                     banglaValueStr = std::get<std::string>(value);
                 }
+                std::cout << banglaValueStr;
+            } else if (auto arraySizeAccess = dynamic_cast<BanglaParser::ArraySizeAccessContext*>(arg)) {
+                int size = getArraySize(arraySizeAccess);
+                std::string banglaValueStr = convertEnglishToBangla(std::to_string(size));
                 std::cout << banglaValueStr;
             }
         }
@@ -525,6 +572,42 @@ public:
 private:
 
     // Helper functions for evaluating expressions and conditions
+    // double getOperandValue(BanglaParser::OperandContext *ctx) {
+    //     if (ctx->INT()) {
+    //         std::string valueStr = ctx->INT()->getText();
+    //         std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //         return std::stoi(englishValueStr);
+    //     } else if (ctx->FLOAT()) {
+    //         std::string valueStr = ctx->FLOAT()->getText();
+    //         std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //         return std::stod(englishValueStr);
+    //     } else if (ctx->ID()) {
+    //         std::string varName = ctx->ID()->getText();
+    //         if (variables.find(varName) != variables.end()) {
+    //             VariableValue value = variables[varName];
+    //             if (std::holds_alternative<int>(value)) {
+    //                 return std::get<int>(value);
+    //             } else if (std::holds_alternative<double>(value)) {
+    //                 return std::get<double>(value);
+    //             } else {
+    //                 throw std::runtime_error("Operand must be a number");
+    //             }
+    //         } else {
+    //             throw std::runtime_error("Undefined variable: " + varName);
+    //         }
+    //     } else if (ctx->arrayElementAccess()) {
+    //         VariableValue value = getArrayElementValue(ctx->arrayElementAccess());
+    //         if (std::holds_alternative<int>(value)) {
+    //             return std::get<int>(value);
+    //         } else if (std::holds_alternative<double>(value)) {
+    //             return std::get<double>(value);
+    //         } else {
+    //             throw std::runtime_error("Operand must be a number");
+    //         }
+    //     }
+    //     throw std::runtime_error("Invalid operand");
+    // }
+
     double getOperandValue(BanglaParser::OperandContext *ctx) {
         if (ctx->INT()) {
             std::string valueStr = ctx->INT()->getText();
@@ -557,6 +640,8 @@ private:
             } else {
                 throw std::runtime_error("Operand must be a number");
             }
+        } else if (ctx->arraySizeAccess()) {
+            return getArraySize(ctx->arraySizeAccess());
         }
         throw std::runtime_error("Invalid operand");
     }
@@ -592,6 +677,57 @@ private:
     }
 
     // Evaluate the expression
+    // VariableValue evaluateExpression(BanglaParser::ExpressionContext *ctx) {
+    //     try {
+    //         if (ctx->INT()) {
+    //             std::string valueStr = ctx->INT()->getText();
+    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //             return std::stoi(englishValueStr);
+    //         } else if (ctx->FLOAT()) {
+    //             std::string valueStr = ctx->FLOAT()->getText();
+    //             std::string englishValueStr = convertBanglaToEnglish(valueStr);
+    //             return std::stod(englishValueStr);
+    //         } else if (ctx->ID()) {
+    //             std::string varName = ctx->ID()->getText();
+    //             if (variables.find(varName) != variables.end()) {
+    //                 return variables[varName];
+    //             } else {
+    //                 throw std::runtime_error("Undefined variable: " + varName);
+    //             }
+    //         } else if (ctx->STRING()) {
+    //             std::string text = ctx->STRING()->getText();
+    //             text = text.substr(1, text.length() - 2); // Remove quotes
+    //             return text;
+    //         } else if (ctx->arrayElementAccess()) {
+    //             return getArrayElementValue(ctx->arrayElementAccess());
+    //         } else if (ctx->expression().size() == 1) {
+    //             return evaluateExpression(ctx->expression(0));
+    //         } else if (ctx->expression().size() == 2) {
+    //             VariableValue left = evaluateExpression(ctx->expression(0));
+    //             VariableValue right = evaluateExpression(ctx->expression(1));
+    //             std::string op = ctx->children[1]->getText();
+
+    //             if (op == "+") {
+    //                 return performOperation(left, right, std::plus<>());
+    //             } else if (op == "-") {
+    //                 return performOperation(left, right, std::minus<>());
+    //             } else if (op == "*") {
+    //                 return performOperation(left, right, std::multiplies<>());
+    //             } else if (op == "/") {
+    //                 return performOperation(left, right, std::divides<>());
+    //             }
+    //         }
+    //     } catch (const std::invalid_argument& e) {
+    //         std::cerr << "Invalid argument: " << e.what() << std::endl;
+    //         throw;
+    //     } catch (const std::out_of_range& e) {
+    //         std::cerr << "Out of range: " << e.what() << std::endl;
+    //         throw;
+    //     }
+
+    //     throw std::runtime_error("Invalid expression");
+    // }
+
     VariableValue evaluateExpression(BanglaParser::ExpressionContext *ctx) {
         try {
             if (ctx->INT()) {
@@ -602,6 +738,10 @@ private:
                 std::string valueStr = ctx->FLOAT()->getText();
                 std::string englishValueStr = convertBanglaToEnglish(valueStr);
                 return std::stod(englishValueStr);
+            } else if (ctx->STRING()) {
+                std::string text = ctx->STRING()->getText();
+                text = text.substr(1, text.length() - 2); // Remove quotes
+                return text;
             } else if (ctx->ID()) {
                 std::string varName = ctx->ID()->getText();
                 if (variables.find(varName) != variables.end()) {
@@ -609,12 +749,10 @@ private:
                 } else {
                     throw std::runtime_error("Undefined variable: " + varName);
                 }
-            } else if (ctx->STRING()) {
-                std::string text = ctx->STRING()->getText();
-                text = text.substr(1, text.length() - 2); // Remove quotes
-                return text;
             } else if (ctx->arrayElementAccess()) {
                 return getArrayElementValue(ctx->arrayElementAccess());
+            } else if (ctx->arraySizeAccess()) {
+                return getArraySize(ctx->arraySizeAccess());
             } else if (ctx->expression().size() == 1) {
                 return evaluateExpression(ctx->expression(0));
             } else if (ctx->expression().size() == 2) {
@@ -729,7 +867,14 @@ private:
     // New Code
     
 
-
+int getArraySize(BanglaParser::ArraySizeAccessContext *ctx) {
+    std::string arrayName = ctx->ID()->getText();
+    if (arrays.find(arrayName) != arrays.end()) {
+        return arrays[arrayName].size();
+    } else {
+        throw std::runtime_error("Undefined array: " + arrayName);
+    }
+}
 
 
 

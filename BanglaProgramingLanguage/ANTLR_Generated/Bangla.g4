@@ -44,6 +44,10 @@ arrayElementAccess
     : ID '[' arrayIndex ']'
     ;
 
+arraySizeAccess
+    : ID '.সংখ্যা()'
+    ;
+
 assignmentStatement
     : ID '=' expression
     ;
@@ -65,7 +69,7 @@ printStatement
     ;
 
 printArguments
-    : (ID | STRING | NATUN_LINE | arrayElementAccess) (',' (ID | STRING | NATUN_LINE | arrayElementAccess))* (',' NATUN_LINE)?
+    : (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess) (',' (ID | STRING | NATUN_LINE | arrayElementAccess | arraySizeAccess))* (',' NATUN_LINE)?
     ;
 
 ifStatement
@@ -88,6 +92,7 @@ expression
     | STRING
     | ID
     | arrayElementAccess
+    | arraySizeAccess
     | '(' expression ')'
     ;
 
@@ -96,6 +101,7 @@ operand
     | FLOAT
     | ID
     | arrayElementAccess
+    | arraySizeAccess
     ;
 
 comparisonOperator

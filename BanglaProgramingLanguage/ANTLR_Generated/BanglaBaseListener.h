@@ -40,6 +40,9 @@ public:
   virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
   virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext * /*ctx*/) override { }
 
+  virtual void enterArraySizeAccess(BanglaParser::ArraySizeAccessContext * /*ctx*/) override { }
+  virtual void exitArraySizeAccess(BanglaParser::ArraySizeAccessContext * /*ctx*/) override { }
+
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext * /*ctx*/) override { }
 

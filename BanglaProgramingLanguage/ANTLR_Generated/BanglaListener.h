@@ -38,6 +38,9 @@ public:
   virtual void enterArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
   virtual void exitArrayElementAccess(BanglaParser::ArrayElementAccessContext *ctx) = 0;
 
+  virtual void enterArraySizeAccess(BanglaParser::ArraySizeAccessContext *ctx) = 0;
+  virtual void exitArraySizeAccess(BanglaParser::ArraySizeAccessContext *ctx) = 0;
+
   virtual void enterAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
   virtual void exitAssignmentStatement(BanglaParser::AssignmentStatementContext *ctx) = 0;
 
