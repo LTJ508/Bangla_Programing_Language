@@ -5,5 +5,5 @@
 05. Take Input from Terminal
 06. Conditional Statement => If else, nested if else => Completed
 07. Iterative => For loop, nested for loop => Completed
-08. Array => declaration, assignment, access
+08. Array => declaration, assignment, access => Completed
 09. Basic File Handling
