@@ -1,0 +1,46 @@
+01. save the antlr jar file in this directory:
+	C:\antlr\antlr-4.13.2-complete.jar
+
+02. Run two command in your Command Prompt:
+	setx ANTLR_JAR "C:\antlr\antlr-4.13.2-complete.jar" /m
+	setx PATH "%PATH%;C:\antlr" /m
+
+03. for generating parser and lexer:
+	java -jar %ANTLR_JAR% -Dlanguage=Cpp MyGrammar.g4
+			or,
+	java -jar %ANTLR_JAR% -Dlanguage=Cpp Bangla.g4
+
+04. Install the Cmake from this website:
+	https://cmake.org/download/
+	download the Windows x64 Installer MSI File and install it.
+05. move to the C:\antlr\ and run the command prompt from the address bar:
+	git clone https://github.com/antlr/antlr4.git
+
+06. move to the C:\antlr\antlr4\runtime\Cpp folder and open the command prompt:
+	mkdir build
+	cd build
+	cmake .. -G "CodeBlocks - MinGW Makefiles"
+
+07. Open this file using codeblocks
+	"C:\antlr\antlr4\runtime\Cpp\build\LIBANTLR4.cbp"
+
+08. In Codeblocks select the build target as antlr4_static
+
+09. Now build the project to create the antlr4-runtime.a static library. (It will take some Time)
+	"C:\antlr\antlr4\runtime\Cpp\build\runtime\libantlr4-runtime-static.a"
+
+10. Now back to our own project
+
+11. Go to Project > Build Options > Search Directories > Compiler and add the path to ANTLR runtime headers
+	"C:\antlr\antlr4\runtime\Cpp\runtime\src"
+12. Under Linker Settings in Build Options, add the path to
+	"C:\antlr\antlr4\runtime\Cpp\build\runtime\libantlr4-runtime-static.a"
+
+13. Go to Project > Build Options > Compiler Settings > Other Compiler Options add this value
+	-std=c++17
+
+14. Go to Project > Build options....
+	Select your project, then go to the #defines section under Compiler settings.
+	Add ANTLR4CPP_STATIC as a new definition.
+
+15. Now Ready to construct the IR Generator
