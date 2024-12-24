@@ -10,8 +10,12 @@
 #include <codecvt>
 #include <variant>
 
+#include <cstdlib> // For realpath or _fullpath
+#include <limits.h> // For PATH_MAX
+#include <unistd.h>
+
 using VariableValue = std::variant<int, double, std::string>;
-bool debug = true;
+bool debug = false;
 
 // Helper function to convert Bangla numerals to English numerals
 std::string convertBanglaToEnglish(const std::string& banglaNumber) {
@@ -497,14 +501,19 @@ public:
         }
     }
 
-
-
-
-
 // New Code
 
 void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) override {
     if (!executeCurrentBlock) return;
+
+    if (debug) {
+        char cwd[PATH_MAX];
+        if (getcwd(cwd, sizeof(cwd)) != nullptr) {
+            std::cout << "Debug => Current working directory: " << cwd << std::endl;
+        } else {
+            perror("getcwd() error");
+        }
+    }
 
     std::string varName = ctx->ID()->getText();
     if (ctx->FILE_OPEN()) {
@@ -528,7 +537,19 @@ void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) override {
         openFiles[varName] = std::move(file);
 
         if (debug) {
-            std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
+            if (openFiles.find(varName) == openFiles.end()) {
+                throw std::runtime_error("File not stored in openFiles map: " + varName);
+            }
+            char fullPath[PATH_MAX];
+#ifdef _WIN32
+            if (_fullpath(fullPath, fileName.c_str(), PATH_MAX)) {
+#else
+            if (realpath(fileName.c_str(), fullPath)) {
+#endif
+                std::cout << "Debug => File opened: " << fullPath << " with mode " << mode << std::endl;
+            } else {
+                std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
+            }
         }
     } else {
         openFiles[varName] = std::fstream();
@@ -537,6 +558,15 @@ void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) override {
 
 void exitFileAssignment(BanglaParser::FileAssignmentContext *ctx) override {
     if (!executeCurrentBlock) return;
+
+    if (debug) {
+        char cwd[PATH_MAX];
+        if (getcwd(cwd, sizeof(cwd)) != nullptr) {
+            std::cout << "Debug => Current working directory: " << cwd << std::endl;
+        } else {
+            perror("getcwd() error");
+        }
+    }
 
     std::string varName = ctx->ID()->getText();
     // Check if the file variable is already defined
@@ -564,8 +594,17 @@ void exitFileAssignment(BanglaParser::FileAssignmentContext *ctx) override {
     openFiles[varName] = std::move(file);
 
     if (debug) {
-        std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
-    }
+            char fullPath[PATH_MAX];
+#ifdef _WIN32
+            if (_fullpath(fullPath, fileName.c_str(), PATH_MAX)) {
+#else
+            if (realpath(fileName.c_str(), fullPath)) {
+#endif
+                std::cout << "Debug => File opened: " << fullPath << " with mode " << mode << std::endl;
+            } else {
+                std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
+            }
+        }
 }
 
 void exitFileRead(BanglaParser::FileReadContext *ctx) override {
@@ -581,7 +620,32 @@ void exitFileRead(BanglaParser::FileReadContext *ctx) override {
 
     if (openFiles.find(fileVarName) != openFiles.end()) {
         std::fstream &file = openFiles[fileVarName];
-        std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+        // Ensure the file stream is open and in a good state
+        if (!file.is_open()) {
+            throw std::runtime_error("File could not be opened: " + fileVarName);
+        }
+        if (file.fail()) {
+            throw std::runtime_error("File stream failed after opening: " + fileVarName);
+        }
+
+        // Move cursor to the beginning of the file
+        file.clear(); // Clear any existing flags
+        file.seekg(0, std::ios::beg);
+        if (file.fail()) {
+            throw std::runtime_error("Failed to seek to the beginning of file: " + fileVarName);
+        }
+
+        // Read the file content
+        std::ostringstream contentStream;
+        contentStream << file.rdbuf();
+        if (contentStream.fail()) {
+            throw std::runtime_error("Failed to read from file stream: " + fileVarName);
+        }
+
+        std::string content = contentStream.str();
+
+        // Assign content to the variable
         variables[varName] = content;
 
         if (debug) {
@@ -663,17 +727,6 @@ void exitFileClose(BanglaParser::FileCloseContext *ctx) override {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
