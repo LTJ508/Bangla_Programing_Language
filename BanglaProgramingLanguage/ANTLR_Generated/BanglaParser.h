@@ -16,10 +16,9 @@ public:
     T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, T__12 = 13, T__13 = 14, 
     T__14 = 15, T__15 = 16, T__16 = 17, T__17 = 18, T__18 = 19, T__19 = 20, 
     T__20 = 21, T__21 = 22, SHURU = 23, SHESH = 24, DHORI = 25, DEKHAO = 26, 
-    NATUN_LINE = 27, IF = 28, ELSE_IF = 29, ELSE = 30, FOR = 31, FILE = 32, 
-    FILE_OPEN = 33, FILE_CLOSE = 34, FILE_READ = 35, FILE_WRITE = 36, ID = 37, 
-    FLOAT = 38, INT = 39, STRING = 40, LINE_COMMENT = 41, BLOCK_COMMENT = 42, 
-    WS = 43
+    NATUN_LINE = 27, IF = 28, ELSE_IF = 29, ELSE = 30, FOR = 31, ID = 32, 
+    FLOAT = 33, INT = 34, STRING = 35, LINE_COMMENT = 36, BLOCK_COMMENT = 37, 
+    WS = 38
   };
 
   enum {
@@ -27,10 +26,9 @@ public:
     RuleArrayDeclaration = 4, RuleArrayElementAssignment = 5, RuleArrayIndex = 6, 
     RuleArrayElementAccess = 7, RuleArraySizeAccess = 8, RuleAssignmentStatement = 9, 
     RuleInitialization = 10, RuleIncrementStatement = 11, RuleDecrementStatement = 12, 
-    RulePrintStatement = 13, RulePrintArguments = 14, RuleFileDeclaration = 15, 
-    RuleFileAssignment = 16, RuleFileRead = 17, RuleFileWrite = 18, RuleFileClose = 19, 
-    RuleIfStatement = 20, RuleForStatement = 21, RuleCondition = 22, RuleExpression = 23, 
-    RuleOperand = 24, RuleComparisonOperator = 25
+    RulePrintStatement = 13, RulePrintArguments = 14, RuleIfStatement = 15, 
+    RuleForStatement = 16, RuleCondition = 17, RuleExpression = 18, RuleOperand = 19, 
+    RuleComparisonOperator = 20
   };
 
   explicit BanglaParser(antlr4::TokenStream *input);
@@ -65,11 +63,6 @@ public:
   class DecrementStatementContext;
   class PrintStatementContext;
   class PrintArgumentsContext;
-  class FileDeclarationContext;
-  class FileAssignmentContext;
-  class FileReadContext;
-  class FileWriteContext;
-  class FileCloseContext;
   class IfStatementContext;
   class ForStatementContext;
   class ConditionContext;
@@ -117,11 +110,6 @@ public:
     IncrementStatementContext *incrementStatement();
     DecrementStatementContext *decrementStatement();
     PrintStatementContext *printStatement();
-    FileDeclarationContext *fileDeclaration();
-    FileAssignmentContext *fileAssignment();
-    FileReadContext *fileRead();
-    FileWriteContext *fileWrite();
-    FileCloseContext *fileClose();
     IfStatementContext *ifStatement();
     ForStatementContext *forStatement();
 
@@ -308,86 +296,6 @@ public:
   };
 
   PrintArgumentsContext* printArguments();
-
-  class  FileDeclarationContext : public antlr4::ParserRuleContext {
-  public:
-    FileDeclarationContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *FILE();
-    antlr4::tree::TerminalNode *ID();
-    antlr4::tree::TerminalNode *FILE_OPEN();
-    antlr4::tree::TerminalNode *STRING();
-    antlr4::tree::TerminalNode *FILE_READ();
-    antlr4::tree::TerminalNode *FILE_WRITE();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileDeclarationContext* fileDeclaration();
-
-  class  FileAssignmentContext : public antlr4::ParserRuleContext {
-  public:
-    FileAssignmentContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *ID();
-    antlr4::tree::TerminalNode *FILE_OPEN();
-    antlr4::tree::TerminalNode *STRING();
-    antlr4::tree::TerminalNode *FILE_READ();
-    antlr4::tree::TerminalNode *FILE_WRITE();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileAssignmentContext* fileAssignment();
-
-  class  FileReadContext : public antlr4::ParserRuleContext {
-  public:
-    FileReadContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> ID();
-    antlr4::tree::TerminalNode* ID(size_t i);
-    antlr4::tree::TerminalNode *FILE_READ();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileReadContext* fileRead();
-
-  class  FileWriteContext : public antlr4::ParserRuleContext {
-  public:
-    FileWriteContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *FILE_WRITE();
-    antlr4::tree::TerminalNode *ID();
-    PrintArgumentsContext *printArguments();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileWriteContext* fileWrite();
-
-  class  FileCloseContext : public antlr4::ParserRuleContext {
-  public:
-    FileCloseContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *FILE_CLOSE();
-    std::vector<antlr4::tree::TerminalNode *> ID();
-    antlr4::tree::TerminalNode* ID(size_t i);
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  FileCloseContext* fileClose();
 
   class  IfStatementContext : public antlr4::ParserRuleContext {
   public:

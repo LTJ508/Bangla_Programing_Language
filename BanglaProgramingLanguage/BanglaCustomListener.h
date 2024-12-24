@@ -10,10 +10,6 @@
 #include <codecvt>
 #include <variant>
 
-#include <cstdlib> // For realpath or _fullpath
-#include <limits.h> // For PATH_MAX
-#include <unistd.h>
-
 using VariableValue = std::variant<int, double, std::string>;
 bool debug = false;
 
@@ -77,7 +73,6 @@ class BanglaCustomListener : public BanglaBaseListener {
 public:
     std::unordered_map<std::string, VariableValue> variables;
     std::unordered_map<std::string, std::vector<VariableValue>> arrays;
-    std::unordered_map<std::string, std::fstream> openFiles;
     bool executeCurrentBlock = true; // Flag to control block execution
     std::vector<bool> executionStack; // Stack to manage nested block execution states
     int countNestedIfElse = 0; // Variable to count nested if-else statements
@@ -501,235 +496,6 @@ public:
         }
     }
 
-// New Code
-
-void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) override {
-    if (!executeCurrentBlock) return;
-
-    if (debug) {
-        char cwd[PATH_MAX];
-        if (getcwd(cwd, sizeof(cwd)) != nullptr) {
-            std::cout << "Debug => Current working directory: " << cwd << std::endl;
-        } else {
-            perror("getcwd() error");
-        }
-    }
-
-    std::string varName = ctx->ID()->getText();
-    if (ctx->FILE_OPEN()) {
-        std::string fileName = ctx->STRING()->getText();
-        fileName = fileName.substr(1, fileName.length() - 2); // Remove quotes
-        std::string mode = ctx->children[7]->getText();
-        std::fstream file;
-
-        if (mode == "FILE_READ") {
-            file.open(fileName, std::ios::in);
-            if (!file.is_open()) {
-                throw std::runtime_error("File does not exist: " + fileName);
-            }
-        } else if (mode == "FILE_WRITE") {
-            file.open(fileName, std::ios::out | std::ios::trunc);
-            if (!file.is_open()) {
-                throw std::runtime_error("Failed to create file: " + fileName);
-            }
-        }
-
-        openFiles[varName] = std::move(file);
-
-        if (debug) {
-            if (openFiles.find(varName) == openFiles.end()) {
-                throw std::runtime_error("File not stored in openFiles map: " + varName);
-            }
-            char fullPath[PATH_MAX];
-#ifdef _WIN32
-            if (_fullpath(fullPath, fileName.c_str(), PATH_MAX)) {
-#else
-            if (realpath(fileName.c_str(), fullPath)) {
-#endif
-                std::cout << "Debug => File opened: " << fullPath << " with mode " << mode << std::endl;
-            } else {
-                std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
-            }
-        }
-    } else {
-        openFiles[varName] = std::fstream();
-    }
-}
-
-void exitFileAssignment(BanglaParser::FileAssignmentContext *ctx) override {
-    if (!executeCurrentBlock) return;
-
-    if (debug) {
-        char cwd[PATH_MAX];
-        if (getcwd(cwd, sizeof(cwd)) != nullptr) {
-            std::cout << "Debug => Current working directory: " << cwd << std::endl;
-        } else {
-            perror("getcwd() error");
-        }
-    }
-
-    std::string varName = ctx->ID()->getText();
-    // Check if the file variable is already defined
-    if (openFiles.find(varName) == openFiles.end()) {
-        throw std::runtime_error("File variable not defined: " + varName);
-    }
-
-    std::string fileName = ctx->STRING()->getText();
-    fileName = fileName.substr(1, fileName.length() - 2); // Remove quotes
-    std::string mode = ctx->children[6]->getText();
-    std::fstream file;
-
-    if (mode == "FILE_READ") {
-        file.open(fileName, std::ios::in);
-        if (!file.is_open()) {
-            throw std::runtime_error("File does not exist: " + fileName);
-        }
-    } else if (mode == "FILE_WRITE") {
-        file.open(fileName, std::ios::out | std::ios::trunc);
-        if (!file.is_open()) {
-            throw std::runtime_error("Failed to create file: " + fileName);
-        }
-    }
-
-    openFiles[varName] = std::move(file);
-
-    if (debug) {
-            char fullPath[PATH_MAX];
-#ifdef _WIN32
-            if (_fullpath(fullPath, fileName.c_str(), PATH_MAX)) {
-#else
-            if (realpath(fileName.c_str(), fullPath)) {
-#endif
-                std::cout << "Debug => File opened: " << fullPath << " with mode " << mode << std::endl;
-            } else {
-                std::cout << "Debug => File opened: " << fileName << " with mode " << mode << std::endl;
-            }
-        }
-}
-
-void exitFileRead(BanglaParser::FileReadContext *ctx) override {
-    if (!executeCurrentBlock) return;
-
-    std::string varName = ctx->ID(0)->getText();
-    std::string fileVarName = ctx->ID(1)->getText();
-
-    // Check if the variable is already declared
-    if (variables.find(varName) == variables.end()) {
-        throw std::runtime_error("Undefined variable: " + varName);
-    }
-
-    if (openFiles.find(fileVarName) != openFiles.end()) {
-        std::fstream &file = openFiles[fileVarName];
-
-        // Ensure the file stream is open and in a good state
-        if (!file.is_open()) {
-            throw std::runtime_error("File could not be opened: " + fileVarName);
-        }
-        if (file.fail()) {
-            throw std::runtime_error("File stream failed after opening: " + fileVarName);
-        }
-
-        // Move cursor to the beginning of the file
-        file.clear(); // Clear any existing flags
-        file.seekg(0, std::ios::beg);
-        if (file.fail()) {
-            throw std::runtime_error("Failed to seek to the beginning of file: " + fileVarName);
-        }
-
-        // Read the file content
-        std::ostringstream contentStream;
-        contentStream << file.rdbuf();
-        if (contentStream.fail()) {
-            throw std::runtime_error("Failed to read from file stream: " + fileVarName);
-        }
-
-        std::string content = contentStream.str();
-
-        // Assign content to the variable
-        variables[varName] = content;
-
-        if (debug) {
-            std::cout << "Debug => File read: " << fileVarName << " content: " << content << std::endl;
-        }
-    } else {
-        throw std::runtime_error("File not open: " + fileVarName);
-    }
-}
-
-void exitFileWrite(BanglaParser::FileWriteContext *ctx) override {
-    if (!executeCurrentBlock) return;
-
-    std::string fileVarName = ctx->ID()->getText();
-    if (openFiles.find(fileVarName) != openFiles.end()) {
-        std::fstream &file = openFiles[fileVarName];
-        std::string content;
-        for (auto arg : ctx->printArguments()->children) {
-            if (auto terminalNode = dynamic_cast<antlr4::tree::TerminalNode*>(arg)) {
-                if (terminalNode->getSymbol()->getType() == BanglaParser::ID) {
-                    std::string varName = terminalNode->getText();
-                    if (variables.find(varName) != variables.end()) {
-                        if (std::holds_alternative<int>(variables[varName])) {
-                            content += std::to_string(std::get<int>(variables[varName]));
-                        } else if (std::holds_alternative<double>(variables[varName])) {
-                            content += std::to_string(std::get<double>(variables[varName]));
-                        } else if (std::holds_alternative<std::string>(variables[varName])) {
-                            content += std::get<std::string>(variables[varName]);
-                        }
-                    } else {
-                        throw std::runtime_error("Undefined variable: " + varName);
-                    }
-                } else if (terminalNode->getSymbol()->getType() == BanglaParser::STRING) {
-                    std::string text = terminalNode->getText();
-                    text = text.substr(1, text.length() - 2); // Remove quotes
-                    content += text;
-                } else if (terminalNode->getSymbol()->getType() == BanglaParser::NATUN_LINE) {
-                    content += "\n";
-                }
-            } else if (auto arrayElementAccess = dynamic_cast<BanglaParser::ArrayElementAccessContext*>(arg)) {
-                VariableValue value = getArrayElementValue(arrayElementAccess);
-                if (std::holds_alternative<int>(value)) {
-                    content += std::to_string(std::get<int>(value));
-                } else if (std::holds_alternative<double>(value)) {
-                    content += std::to_string(std::get<double>(value));
-                } else if (std::holds_alternative<std::string>(value)) {
-                    content += std::get<std::string>(value);
-                }
-            } else if (auto arraySizeAccess = dynamic_cast<BanglaParser::ArraySizeAccessContext*>(arg)) {
-                int size = getArraySize(arraySizeAccess);
-                content += std::to_string(size);
-            }
-        }
-        file << content;
-
-        if (debug) {
-            std::cout << "Debug => File written: " << fileVarName << " content: " << content << std::endl;
-        }
-    } else {
-        throw std::runtime_error("File not open: " + fileVarName);
-    }
-}
-
-
-void exitFileClose(BanglaParser::FileCloseContext *ctx) override {
-    if (!executeCurrentBlock) return;
-
-    for (auto idCtx : ctx->ID()) {
-        std::string varName = idCtx->getText();
-        if (openFiles.find(varName) != openFiles.end()) {
-            openFiles[varName].close();
-            openFiles.erase(varName);
-
-            if (debug) {
-                std::cout << "Debug => File closed: " << varName << std::endl;
-            }
-        } else {
-            throw std::runtime_error("File not open: " + varName);
-        }
-    }
-}
-
-
-
 private:
 
     // Helper functions for evaluating expressions and conditions
@@ -927,16 +693,6 @@ private:
                 exitDecrementStatement(statement->decrementStatement());
             } else if (statement->printStatement()) {
                 exitPrintStatement(statement->printStatement());
-            } else if (statement->fileDeclaration()) {
-                exitFileDeclaration(statement->fileDeclaration());
-            } else if (statement->fileAssignment()) {
-                exitFileAssignment(statement->fileAssignment());
-            } else if (statement->fileRead()) {
-                exitFileRead(statement->fileRead());
-            } else if (statement->fileWrite()) {
-                exitFileWrite(statement->fileWrite());
-            } else if (statement->fileClose()) {
-                exitFileClose(statement->fileClose());
             } else if (statement->ifStatement()) {
                 countNestedIfElse++;
                 exitIfStatement(statement->ifStatement());

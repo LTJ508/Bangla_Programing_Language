@@ -59,21 +59,6 @@ public:
   virtual void enterPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
   virtual void exitPrintArguments(BanglaParser::PrintArgumentsContext *ctx) = 0;
 
-  virtual void enterFileDeclaration(BanglaParser::FileDeclarationContext *ctx) = 0;
-  virtual void exitFileDeclaration(BanglaParser::FileDeclarationContext *ctx) = 0;
-
-  virtual void enterFileAssignment(BanglaParser::FileAssignmentContext *ctx) = 0;
-  virtual void exitFileAssignment(BanglaParser::FileAssignmentContext *ctx) = 0;
-
-  virtual void enterFileRead(BanglaParser::FileReadContext *ctx) = 0;
-  virtual void exitFileRead(BanglaParser::FileReadContext *ctx) = 0;
-
-  virtual void enterFileWrite(BanglaParser::FileWriteContext *ctx) = 0;
-  virtual void exitFileWrite(BanglaParser::FileWriteContext *ctx) = 0;
-
-  virtual void enterFileClose(BanglaParser::FileCloseContext *ctx) = 0;
-  virtual void exitFileClose(BanglaParser::FileCloseContext *ctx) = 0;
-
   virtual void enterIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
   virtual void exitIfStatement(BanglaParser::IfStatementContext *ctx) = 0;
 
